@@ -1,0 +1,143 @@
+SET ECHO ON
+/
+SET SERVEROUTPUT ON
+/
+spool c:\DistributionBiere.txt; 
+-- ======================================================================
+--  Projet:        Automn 2014 
+--  Auteur:        Ghislain Maltais
+--  Sigle:         INM5001 Gr 30
+-- ======================================================================
+
+
+--***********************************************************************  
+--*           1. LE SCHEMA DE LA BASE DE DONNEES:                       *
+--***********************************************************************
+DROP TABLE LivraisonDetail;
+DROP TABLE CommandeDetail;
+DROP TABLE Livraison;
+DROP TABLE Commande;
+DROP TABLE Client;
+DROP TABLE Region;
+DROP TABLE Produit;
+DROP TABLE Camion;
+DROP TABLE Usager;
+
+
+CREATE TABLE Region
+(noRegion	INTEGER		NOT NULL,
+ region	        VARCHAR(20)	NOT NULL,
+ PRIMARY KEY(noRegion),
+ CHECK(noRegion > 0)
+)
+/
+
+CREATE TABLE Produit
+(noProduit 		INTEGER		NOT NULL,
+ description 		VARCHAR(20),
+ prixUnitaire 		DECIMAL(10,2)	NOT NULL,
+ emballage		INTEGER		NOT NULL,
+ quantiteEnStock	INTEGER		DEFAULT 0 NOT NULL 
+	CHECK (quantiteEnStock >= 0),
+ PRIMARY KEY (noProduit))
+/
+
+CREATE TABLE Camion
+(noCamion 	INTEGER 	NOT NULL,
+ nbCaisseMax	INTEGER		NOT NULL
+      CHECK (nbCaisseMax > 0),
+ PRIMARY KEY (noCamion)
+)
+/
+
+CREATE TABLE Client
+(noClient	INTEGER		NOT NULL,	
+ nomClient      VARCHAR(50)	NOT NULL,  
+ adresse	VARCHAR(30)	NOT NULL,
+ ville		VARCHAR(15)	NOT NULL,
+ noRegion	INTEGER		NOT NULL REFERENCES Region,
+ telephone	VARCHAR(15)	NOT NULL,
+ courriel	VARCHAR(25)     DEFAULT ('courriel'),
+ confirm	CHAR(1),
+ PRIMARY KEY(noClient),
+ FOREIGN KEY (noRegion) REFERENCES Region)
+/
+
+
+CREATE TABLE Commande
+(noCommande 	        INTEGER 	NOT NULL,
+ dateCommande		DATE		NOT NULL,
+ noClient		INTEGER		NOT NULL,
+ PRIMARY KEY 	(noCommande),
+ FOREIGN KEY 	(noClient) REFERENCES Client
+)
+/
+
+
+CREATE TABLE CommandeDetail
+(noCommande 	INTEGER		NOT NULL,
+ noProduit 	INTEGER		NOT NULL,
+ quantite 	INTEGER		NOT NULL
+	CHECK (quantite > 0),
+ PRIMARY KEY (noCommande, noProduit),
+ FOREIGN KEY (noCommande) REFERENCES Commande,
+ FOREIGN KEY (noProduit) REFERENCES Produit
+)
+/
+
+CREATE TABLE Livraison
+(noCamion 	INTEGER 	NOT NULL,
+ noLivraison 	INTEGER 	NOT NULL,
+ dateLivraison	DATE		NOT NULL,
+ noRegion	INTEGER		NOT NULL, 
+ PRIMARY KEY (noLivraison),
+ FOREIGN KEY (noCamion) REFERENCES Camion
+)
+/
+
+CREATE TABLE LivraisonDetail
+(noLivraison 	INTEGER 		NOT NULL,
+ noCommande 	INTEGER		NOT NULL,
+ noProduit 		INTEGER		NOT NULL,
+ noRegion	INTEGER		NOT NULL, 
+ qteLivree	INTEGER		NOT NULL
+	CHECK (qteLivree > 0),
+ PRIMARY KEY (noLivraison, noCommande, noProduit),
+ FOREIGN KEY (noLivraison) REFERENCES Livraison,
+ FOREIGN KEY (noCommande, noProduit) REFERENCES CommandeDetail,
+ FOREIGN KEY (noRegion) REFERENCES Region
+)
+/
+
+CREATE TABLE Usager
+(noUsager	INTEGER		NOT NULL,
+ userName	CHAR(8)		NOT NULL,
+ pw		CHAR(5)		NOT NULL,
+ type		VARCHAR(20)	NOT NULL,
+ confirm	CHAR(2)		NOT NULL,
+ PRIMARY KEY (noUsager)
+)
+/
+
+--***********************************************************************  
+--*           2. INSERTION DANS LES TABLES DE LA BASE DE DONNEES:       *
+--***********************************************************************
+
+ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY'
+/
+
+--**************  TABLE Region ********************
+
+INSERT INTO Region VALUES(10,'MTL-EST');
+INSERT INTO Region VALUES(20,'MTL-OUEST');
+INSERT INTO Region VALUES(30,'LAVAL');
+INSERT INTO Region VALUES(40,'MONTÉRÉGIE');
+INSERT INTO Region VALUES(50,'LAURENTIDE');
+INSERT INTO Region VALUES(60,'LONGUEUIL');
+
+--*************************************************
+INSERT INTO Client VALUES(1,'Hotel St-Denis','254, rue Saint-Denis','Montreal',10,
+                          '514 849-4526','stay@hotel-st-denis.com','Y');
+
+SET	ECHO OFF
+SPOOL	OFF
