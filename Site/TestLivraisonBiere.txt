@@ -27,7 +27,7 @@ DROP TABLE Usager;
 CREATE TABLE Region
 (noRegion	INTEGER		NOT NULL,
  region	        VARCHAR(20)	NOT NULL,
- PRIMARY KEY(noRegion),
+ CONSTRAINT pk_Region PRIMARY KEY(noRegion),
  CHECK(noRegion > 0)
 )
 /
@@ -35,12 +35,15 @@ CREATE TABLE Region
 CREATE TABLE Produit
 (noProduit 		INTEGER		NOT NULL,
  description 		VARCHAR(20),
- prixUnitaire 		DECIMAL(10,2)	NOT NULL,
+ prix    		DECIMAL(10,2)	NOT NULL,
  emballage		INTEGER		NOT NULL,
+ alcool			VARCHAR(5),
+ mirobrasserie		VARCHAR(30),
  quantiteEnStock	INTEGER		DEFAULT 0 NOT NULL 
 	CHECK (quantiteEnStock >= 0),
  CONSTRAINT pk_Produit PRIMARY KEY (noProduit))
 /
+
 
 CREATE TABLE Camion
 (noCamion 	INTEGER 	NOT NULL,
@@ -137,6 +140,50 @@ INSERT INTO Region VALUES(40,'MONTEREGIE');
 INSERT INTO Region VALUES(50,'LAURENTIDE');
 INSERT INTO Region VALUES(60,'LONGUEUIL');
 INSERT INTO Region VALUES(70,'LANAUDIERE');
+
+--**************  TABLE Produit *******************
+
+INSERT INTO Produit VALUES(1000,'Boreale Blanche',9.99,6,'4,5%','Les brasseurs du nord',100);
+INSERT INTO Produit VALUES(1001,'Boreale Blanche',13.99,12,'4,5%','Les brasseurs du nord',100);
+INSERT INTO Produit VALUES(1002,'Le cheval blanc',9.99,6,'5%','Les brassrues de Montreal',1000);
+INSERT INTO Produit VALUES(1003,'Le cheval blanc',14.99,12,'5%','Les brassrues de Montreal',800);
+INSERT INTO Produit VALUES(1004,'La Rebelle Queb',9.99,6,'6,5%','Les brassrues de Montreal',355);
+INSERT INTO Produit VALUES(1005,'Coup de grisou',13.99,12,'5%','Les brassrues de Montreal',400);
+INSERT INTO Produit VALUES(1006,'Schoune a l erable',9.99,6,'5%','Ferme Brasserie Schoune',400);
+INSERT INTO Produit VALUES(1007,'Griffon Rousse',9.99,6,'4,5%','Brasserie McAuslan',700);
+INSERT INTO Produit VALUES(1008,'Griffon Rousse',14.99,12,'4,5%','Brasserie McAuslan',185);
+INSERT INTO Produit VALUES(1009,'St-Ambroise Noire',17.99,24,'5%','Brasserie McAuslan',80);
+INSERT INTO Produit VALUES(1010,'St-Ambroise Noire',11.99,12,'5%','Brasserie McAuslan',111);
+INSERT INTO Produit VALUES(1011,'St-Ambroise Noire',8.99,6,'5%','Brasserie McAuslan',323);
+INSERT INTO Produit VALUES(1012,'La fin du monde',8.99,6,'9%','Unibroue',500);
+INSERT INTO Produit VALUES(1013,'La fin du monde',12.99,12,'9%','Unibroue',400);
+INSERT INTO Produit VALUES(1014,'La fin du monde',18.99,24,'9%','Unibroue',200);
+INSERT INTO Produit VALUES(1015,'Trois pistoles',11.99,12,'9%','Unibroue',80);
+INSERT INTO Produit VALUES(1016,'Alexander Keith s',8.99,6,'5.3%','Labatt',300);
+INSERT INTO Produit VALUES(1017,'Alexander Keith s',12.99,12,'5.3%','Labatt',250);
+INSERT INTO Produit VALUES(1018,'Alexander Keith s',16.99,24,'5.3%','Labatt',320);
+INSERT INTO Produit VALUES(1019,'Beck s',9.99,6,'5%','Labatt',388);
+INSERT INTO Produit VALUES(1020,'Beck s',11.99,12,'5.3%','Labatt',127);
+INSERT INTO Produit VALUES(1021,'Coors Light IceT',8.99,6,'4%','Molson',1002);
+INSERT INTO Produit VALUES(1022,'Coors Light IceT',11.99,12,'4%','Molson',756);
+INSERT INTO Produit VALUES(1023,'Coors Light IceT',14.99,24,'4%','Molson',31);
+INSERT INTO Produit VALUES(1024,'Corona Extrat',8.99,6,'4,6%','Molson',5);
+INSERT INTO Produit VALUES(1025,'Corona Extrat',11.99,12,'4,6%','Molson',9);
+INSERT INTO Produit VALUES(1026,'Corona Extrat',14.99,24,'4,6%','Molson',2);
+INSERT INTO Produit VALUES(1027,'Heineken',9.99,6,'5%','Molson',105);
+INSERT INTO Produit VALUES(1028,'Heineken',12.99,12,'5%','Molson',115);
+INSERT INTO Produit VALUES(1029,'Heineken',15.99,24,'5%','Molson',789);
+INSERT INTO Produit VALUES(1030,'Molson Dry',9.99,6,'5,5%','Molson',806);
+INSERT INTO Produit VALUES(1031,'Molson Dry',13.99,12,'5,5%','Molson',56);
+INSERT INTO Produit VALUES(1032,'Molson Dry',17.99,24,'5,5%','Molson',221);
+INSERT INTO Produit VALUES(1033,'Stella Artois',8.99,6,'5,2%','Labatt',5);
+INSERT INTO Produit VALUES(1034,'Stella Artois',11.99,12,'5,2%','Labatt',2);
+INSERT INTO Produit VALUES(1035,'Bud Light',9.99,16,'4%','Labatt',15);
+INSERT INTO Produit VALUES(1036,'Bud Light',11.99,16,'4%','Labatt',25);
+INSERT INTO Produit VALUES(1037,'Bud Light',16.99,24,'4%','Labatt',37);
+
+
+
 
 --*************************************************
 INSERT INTO Client VALUES(1,'Hotel St-Denis','254, rue Saint-Denis','Montreal',10,
