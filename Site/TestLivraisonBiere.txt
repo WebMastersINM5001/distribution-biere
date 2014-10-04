@@ -38,7 +38,7 @@ CREATE TABLE Produit
  prix    		DECIMAL(10,2)	NOT NULL,
  emballage		INTEGER		NOT NULL,
  alcool			VARCHAR(5),
- mirobrasserie		VARCHAR(30),
+ microbrasserie		VARCHAR(30),
  quantiteEnStock	INTEGER		DEFAULT 0 NOT NULL 
 	CHECK (quantiteEnStock >= 0),
  CONSTRAINT pk_Produit PRIMARY KEY (noProduit))
@@ -182,8 +182,18 @@ INSERT INTO Produit VALUES(1035,'Bud Light',9.99,16,'4%','Labatt',15);
 INSERT INTO Produit VALUES(1036,'Bud Light',11.99,16,'4%','Labatt',25);
 INSERT INTO Produit VALUES(1037,'Bud Light',16.99,24,'4%','Labatt',37);
 
+--******************* TABLE Camion ******************************
 
-
+INSERT INTO Camion VALUES(100,'800','y');
+INSERT INTO Camion VALUES(101,'800','y');
+INSERT INTO Camion VALUES(102,'800','y');
+INSERT INTO Camion VALUES(103,'800','y');
+INSERT INTO Camion VALUES(105,'800','y');
+INSERT INTO Camion VALUES(106,'800','y');
+INSERT INTO Camion VALUES(107,'800','y');
+INSERT INTO Camion VALUES(108,'800','y');
+INSERT INTO Camion VALUES(109,'2080','y');
+INSERT INTO Camion VALUES(110,'2080','y');
 
 --*************************************************
 INSERT INTO Client VALUES(1,'Hotel St-Denis','254, rue Saint-Denis','Montreal',10,
