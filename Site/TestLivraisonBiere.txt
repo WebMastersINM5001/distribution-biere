@@ -39,14 +39,15 @@ CREATE TABLE Produit
  emballage		INTEGER		NOT NULL,
  quantiteEnStock	INTEGER		DEFAULT 0 NOT NULL 
 	CHECK (quantiteEnStock >= 0),
- PRIMARY KEY (noProduit))
+ CONSTRAINT pk_Produit PRIMARY KEY (noProduit))
 /
 
 CREATE TABLE Camion
 (noCamion 	INTEGER 	NOT NULL,
  nbCaisseMax	INTEGER		NOT NULL
       CHECK (nbCaisseMax > 0),
- PRIMARY KEY (noCamion)
+ disponible	CHAR(1)		NOT NULL,
+ CONSTRAINT pk_Camion PRIMARY KEY (noCamion)
 )
 /
 
@@ -55,12 +56,13 @@ CREATE TABLE Client
  nomClient      VARCHAR(50)	NOT NULL,  
  adresse	VARCHAR(30)	NOT NULL,
  ville		VARCHAR(15)	NOT NULL,
- noRegion	INTEGER		NOT NULL REFERENCES Region,
+ noRegion	INTEGER		NOT NULL,
  telephone	VARCHAR(15)	NOT NULL,
  courriel	VARCHAR(25)     DEFAULT ('courriel'),
  confirm	CHAR(1),
- PRIMARY KEY(noClient),
- FOREIGN KEY (noRegion) REFERENCES Region)
+ CONSTRAINT pk_Client PRIMARY KEY(noClient),
+ CONSTRAINT fk_Client FOREIGN KEY (noRegion) REFERENCES Region
+)
 /
 
 
@@ -68,8 +70,8 @@ CREATE TABLE Commande
 (noCommande 	        INTEGER 	NOT NULL,
  dateCommande		DATE		NOT NULL,
  noClient		INTEGER		NOT NULL,
- PRIMARY KEY 	(noCommande),
- FOREIGN KEY 	(noClient) REFERENCES Client
+ CONSTRAINT pk_Commande PRIMARY KEY 	(noCommande),
+ CONSTRAINT fk_Commande FOREIGN KEY 	(noClient) REFERENCES Client
 )
 /
 
@@ -79,9 +81,9 @@ CREATE TABLE CommandeDetail
  noProduit 	INTEGER		NOT NULL,
  quantite 	INTEGER		NOT NULL
 	CHECK (quantite > 0),
- PRIMARY KEY (noCommande, noProduit),
- FOREIGN KEY (noCommande) REFERENCES Commande,
- FOREIGN KEY (noProduit) REFERENCES Produit
+ CONSTRAINT pk_CommandeDetail PRIMARY KEY (noCommande, noProduit),
+ CONSTRAINT fk_noCommande FOREIGN KEY (noCommande) REFERENCES Commande,
+ CONSTRAINT fk_noProduit FOREIGN KEY (noProduit) REFERENCES Produit
 )
 /
 
@@ -90,8 +92,8 @@ CREATE TABLE Livraison
  noLivraison 	INTEGER 	NOT NULL,
  dateLivraison	DATE		NOT NULL,
  noRegion	INTEGER		NOT NULL, 
- PRIMARY KEY (noLivraison),
- FOREIGN KEY (noCamion) REFERENCES Camion
+ CONSTRAINT pk_Livraison PRIMARY KEY (noLivraison),
+ CONSTRAINT fk_Livraison FOREIGN KEY (noCamion) REFERENCES Camion
 )
 /
 
@@ -102,10 +104,10 @@ CREATE TABLE LivraisonDetail
  noRegion	INTEGER		NOT NULL, 
  qteLivree	INTEGER		NOT NULL
 	CHECK (qteLivree > 0),
- PRIMARY KEY (noLivraison, noCommande, noProduit),
- FOREIGN KEY (noLivraison) REFERENCES Livraison,
- FOREIGN KEY (noCommande, noProduit) REFERENCES CommandeDetail,
- FOREIGN KEY (noRegion) REFERENCES Region
+ CONSTRAINT pk_LivraisonDetail PRIMARY KEY (noLivraison, noCommande, noProduit),
+ CONSTRAINT fk_noLivraison FOREIGN KEY (noLivraison) REFERENCES Livraison,
+ CONSTRAINT fk_noComNoProd FOREIGN KEY (noCommande, noProduit) REFERENCES CommandeDetail,
+ CONSTRAINT fk_noRegion FOREIGN KEY (noRegion) REFERENCES Region
 )
 /
 
@@ -115,7 +117,7 @@ CREATE TABLE Usager
  pw		CHAR(5)		NOT NULL,
  type		VARCHAR(20)	NOT NULL,
  confirm	CHAR(2)		NOT NULL,
- PRIMARY KEY (noUsager)
+ CONSTRAINT pk_Usager PRIMARY KEY (noUsager)
 )
 /
 
@@ -131,9 +133,10 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY'
 INSERT INTO Region VALUES(10,'MTL-EST');
 INSERT INTO Region VALUES(20,'MTL-OUEST');
 INSERT INTO Region VALUES(30,'LAVAL');
-INSERT INTO Region VALUES(40,'MONTÉRÉGIE');
+INSERT INTO Region VALUES(40,'MONTEREGIE');
 INSERT INTO Region VALUES(50,'LAURENTIDE');
 INSERT INTO Region VALUES(60,'LONGUEUIL');
+INSERT INTO Region VALUES(70,'LANAUDIERE');
 
 --*************************************************
 INSERT INTO Client VALUES(1,'Hotel St-Denis','254, rue Saint-Denis','Montreal',10,
