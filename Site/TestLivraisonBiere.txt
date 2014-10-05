@@ -58,10 +58,10 @@ CREATE TABLE Client
 (noClient	INTEGER		NOT NULL,	
  nomClient      VARCHAR(50)	NOT NULL,  
  adresse	VARCHAR(30)	NOT NULL,
- ville		VARCHAR(15)	NOT NULL,
+ ville		VARCHAR(20)	NOT NULL,
  noRegion	INTEGER		NOT NULL,
  telephone	VARCHAR(15)	NOT NULL,
- courriel	VARCHAR(25)     DEFAULT ('courriel'),
+ courriel	VARCHAR(30)     DEFAULT ('courriel'),
  confirm	CHAR(1),
  CONSTRAINT pk_Client PRIMARY KEY(noClient),
  CONSTRAINT fk_Client FOREIGN KEY (noRegion) REFERENCES Region
@@ -124,12 +124,19 @@ CREATE TABLE Usager
 )
 /
 
+
 --***********************************************************************  
 --*           2. INSERTION DANS LES TABLES DE LA BASE DE DONNEES:       *
 --***********************************************************************
 
 ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY'
 /
+--*************** TABLE Usager ****************************************
+
+INSERT INTO Usager VALUES(300,'KevB5001','05001','Administrateur','Y');
+INSERT INTO Usager VALUES(301,'MalG5001','05001','Administrateur','Y');
+INSERT INTO Usager VALUES(302,'AleC5001','05001','Administrateur','Y');
+INSERT INTO Usager VALUES(303,'Bas45001','05001','Administrateur','Y');
 
 --**************  TABLE Region ********************
 
@@ -137,7 +144,7 @@ INSERT INTO Region VALUES(10,'MTL-EST');
 INSERT INTO Region VALUES(20,'MTL-OUEST');
 INSERT INTO Region VALUES(30,'LAVAL');
 INSERT INTO Region VALUES(40,'MONTEREGIE');
-INSERT INTO Region VALUES(50,'LAURENTIDE');
+INSERT INTO Region VALUES(50,'RIVE-NORD');
 INSERT INTO Region VALUES(60,'LONGUEUIL');
 INSERT INTO Region VALUES(70,'LANAUDIERE');
 
@@ -195,7 +202,8 @@ INSERT INTO Camion VALUES(108,'800','y');
 INSERT INTO Camion VALUES(109,'2080','y');
 INSERT INTO Camion VALUES(110,'2080','y');
 
---*************************************************
+--************************* TABLE Client *********************************
+
 INSERT INTO Client VALUES(1,'Hotel Europeenne','1620, rue St-Hubert','Montreal',10,
                           '514 849-4526','stay@hotel-st-denis.com','Y');
 INSERT INTO Client VALUES(2,'Hotel St-Denis','254, rue Saint-Denis','Montreal',10,
@@ -216,6 +224,90 @@ INSERT INTO Client VALUES(9,'Casino de Montreal','1, ave du Casino','Montreal',1
                           '514 392-2746',' ','Y');
 INSERT INTO Client VALUES(10,'Les 2 Pierrots','104, rue Saint-Paul','Montreal',20,
                           '514 861-1270','info@2pierrots.com','Y');
+INSERT INTO Client VALUES(11,'Hotel Sheraton','2440, aut des Laurentides','Laval',30,
+                          '450 687-2440','reserv@sheraton-laval.com','Y');
+INSERT INTO Client VALUES(12,'St-Martin Hotel Suite','1400,rue Maurice-Gauvin','Laval',30,
+                          '450 902-3000','info@lestmartin.com','Y');
+INSERT INTO Client VALUES(13,'Confort  Inn','2055,aut des Laurentides','Laval',30,
+                          '450 686-0600','cn331@whg.com','Y');
+INSERT INTO Client VALUES(14,'Econo Lodge Laval','1981,Curé-Labelle','Laval',30,
+                          '450 681-6411','info@econolodgelaval.com','Y');
+INSERT INTO Client VALUES(15,'Le tire-Bouchon','2930,ave Pierre-Peladeau','Laval',30,
+                          '450 231-1058','','Y');
+INSERT INTO Client VALUES(16,'Univers Ristorante-Bar','3453,boul St-Martin O','Laval',30,
+                          '450 680-1691','','Y');
+INSERT INTO Client VALUES(17,'Alessa Bar Lounge','3435,aut. Laval O','Laval',30,
+                          '450 682-2283','','Y');
+INSERT INTO Client VALUES(18,'Allumette Publicitaire','274,rue Elie','Laval',30,
+                          '450 625-0645','','Y');
+INSERT INTO Client VALUES(19,'Taverne t-Martin','1725,boul. Des Laurentide','Laval',30,
+                          '450 625-0898','','Y');
+INSERT INTO Client VALUES(20,'Bar Bada Bing','270,boul. De La Concorde','Laval',30,
+                          '450 681-2158','','Y');
+INSERT INTO Client VALUES(21,'La Brasserie Pudriere','975,Bernard-Pilon','Beloeil',40,
+                          '450 467-0968','','Y');
+INSERT INTO Client VALUES(22,'Bar Le Surf','1352,ch de Chamblie','Longueuil',60,
+                          '450 467-0968','','Y');
+INSERT INTO Client VALUES(23,'Bistro Ste-Madeleine','55,St-Simon','Ste-Madeleine',40,
+                          '450 467-0968','','Y');
+INSERT INTO Client VALUES(24,'Bar-Terrasse Helene','9645,ch de Chamblie','Ste-Hubert',40,
+                          '450 676-6490','','Y');
+INSERT INTO Client VALUES(25,'Cafe Bar St-Joseph','354,ch de la Grande Cote','Boisbriands',50,
+                          '450 971-2222','','Y');
+INSERT INTO Client VALUES(26,'Le Monte Cristo Bistro','10,Blainville Ouest','Ste-Therese',50,
+                          '450 419-6765','info@lemontecristo.ca','Y');
+INSERT INTO Client VALUES(27,'Le chateau Joliette','450,rue St-Thoas','Joliette',70,
+                          '450 419-6765','a.quintal@chateaujoliette.com','Y');
+INSERT INTO Client VALUES(28,'La Brasserie Pudriere','975,Bernard-Pilon','Beloeil',40,
+                          '450 467-0968','','Y');
+INSERT INTO Client VALUES(29,'Auberge Aux Quatres Matin','155,rue des Skieurs','Saint-Come',70,
+                          '450 883-1932','info@auxquatrematins.ca','Y');
+INSERT INTO Client VALUES(30,'Days Inn Berthierville','760,rue Gadoury','Berthierville',70,
+                          '450 836-1621','info@daysinnberthier.com','Y');
+INSERT INTO Client VALUES(31,'Bar Le Ranch','25,rue Gauthier','Joliette',70,
+                          '450 499-0018','info@brasserieleranch.com','Y');
+INSERT INTO Client VALUES(32,'Brasserie Albion','410,boul. Manseau','Joliette',70,
+                          '450 759-7482',' ','Y');
+INSERT INTO Client VALUES(33,'Bar le paradis','1343,rue Bernier','Saint-Jean',40,
+                          '450 349-4702',' ','Y');
+INSERT INTO Client VALUES(34,'Brasserie de Mail','60, Rte 202','Lacolle',40,
+                          '450 246-2826',' ','Y');
+INSERT INTO Client VALUES(35,'Brasserie Maska','3425, boul. Laframboise','Saint-Hyacinthe',40,
+                          '450 742-2233',' ','Y');
+INSERT INTO Client VALUES(36,'Bienvenue Bar Salon','920, rue Fleury','Montreal',20,
+                          '514 387-9426',' ','Y');
+INSERT INTO Client VALUES(37,'Billard Salon Le Sieur','1341, Grande Allée','Terrebonne',50,
+                          '450 492-8888',' ','Y');
+INSERT INTO Client VALUES(38,'Jono Bar','2201, av Mont-Royal','Montrwal',10,
+                          '514 523-1841',' ','Y');
+INSERT INTO Client VALUES(39,'Bar Lanjeu','1300, Saint-Jean-Baptiste','Pointe-Aux-Tremble',10,
+                          '450 565-3359',' ','Y');
+INSERT INTO Client VALUES(40,'Hotel Brossard','7365, boul. Marie-Victorin','Brossard',40,
+                          '514 890-6000','reservation@hotelbrossard.com','Y');
+INSERT INTO Client VALUES(41,'Hotel Plaza Valleyfield','40, du Centenaire','Valleyfield',40,
+                          '450 373-1990','reception@hotelvalleyfield.ca','Y');
+INSERT INTO Client VALUES(42,'Traiteur le Fin Palais','379, Adolphe-Chapeleau','Bois-Des-Filion',50,
+                          '450 621-0891',' ','Y');
+INSERT INTO Client VALUES(43,'Bar Sportivo','6804, Saint-Laurent','Montreal',20,
+                          '514 495-0170',' ','Y');
+INSERT INTO Client VALUES(44,'Bar Le Skratch','11841,boul. Pierrefond','Pierrefond',20,
+                          '514 683-5000',' ','Y');
+INSERT INTO Client VALUES(45,'La maison Verte','16981,boul. Gouin O','Sainte-Genevieve',20,
+                          '514 696-6308',' ','Y');
+INSERT INTO Client VALUES(46,'Vivaldi Restaurant','13071,boul. Gouin O','Pierrefond',20,
+                          '514 620-9200',' ','Y');
+INSERT INTO Client VALUES(45,'La maison Verte','16981,boul. Gouin O','Sainte-Genevieve',20,
+                          '514 696-6308',' ','Y');
+INSERT INTO Client VALUES(46,'Brasserie Cherrier','3638, rue St-Denis','Montreal',10,
+                          '514 843-6425',' ','Y');
+INSERT INTO Client VALUES(47,'Brasserie St-Léonard','4440,rue Jean-Talon','St-Leonard',10,
+                          '514 721-5862',' ','Y');
+INSERT INTO Client VALUES(48,'S Lounge','5872,rue Jean-Talon','St-Leonard',10,
+                          '514 419-3404',' ','Y');
+INSERT INTO Client VALUES(49,'Resto Bar Napoleon','3200,ch Gascon','Terrebonne',50,
+                          '514 477-6251',' ','Y');
+INSERT INTO Client VALUES(50,'Marina St-Blaise','23,39E av av RR61','St-Blaise',40,
+                          '514 291-3300',' ','Y');
 
 SET	ECHO OFF
 SPOOL	OFF
