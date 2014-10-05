@@ -196,8 +196,26 @@ INSERT INTO Camion VALUES(109,'2080','y');
 INSERT INTO Camion VALUES(110,'2080','y');
 
 --*************************************************
-INSERT INTO Client VALUES(1,'Hotel St-Denis','254, rue Saint-Denis','Montreal',10,
+INSERT INTO Client VALUES(1,'Hotel Europeenne','1620, rue St-Hubert','Montreal',10,
                           '514 849-4526','stay@hotel-st-denis.com','Y');
+INSERT INTO Client VALUES(2,'Hotel St-Denis','254, rue Saint-Denis','Montreal',10,
+                          '514 282-8749','europeenne@qc.aibn.com','Y');
+INSERT INTO Client VALUES(3,'Marriot residence Inn','270, rue Saint-Antoine O','Montreal',20,
+                          '514 380-3333','info@westinmontreal.com','Y');
+INSERT INTO Client VALUES(4,'Westin Montreal','6500, Place Robert-Jocas ','Montreal',20,
+                          '514 339-1168','inforesidenceinn@mmtla.ca','Y');
+INSERT INTO Client VALUES(5,'Hotellerie Pierre du Calvet','405, rue de Bonsecours','Montreal',10,
+                          '514 282-0456','calvet@pierreducalvet.ca','Y');
+INSERT INTO Client VALUES(6,'Bistro on the Ave','1362, ave. Greene','Montreal',20,
+                          '514 939-6451',' ','Y');
+INSERT INTO Client VALUES(7,'Au conquieme peche','4475, rue St-Denis','Montreal',10,
+                          '514 286-0123','info@aucinquiemepeche.com','Y');
+INSERT INTO Client VALUES(8,'Bateau -Mouche','Quaie Jacques-Cartier','Montreal',10,
+                          '514 849-9952','info@bateau-mouche.com','Y');
+INSERT INTO Client VALUES(9,'Casino de Montreal','1, ave du Casino','Montreal',10,
+                          '514 392-2746',' ','Y');
+INSERT INTO Client VALUES(10,'Les 2 Pierrots','104, rue Saint-Paul','Montreal',20,
+                          '514 861-1270','info@2pierrots.com','Y');
 
 SET	ECHO OFF
 SPOOL	OFF
