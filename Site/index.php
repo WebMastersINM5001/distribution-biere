@@ -1,28 +1,26 @@
-<table width="300" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-<tr>
-<form name="form1" method="post" action="checklogin.php">
-<td>
-<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
-<tr>
-<td colspan="3"><strong>Member Login </strong></td>
-</tr>
-<tr>
-<td width="78">Username</td>
-<td width="6">:</td>
-<td width="294"><input name="myusername" type="text" id="myusername"></td>
-</tr>
-<tr>
-<td>Password</td>
-<td>:</td>
-<td><input name="mypassword" type="text" id="mypassword"></td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td><input type="submit" name="Submit" value="Login"></td>
-</tr>
-</table>
-</td>
-</form>
-</tr>
-</table>
+<?php include("includes/header.php"); ?>
+<body>
+	<div id="content">
+		<h1>Web master inc.</h1>
+		<form class="form-horizontal" role="form" method="post" action="checklogin.php">
+		  <div class="form-group">
+		    <label for="userName" class="col-sm-2 control-label">Nom d'utilisateur</label>
+		    <div class="col-sm-10">
+		      <input name="userName" type="text" id="userName">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="password" class="col-sm-2 control-label">Password</label>
+		    <div class="col-sm-10">
+		      <input name="password" type="password" id="password">
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-default">Soumettre</button>
+		    </div>
+		  </div>
+		</form>
+	</div>
+</body>
+<?php include("includes/footer.php"); ?>

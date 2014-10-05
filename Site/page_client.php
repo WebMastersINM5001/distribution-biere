@@ -6,9 +6,10 @@ if( !isset($_SESSION["myusername"]) ){
 	exit();
 }
 ?>
+<?php include("includes/header.php"); ?>
 
-<html>
 <body>
-Login Successful
+Bienvenue cher client
 </body>
-</html>
+
+<?php include("includes/footer.php"); ?>
