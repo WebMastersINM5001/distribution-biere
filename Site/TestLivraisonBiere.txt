@@ -294,10 +294,6 @@ INSERT INTO Client VALUES(44,'Bar Le Skratch','11841,boul. Pierrefond','Pierrefo
                           '514 683-5000',' ','Y');
 INSERT INTO Client VALUES(45,'La maison Verte','16981,boul. Gouin O','Sainte-Genevieve',20,
                           '514 696-6308',' ','Y');
-INSERT INTO Client VALUES(46,'Vivaldi Restaurant','13071,boul. Gouin O','Pierrefond',20,
-                          '514 620-9200',' ','Y');
-INSERT INTO Client VALUES(45,'La maison Verte','16981,boul. Gouin O','Sainte-Genevieve',20,
-                          '514 696-6308',' ','Y');
 INSERT INTO Client VALUES(46,'Brasserie Cherrier','3638, rue St-Denis','Montreal',10,
                           '514 843-6425',' ','Y');
 INSERT INTO Client VALUES(47,'Brasserie St-Léonard','4440,rue Jean-Talon','St-Leonard',10,
@@ -308,6 +304,10 @@ INSERT INTO Client VALUES(49,'Resto Bar Napoleon','3200,ch Gascon','Terrebonne',
                           '514 477-6251',' ','Y');
 INSERT INTO Client VALUES(50,'Marina St-Blaise','23,39E av av RR61','St-Blaise',40,
                           '514 291-3300',' ','Y');
+INSERT INTO Client VALUES(51,'La maison Verte','16981,boul. Gouin O','Sainte-Genevieve',20,
+                          '514 696-6308',' ','Y');
+INSERT INTO Client VALUES(52,'Vivaldi Restaurant','13071,boul. Gouin O','Pierrefond',20,
+                          '514 620-9200',' ','Y');
 
 SET	ECHO OFF
 SPOOL	OFF
