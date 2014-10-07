@@ -4,7 +4,19 @@
 ---------------------------------------------
 
 set define off
-spool create_objets.log
+spool c:\distributionBiere.txt
+
+drop table CLIENT CASCADE;
+drop table COMMANDE CASCADE;
+drop table REGION CASCADE;
+drop table CAMION CASCADE;
+drop table PRODUIT CASCADE;
+drop table COMMANDEDETAIL CASCADE;
+drop table LIVRAISON CASCADE;
+drop table LIVRAISONDETAIL CASCADE;
+drop table USAGER CASCADE;
+drop table ROLE CASCADE;
+
 
 prompt
 prompt Creating table CAMION
