@@ -16,7 +16,9 @@
 		    </div>
 		  </div>
 		  <div class="form-group">
+
 		    <div class="col-sm-offset-2 col-sm-10">
+		    	<a href="newAccount.php">Créer un compte client</a><br><br>
 		      <button type="submit" class="btn btn-default">Soumettre</button>
 		    </div>
 		  </div>
