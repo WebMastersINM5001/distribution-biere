@@ -2,21 +2,23 @@
 -- Export file for user INM5001            --
 -- Created by uacc on 06.10.2014, 19:59:16 --
 ---------------------------------------------
-
+SET ECHO ON
+/
+SET SERVEROUTPUT ON
+/
 set define off
 spool c:\distributionBiere.txt
 
-drop table CLIENT CASCADE;
-drop table COMMANDE CASCADE;
-drop table REGION CASCADE;
-drop table CAMION CASCADE;
-drop table PRODUIT CASCADE;
-drop table COMMANDEDETAIL CASCADE;
-drop table LIVRAISON CASCADE;
-drop table LIVRAISONDETAIL CASCADE;
-drop table USAGER CASCADE;
-drop table ROLE CASCADE;
-
+DROP TABLE LIVRAISONDETAIL;
+DROP TABLE COMMANDEDETAIL;
+DROP TABLE LIVRAISON;
+DROP TABLE COMMANDE;
+DROP TABLE CLIENT;
+DROP TABLE REGION;
+DROP TABLE PRODUIT;
+DROP TABLE CAMION;
+DROP TABLE USAGER;
+DROP TABLE ROLE CASCADE;
 
 prompt
 prompt Creating table CAMION
@@ -55,7 +57,7 @@ prompt =====================
 prompt
 create table USAGER
 (
-  nousager    NUMBER not null,
+  nousager    NUMBER        not null,
   usrname     VARCHAR2(500),
   password    VARCHAR2(150),
   type        VARCHAR2(2),
@@ -71,15 +73,15 @@ prompt =====================
 prompt
 create table CLIENT
 (
-  noclient  NUMBER not null,
-  nomclient VARCHAR2(500),
-  adresse   VARCHAR2(500),
-  telephone VARCHAR2(50),
+  noclient  NUMBER 		not null,
+  nomclient VARCHAR2(500)	not null,
+  adresse   VARCHAR2(500)	not null,
+  telephone VARCHAR2(15),
   courriel  VARCHAR2(250),
-  noregion  NUMBER,
+  noregion  NUMBER		not null,
   confirm   VARCHAR2(1),
   nousager  NUMBER,
-  ville     VARCHAR2(20)
+  ville     VARCHAR2(20)	not null
 )
 ;
 alter table CLIENT
@@ -98,8 +100,8 @@ prompt
 create table COMMANDE
 (
   nocommande   NUMBER not null,
-  noclient     NUMBER,
-  datecommande DATE,
+  noclient     NUMBER not null,
+  datecommande DATE   not null,
   confirm      VARCHAR2(1)
 )
 ;
@@ -116,12 +118,13 @@ prompt
 create table PRODUIT
 (
   noproduit       NUMBER not null,
-  description     VARCHAR2(500),
-  prix            NUMBER,
-  quantiteenstock NUMBER,
-  furnisseur      VARCHAR2(25),
+  description     VARCHAR2(500)  not null,
+  prix    	  DECIMAL(10,2)	 NOT NULL,
+  quantiteenstock NUMBER
+       CHECK (quantiteenstock >= 0),
+  fournisseur     VARCHAR2(30),
   alcool          VARCHAR2(50),
-  emballage       NUMBER
+  emballage       NUMBER not null
 )
 ;
 alter table PRODUIT
@@ -134,9 +137,10 @@ prompt
 create table COMMANDEDETAIL
 (
   noligne    NUMBER,
-  nocommande NUMBER,
-  noproduit  NUMBER,
+  nocommande NUMBER not null,
+  noproduit  NUMBER not null,
   quantite   NUMBER
+      CHECK (quantite > 0)
 )
 ;
 alter table COMMANDEDETAIL
@@ -145,6 +149,8 @@ alter table COMMANDEDETAIL
 alter table COMMANDEDETAIL
   add constraint COMMANDEDETAIL_FK02 foreign key (NOPRODUIT)
   references PRODUIT (NOPRODUIT);
+alter table COMMANDEDETAIL
+  add constraint COMMANDEDETAIL_PK primary key (NOCOMMANDE, NOPRODUIT);
 
 prompt
 prompt Creating table LIVRAISON
@@ -153,7 +159,7 @@ prompt
 create table LIVRAISON
 (
   nolivraison   NUMBER not null,
-  datelivraison DATE,
+  datelivraison DATE   not null,
   nocamion      NUMBER
 )
 ;
@@ -174,6 +180,8 @@ create table LIVRAISONDETAIL
   nocommande  NUMBER,
   noproduit   NUMBER,
   qtlivree    NUMBER
+       CHECK (qtLivree > 0),
+  CONSTRAINT pk_LivraisonDetail PRIMARY KEY (nolivraison, nocommande, noproduit)
 )
 ;
 alter table LIVRAISONDETAIL
@@ -201,4 +209,5 @@ alter table ROLE
   add constraint ROLE_PK primary key (NOROLE);
 
 
-spool off
+SET	ECHO OFF
+SPOOL	OFF
