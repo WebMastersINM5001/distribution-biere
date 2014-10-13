@@ -18,7 +18,7 @@ DROP TABLE REGION;
 DROP TABLE PRODUIT;
 DROP TABLE CAMION;
 DROP TABLE USAGER;
-DROP TABLE ROLE CASCADE;
+DROP TABLE ROLE;
 
 prompt
 prompt Creating table CAMION
@@ -26,10 +26,10 @@ prompt =====================
 prompt
 create table CAMION
 (
-  nocamion    NUMBER not null,
-  nbcaissemax NUMBER,
-  description VARCHAR2(500),
-  disponible  VARCHAR2(1)
+  nocamion    NUMBER     not null,
+  nbcaissemax NUMBER     not null,
+  description VARCHAR2(50),
+  disponible  VARCHAR2(1) not null
 )
 ;
 alter table CAMION
@@ -45,7 +45,7 @@ prompt
 create table REGION
 (
   noregion  NUMBER not null,
-  nomregion VARCHAR2(500)
+  nomregion VARCHAR2(500) not null
 )
 ;
 alter table REGION
@@ -57,10 +57,10 @@ prompt =====================
 prompt
 create table USAGER
 (
-  nousager    NUMBER        not null,
-  usrname     VARCHAR2(500),
-  password    VARCHAR2(150),
-  type        VARCHAR2(2),
+  nousager    NUMBER        NOT NULL,
+  username    VARCHAR2(500) NOT NULL,
+  password    VARCHAR2(150) NOT NULL,
+  type        VARCHAR2(50)   NOT NULL,
   description VARCHAR2(250)
 )
 ;
@@ -76,10 +76,10 @@ create table CLIENT
   noclient  NUMBER 		not null,
   nomclient VARCHAR2(500)	not null,
   adresse   VARCHAR2(500)	not null,
-  telephone VARCHAR2(15),
+  telephone VARCHAR2(15)        not null,
   courriel  VARCHAR2(250),
   noregion  NUMBER		not null,
-  confirm   VARCHAR2(1),
+  confirm   CHAR(1),
   nousager  NUMBER,
   ville     VARCHAR2(20)	not null
 )
@@ -102,7 +102,7 @@ create table COMMANDE
   nocommande   NUMBER not null,
   noclient     NUMBER not null,
   datecommande DATE   not null,
-  confirm      VARCHAR2(1)
+  confirm      CHAR(1)
 )
 ;
 alter table COMMANDE
@@ -139,7 +139,7 @@ create table COMMANDEDETAIL
   noligne    NUMBER,
   nocommande NUMBER not null,
   noproduit  NUMBER not null,
-  quantite   NUMBER
+  quantite   NUMBER NOT NULL
       CHECK (quantite > 0)
 )
 ;
@@ -160,7 +160,7 @@ create table LIVRAISON
 (
   nolivraison   NUMBER not null,
   datelivraison DATE   not null,
-  nocamion      NUMBER
+  nocamion      NUMBER not null
 )
 ;
 alter table LIVRAISON
@@ -176,10 +176,10 @@ prompt
 create table LIVRAISONDETAIL
 (
   noligne     NUMBER,
-  nolivraison NUMBER,
-  nocommande  NUMBER,
-  noproduit   NUMBER,
-  qtlivree    NUMBER
+  nolivraison NUMBER    NOT NULL,
+  nocommande  NUMBER    NOT NULL,
+  noproduit   NUMBER    NOT NULL,
+  qtlivree    NUMBER    NOT NULL
        CHECK (qtLivree > 0),
   CONSTRAINT pk_LivraisonDetail PRIMARY KEY (nolivraison, nocommande, noproduit)
 )

@@ -109,16 +109,26 @@ INSERT INTO PRODUIT(noproduit,description,prix,emballage,alcool,fournisseur,quan
 
 --******************* TABLE Camion ******************************
 
-INSERT INTO Camion VALUES(100,'800','Camion classe 3','y');
-INSERT INTO Camion VALUES(101,'800','Camion classe 3','y');
-INSERT INTO Camion VALUES(102,'800','Camion classe 3','y');
-INSERT INTO Camion VALUES(104,'800','Camion classe 3','y');
-INSERT INTO Camion VALUES(105,'800','Camion classe 3','y');
-INSERT INTO Camion VALUES(106,'800','Camion classe 3','y');
-INSERT INTO Camion VALUES(107,'800','Camion classe 3','y');
-INSERT INTO Camion VALUES(108,'800','Camion classe 3','y');
-INSERT INTO Camion VALUES(109,'2080','Camion classe 1','y');
-INSERT INTO Camion VALUES(110,'2080','Camion classe 1','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(100,800,'Camion classe 3','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(101,'800','Camion classe 3','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(102,'800','Camion classe 3','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(104,'800','Camion classe 3','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(105,'800','Camion classe 3','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(106,'800','Camion classe 3','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(107,'800','Camion classe 3','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(108,'800','Camion classe 3','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(109,'2080','Camion classe 1','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(110,'2080','Camion classe 1','y');
 
 --************************* TABLE Client *********************************
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
@@ -225,6 +235,34 @@ INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,
 	    VALUES(51,'La maison Verte','16981,boul. Gouin O','Sainte-Genevieve',20,'514 696-6308',' ','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(52,'Vivaldi Restaurant','13071,boul. Gouin O','Pierrefond',20,'514 620-9200',' ','Y',NULL);
+
+
+--************************* TABLE Commande *********************************
+insert into Commande values(300,5,'12/10/2014','y');
+insert into Commande values(301,5,'12/10/2014','y');
+insert into Commande values(302,15,'12/10/2014','y');
+insert into Commande values(304,3,'12/10/2014','y');
+insert into Commande values(305,3,'12/10/2014','y');
+insert into Commande values(306,8,'12/10/2014','y');
+insert into Commande values(307,11,'12/10/2014','y');
+insert into Commande values(308,44,'12/10/2014','y');
+insert into Commande values(309,32,'12/10/2014','y');
+insert into Commande values(310,50,'12/10/2014','y');
+insert into Commande values(311,16,'12/10/2014','y');
+insert into Commande values(312,24,'12/10/2014','y');
+insert into Commande values(313,24,'12/10/2014','y');
+insert into Commande values(314,24,'12/10/2014','y');
+insert into Commande values(315,47,'12/10/2014','y');
+insert into Commande values(316,13,'12/10/2014','y');
+insert into Commande values(317,31,'12/10/2014','y');
+insert into Commande values(318,20,'12/10/2014','y');
+insert into Commande values(319,18,'12/10/2014','y');
+insert into Commande values(320,52,'12/10/2014','y');
+
+
+
+
+
 commit;
 /
 SET	ECHO OFF

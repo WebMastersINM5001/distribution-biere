@@ -1,0 +1,142 @@
+
+SET ECHO ON
+/
+SET SERVEROUTPUT ON
+/
+spool c:\DistributionBiere.txt; 
+-- ======================================================================
+--  Projet:        Automn 2014 
+--  Auteur:        Ghislain Maltais
+--  Sigle:         INM5001 Gr 30
+-- ======================================================================
+
+
+--***********************************************************************  
+--*           1. LE SCHEMA DE LA BASE DE DONNEES:                       *
+--***********************************************************************
+DROP TABLE LivraisonDetail;
+DROP TABLE CommandeDetail;
+DROP TABLE Livraison;
+DROP TABLE Commande;
+DROP TABLE Client;
+DROP TABLE Region;
+DROP TABLE Produit;
+DROP TABLE Camion;
+DROP TABLE Usager;
+DROP TABLE ROLE;
+
+
+CREATE TABLE Region
+(noRegion	INTEGER		NOT NULL,
+ region	        VARCHAR(30)	NOT NULL,
+ CONSTRAINT pk_Region PRIMARY KEY(noRegion)
+)
+/
+
+CREATE TABLE Produit
+(noProduit 		INTEGER		NOT NULL,
+ description 		VARCHAR(20)	NOT NULL,
+ prix    		DECIMAL(10,2)	NOT NULL,
+ emballage		INTEGER		NOT NULL,
+ alcool			VARCHAR2(5),
+ fournisseur		VARCHAR2(30),
+ quantiteEnStock	INTEGER		NOT NULL 
+	CHECK (quantiteEnStock >= 0),
+ CONSTRAINT pk_Produit PRIMARY KEY (noProduit))
+/
+
+
+CREATE TABLE Camion
+(noCamion 	INTEGER 	NOT NULL,
+ nbCaisseMax	INTEGER		NOT NULL
+      CHECK (nbCaisseMax > 0),
+ disponible	CHAR(1)		NOT NULL,
+ description	VARCHAR2(50),
+ CONSTRAINT pk_Camion PRIMARY KEY (noCamion)
+)
+/
+
+CREATE TABLE Usager
+(noUsager	INTEGER		NOT NULL,
+ userName	CHAR(8)		NOT NULL,
+ password	CHAR(5)		NOT NULL,
+ type		VARCHAR(20)	NOT NULL,
+ description	VARCHAR(100),
+ CONSTRAINT pk_Usager PRIMARY KEY (noUsager)
+)
+/
+
+CREATE TABLE Client
+(noClient	INTEGER		NOT NULL,	
+ nomClient      VARCHAR(50)	NOT NULL,  
+ adresse	VARCHAR(30)	NOT NULL,
+ ville		VARCHAR(20)	NOT NULL,
+ noRegion	INTEGER		NOT NULL,
+ telephone	VARCHAR(15)	NOT NULL,
+ courriel	VARCHAR(50),
+ noUsager	NUMBER,
+ confirm	CHAR(1),
+ CONSTRAINT pk_Client PRIMARY KEY(noClient),
+ CONSTRAINT fk_Client FOREIGN KEY (noRegion) REFERENCES Region,
+ CONSTRAINT fk_Usager FOREIGN KEY (noUsager) REFERENCES Usager
+)
+/
+
+
+CREATE TABLE Commande
+(noCommande 	        INTEGER 	NOT NULL,
+ noClient		INTEGER		NOT NULL,
+ dateCommande		DATE		NOT NULL,
+ confirm		CHAR(1)		NOT NULL,
+ CONSTRAINT pk_Commande PRIMARY KEY 	(noCommande),
+ CONSTRAINT fk_Commande FOREIGN KEY 	(noClient) REFERENCES Client
+)
+/
+
+
+CREATE TABLE CommandeDetail
+(noLigne	NUMBER,
+ noCommande 	INTEGER		NOT NULL,
+ noProduit 	INTEGER		NOT NULL,
+ quantite 	INTEGER		NOT NULL
+	CHECK (quantite > 0),
+ CONSTRAINT pk_CommandeDetail PRIMARY KEY (noCommande, noProduit),
+ CONSTRAINT fk_noCommande FOREIGN KEY (noCommande) REFERENCES Commande,
+ CONSTRAINT fk_noProduit FOREIGN KEY (noProduit) REFERENCES Produit
+)
+/
+
+CREATE TABLE Livraison
+(noLivraison 	INTEGER 	NOT NULL,
+ dateLivraison	DATE		NOT NULL,
+ noCamion 	INTEGER 	NOT NULL, 
+ CONSTRAINT pk_Livraison PRIMARY KEY (noLivraison),
+ CONSTRAINT fk_Livraison FOREIGN KEY (noCamion) REFERENCES Camion
+)
+/
+
+CREATE TABLE LivraisonDetail
+(noLigne	NUMBER,
+ noLivraison 	INTEGER 		NOT NULL,
+ noCommande 	INTEGER			NOT NULL,
+ noProduit 		INTEGER		NOT NULL, 
+ qteLivree	INTEGER			NOT NULL
+	CHECK (qteLivree > 0),
+ CONSTRAINT pk_LivraisonDetail PRIMARY KEY (noLivraison, noCommande, noProduit),
+ CONSTRAINT fk_noLivraison FOREIGN KEY (noLivraison) REFERENCES Livraison,
+ CONSTRAINT fk_noCom FOREIGN KEY (noCommande) REFERENCES Commande,
+ CONSTRAINT fk_noPro FOREIGN KEY (noProduit) REFERENCES Produit
+)
+/
+
+CREATE TABLE Role
+(noRole   NUMBER 	NOT NULL,
+ nomRole  VARCHAR2(150),
+ menuItem VARCHAR2(150),
+ CONSTRAINT pk_Role PRIMARY KEY (noRole)
+)
+/
+
+
+SET	ECHO OFF
+SPOOL	OFF
