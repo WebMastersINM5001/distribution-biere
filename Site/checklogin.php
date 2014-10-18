@@ -1,12 +1,8 @@
+<?php include("includes/databaseInfo.php"); ?>
+
 <?php
 
 	session_start();
-
-	$host="localhost"; // Host name 
-	$username=""; // Mysql username 
-	$password=""; // Mysql password 
-	$db_name="test"; // Database name 
-	$tbl_name="usager"; // Table name 
 
 	// Connect to server and select databse.
 	mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
@@ -38,11 +34,11 @@
 		$_SESSION["myusername"] = $myusername;
 		$_SESSION["mypassword"] = $mypassword;
 
-		if($row[3] == "client" && $row[4] == "y"){
+		if($row[4] == "client" && $row[5] == "y"){
 			header("location:page_client.php");
-		}else if($row[3] == "entreprise" && $row[4] == "y"){
+		}else if($row[4] == "entreprise" && $row[5] == "y"){
 			header("location:page_entreprise.php");
-		}else if($row[3] == "livreur" && $row[4] == "y"){
+		}else if($row[4] == "livreur" && $row[5] == "y"){
 			header("location:page_livreur.php");
 		}else{
 			echo "Votre compte n'a pas été encore validé";
