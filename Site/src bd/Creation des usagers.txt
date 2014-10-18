@@ -5,6 +5,9 @@
 --INSERT INTO Usager VALUES(302,'AleC5001','45612','Administrateur','Y');
 --INSERT INTO Usager VALUES(303,'Bas45001','98745','Administrateur','Y');
  -- ***************** Creation des Usager *****************************
+
+
+--*********************  SUPRESSION DES USAGER ***********************
 --DROP USER KevB5001 CASCADE;
 --DROP USER MalG5001 CASCADE;
 --DROP USER AleC5001 CASCADE;
@@ -28,7 +31,7 @@ GRANT connect, resource TO Bas45001;
 --GRANT SELECT, INSERT, UPDATE, DELETE ON system TO KevB5001 ;
 
 BEGIN
-   FOR R IN (SELECT owner, table_name FROM all_tables WHERE owner='YANNICK') LOOP
+   FOR R IN (SELECT owner, table_name FROM all_tables WHERE owner='KevB5001') LOOP
       EXECUTE IMMEDIATE 'GRANT SELECT, INSERT, UPDATE, DELETE ON ' ||
                          R.owner || '.' || R.table_name || ' TO FRED';
    END LOOP;

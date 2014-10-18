@@ -92,6 +92,9 @@ alter table CLIENT
 alter table CLIENT
   add constraint CLIENT_FK02 foreign key (NOUSAGER)
   references USAGER (NOUSAGER);
+alter table CLIENT
+  add constraint CLIENT_PK2 UNIQUE(telephone);
+
 
 prompt
 prompt Creating table COMMANDE

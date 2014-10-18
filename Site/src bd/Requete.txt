@@ -1,0 +1,28 @@
+select description
+from COMMANDEDETAIL cd, PRODUIT p
+where cd.NOPRODUIT = p.NOPRODUIT and
+     cd.NOCOMMANDE = 300;
+
+--**************************************************************
+-- Le no de région ainsi que la région du noLivraison = 5000
+--*************************************************************
+
+SELECT DISTINCT re.noregion, re.nomregion
+from LIVRAISONDETAIL ld,COMMANDE cm,CLIENT cl, REGION re
+WHERE ld.nocommande = cm.nocommande AND
+      cm.noclient = cl.noclient AND
+      cl.noregion = re.noregion AND
+      ld.nolivraison = 5000;  
+
+--**************************************************************
+-- Le nocommande, noclient et nomclient qui sont dans le camion 100
+--*************************************************************
+SELECT cm.nocommande,cl.noclient,cl.nomclient
+from LIVRAISONDETAIL ld,COMMANDE cm,CLIENT cl, CAMION ca,
+     LIVRAISON li
+WHERE ca.nocamion = li.noCamion AND
+      li.nolivraison = ld.nolivraison AND
+      ld.nocommande = cm.nocommande AND
+      cm.noclient = cl.noclient AND
+      ca.nocamion = 100;
+      
