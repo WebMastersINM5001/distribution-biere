@@ -2,8 +2,10 @@ SET ECHO ON
 /
 SET SERVEROUTPUT ON
 /
-set define off
-spool c:\distributionBiereClient.txt
+set define off;
+
+SPOOL dBiereClient.txt
+/
 
 --***********************************************************************  
 --*           2. INSERTION DANS LES TABLES DE LA BASE DE DONNEES:       *
@@ -188,7 +190,7 @@ INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(27,'Le chateau Joliette','450,rue St-Thoas','Joliette',70,'450 752-2525','a.quintal@chateaujoliette.com','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
-	    VALUES(28,'La Brasserie Pudriere','975,Bernard-Pilon','Beloeil',40,'450 467-0968','','Y',NULL);
+	    VALUES(28,'La Brasserie Pudriere','975,Bernard-Pilon','Beloeil',40,'450 467-3005','','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(29,'Auberge Aux Quatres Matin','155,rue des Skieurs','Saint-Come',70,'450 883-1932','info@auxquatrematins.ca','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
@@ -228,7 +230,7 @@ INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(47,'Brasserie St-Léonard','4440,rue Jean-Talon','St-Leonard',10,'514 721-5862',' ','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
-	    VALUES(48,'S Lounge','5872,rue Jean-Talon','St-Leonard',10,'514 419-3404',' ','Y',NULL);
+	    VALUES(48,'S Lounge','5872,rue Jean-Talon','St-Leonard',10,'514 419-2000',' ','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(49,'Resto Bar Napoleon','3200,ch Gascon','Terrebonne',50,'514 477-6251',' ','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 

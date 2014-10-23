@@ -3,5 +3,5 @@ CREATE VIEW InfoClient AS
     FROM CLIENT;
 
 CREATE VIEW InfoProduit AS
-    SELECT noproduit,description,prix,exballage,quantiteenstock,fournisseur
+    SELECT noproduit,description,prix,emballage,quantiteenstock,fournisseur
     from produit;
