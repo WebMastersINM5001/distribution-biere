@@ -1,4 +1,7 @@
-select description
+--**************************************************************
+-- Voir la liste les produits commandes par la commande 300
+--**************************************************************
+select cd.nocommande,description, p.emballage, cd.quantite
 from COMMANDEDETAIL cd, PRODUIT p
 where cd.NOPRODUIT = p.NOPRODUIT and
      cd.NOCOMMANDE = 300;
@@ -25,4 +28,96 @@ WHERE ca.nocamion = li.noCamion AND
       ld.nocommande = cm.nocommande AND
       cm.noclient = cl.noclient AND
       ca.nocamion = 100;
-      
+
+
+--**************************************************************
+-- Les nocommandes placées a la même date qu'une commande (Ex;:300)
+--************************************************************* 
+SELECT Commande.noCommande
+FROM Commande, Commande C2
+WHERE Commande.dateCommande = C2.dateCommande AND
+C2.noCommande = 300;
+
+--**************************************************************
+-- Reaprovisionner un produit
+--************************************************************* 
+UPDATE PRODUIT
+SET quantiteenstock = quantiteenstock + 2
+WHERE noproduit = 1000;
+
+--**************************************************************
+-- Les produits les moins dispendieux
+--************************************************************* 
+SELECT *
+FROM PRODUIT
+WHERE prix =
+         (SELECT MIN(prix)
+          FROM PRODUIT);
+
+--****************************************************************
+-- Le montant de la  de la commande #300 avant et après 
+-- taxe de 15%
+--************************************************************* 
+
+SELECT nocommande, SUM(quantite*prix)AS Montant,
+       SUM(quantite*prix *1.15)AS AVEC_TAXE
+FROM   COMMANDEDETAIL CD, PRODUIT P
+WHERE  CD.noproduit = P.noproduit AND
+       nocommande = 300
+GROUP BY nocommande;
+
+--****************************************************************
+-- Le montant de la facture de la Livraison #5000 avant et après 
+-- taxe de 15%
+--************************************************************* 
+SELECT LD.nolivraison,SUM(qtlivree*prix)AS prixTtotal,
+       SUM(qtlivree * prix*1.15)AS avecTaxe
+FROM   LIVRAISONDETAIL LD, PRODUIT P
+WHERE  LD.noproduit = P.noproduit AND
+       nolivraison = 5000
+GROUP BY nolivraison;
+
+--****************************************************************
+--Les produits qui ont la description est  Corona  
+--****************************************************************
+SELECT *
+FROM   PRODUIT
+WHERE  description LIKE '%Corona%';
+
+SELECT *
+FROM   PRODUIT
+WHERE  description LIKE '%Molson%';
+
+--****************************************************************
+-- Le nom du client dont la commande est 300.
+--****************************************************************
+
+SELECT     CL.noclient,nomclient
+FROM       CLIENT CL,COMMANDE CM
+WHERE      CL.noclient = CM.noclient and
+           nocommande = 300;
+
+--****************************************************************
+-- Les noms des clients (sans répétition) qui ont une livraison 
+-- datée du 14 octoble 2014 ou du 14 octobre 2013. 
+--****************************************************************
+
+SELECT	DISTINCT nomClient
+FROM	CLIENT CL, COMMANDE C, LIVRAISONDETAIL LD, LIVRAISON L
+WHERE   (datelivraison = '14/10/2014' OR 
+         datelivraison = '14/10/2013') AND
+         CL.noclient = C.noclient AND 
+         C.nocommande = LD.nocommande AND
+	 LD.nolivraison = L.nolivraison
+/ 
+
+--****************************************************************
+-- La table LIVRAISONDETAIL triée par nocommande en ordre 
+-- croissant et pour chaque nocommande identique,trie par noproduit 
+-- en ordre croissant.  
+--****************************************************************
+
+SELECT	  *
+FROM      LIVRAISONDETAIL
+ORDER BY  nocommande ASC, noproduit ASC
+/
