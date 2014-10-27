@@ -7,7 +7,7 @@ SET ECHO ON
 SET SERVEROUTPUT ON
 /
 set define off
-spool c:\distributionBiere.txt
+spool distributionBiere.txt
 
 DROP TABLE LIVRAISONDETAIL;
 DROP TABLE COMMANDEDETAIL;
@@ -45,7 +45,7 @@ prompt
 create table REGION
 (
   noregion  NUMBER not null,
-  nomregion VARCHAR2(500) not null
+  nomregion VARCHAR2(20) not null
 )
 ;
 alter table REGION
@@ -58,10 +58,10 @@ prompt
 create table USAGER
 (
   nousager    NUMBER        NOT NULL,
-  username    VARCHAR2(500) NOT NULL,
-  password    VARCHAR2(150) NOT NULL,
+  username    VARCHAR2(50) NOT NULL,
+  password    VARCHAR2(50) NOT NULL,
   type        VARCHAR2(50)   NOT NULL,
-  description VARCHAR2(250)
+  description VARCHAR2(50)
 )
 ;
 alter table USAGER
@@ -74,10 +74,10 @@ prompt
 create table CLIENT
 (
   noclient  NUMBER 		not null,
-  nomclient VARCHAR2(500)	not null,
-  adresse   VARCHAR2(500)	not null,
+  nomclient VARCHAR2(50)	not null,
+  adresse   VARCHAR2(50)	not null,
   telephone VARCHAR2(15)        not null,
-  courriel  VARCHAR2(250),
+  courriel  VARCHAR2(60),
   noregion  NUMBER		not null,
   confirm   CHAR(1),
   nousager  NUMBER,
@@ -92,6 +92,9 @@ alter table CLIENT
 alter table CLIENT
   add constraint CLIENT_FK02 foreign key (NOUSAGER)
   references USAGER (NOUSAGER);
+alter table CLIENT
+  add constraint CLIENT_PK2 UNIQUE(telephone);
+
 
 prompt
 prompt Creating table COMMANDE
@@ -118,7 +121,7 @@ prompt
 create table PRODUIT
 (
   noproduit       NUMBER not null,
-  description     VARCHAR2(500)  not null,
+  description     VARCHAR2(50)  not null,
   prix    	  DECIMAL(10,2)	 NOT NULL,
   quantiteenstock NUMBER
        CHECK (quantiteenstock >= 0),
@@ -201,8 +204,8 @@ prompt
 create table ROLE
 (
   norole   NUMBER not null,
-  nomrole  VARCHAR2(150),
-  menuitem VARCHAR2(150)
+  nomrole  VARCHAR2(50),
+  menuitem VARCHAR2(50)
 )
 ;
 alter table ROLE

@@ -2,8 +2,10 @@ SET ECHO ON
 /
 SET SERVEROUTPUT ON
 /
-set define off
-spool c:\distributionBiereClient.txt
+set define off;
+
+SPOOL dBiereClient.txt
+/
 
 --***********************************************************************  
 --*           2. INSERTION DANS LES TABLES DE LA BASE DE DONNEES:       *
@@ -114,7 +116,9 @@ INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible)
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
 	VALUES(101,'800','Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(102,'800','Camion classe 3','y');
+	VALUES(103,'800','Camion classe 3','y');
+INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
+	VALUES(102,800,'Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
 	VALUES(104,'800','Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
@@ -174,9 +178,9 @@ INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
  	    VALUES(21,'La Brasserie Pudriere','975,Bernard-Pilon','Beloeil',40,'450 467-0968','','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
-	    VALUES(22,'Bar Le Surf','1352,ch de Chamblie','Longueuil',60,'450 467-0968','','Y',NULL);
+	    VALUES(22,'Bar Le Surf','1352,ch de Chamblie','Longueuil',60,'450 674-8384','','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
-	    VALUES(23,'Bistro Ste-Madeleine','55,St-Simon','Ste-Madeleine',40,'450 467-0968','','Y',NULL);
+	    VALUES(23,'Bistro Ste-Madeleine','55,St-Simon','Ste-Madeleine',40,'450 467-0970','','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(24,'Bar-Terrasse Helene','9645,ch de Chamblie','Ste-Hubert',40,'450 676-6490','','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
@@ -184,9 +188,9 @@ INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
             VALUES(26,'Le Monte Cristo Bistro','10,Blainville Ouest','Ste-Therese',50,'450 419-6765','info@lemontecristo.ca','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
-	    VALUES(27,'Le chateau Joliette','450,rue St-Thoas','Joliette',70,'450 419-6765','a.quintal@chateaujoliette.com','Y',NULL);
+	    VALUES(27,'Le chateau Joliette','450,rue St-Thoas','Joliette',70,'450 752-2525','a.quintal@chateaujoliette.com','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
-	    VALUES(28,'La Brasserie Pudriere','975,Bernard-Pilon','Beloeil',40,'450 467-0968','','Y',NULL);
+	    VALUES(28,'La Brasserie Pudriere','975,Bernard-Pilon','Beloeil',40,'450 467-3005','','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(29,'Auberge Aux Quatres Matin','155,rue des Skieurs','Saint-Come',70,'450 883-1932','info@auxquatrematins.ca','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
@@ -226,41 +230,110 @@ INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(47,'Brasserie St-Léonard','4440,rue Jean-Talon','St-Leonard',10,'514 721-5862',' ','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
-	    VALUES(48,'S Lounge','5872,rue Jean-Talon','St-Leonard',10,'514 419-3404',' ','Y',NULL);
+	    VALUES(48,'S Lounge','5872,rue Jean-Talon','St-Leonard',10,'514 419-2000',' ','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(49,'Resto Bar Napoleon','3200,ch Gascon','Terrebonne',50,'514 477-6251',' ','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(50,'Marina St-Blaise','23,39E av av RR61','St-Blaise',40,'514 291-3300',' ','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
-	    VALUES(51,'La maison Verte','16981,boul. Gouin O','Sainte-Genevieve',20,'514 696-6308',' ','Y',NULL);
+	    VALUES(51,'Goldies Resto Bar','7425, rue St-Jacques','Montreal',20,'514 486-1433',' ','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(52,'Vivaldi Restaurant','13071,boul. Gouin O','Pierrefond',20,'514 620-9200',' ','Y',NULL);
 
 
 --************************* TABLE Commande *********************************
-insert into Commande values(300,5,'12/10/2014','y');
-insert into Commande values(301,5,'12/10/2014','y');
-insert into Commande values(302,15,'12/10/2014','y');
-insert into Commande values(304,3,'12/10/2014','y');
-insert into Commande values(305,3,'12/10/2014','y');
-insert into Commande values(306,8,'12/10/2014','y');
-insert into Commande values(307,11,'12/10/2014','y');
-insert into Commande values(308,44,'12/10/2014','y');
-insert into Commande values(309,32,'12/10/2014','y');
-insert into Commande values(310,50,'12/10/2014','y');
-insert into Commande values(311,16,'12/10/2014','y');
-insert into Commande values(312,24,'12/10/2014','y');
-insert into Commande values(313,24,'12/10/2014','y');
-insert into Commande values(314,24,'12/10/2014','y');
-insert into Commande values(315,47,'12/10/2014','y');
-insert into Commande values(316,13,'12/10/2014','y');
-insert into Commande values(317,31,'12/10/2014','y');
-insert into Commande values(318,20,'12/10/2014','y');
-insert into Commande values(319,18,'12/10/2014','y');
-insert into Commande values(320,52,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm) 
+	values(300,5,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(301,5,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(302,15,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(304,3,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(305,3,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(306,8,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(307,11,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(308,44,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(309,32,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(310,50,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(311,16,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(312,24,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(313,24,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(314,24,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(315,47,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(316,13,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(317,31,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(318,20,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(319,18,'12/10/2014','y');
+insert into Commande(nocommande,noclient,datecommande,confirm)  
+	values(320,52,'12/10/2014','y');
+
+--***************************** TABLE COMMANDEDETAIL **************************
+
+INSERT INTO COMMANDEDETAIL VALUES(1,300,1024,3);
+INSERT INTO COMMANDEDETAIL VALUES(2,300,1009,5);
+INSERT INTO COMMANDEDETAIL VALUES(3,304,1001,40);
+INSERT INTO COMMANDEDETAIL VALUES(4,300,1021,12);
+INSERT INTO COMMANDEDETAIL VALUES(5,300,1006,18);
+INSERT INTO COMMANDEDETAIL VALUES(6,300,1005,7);
+INSERT INTO COMMANDEDETAIL VALUES(7,318,1022,3);
+INSERT INTO COMMANDEDETAIL VALUES(8,318,1005,4);
+INSERT INTO COMMANDEDETAIL VALUES(9,318,1031,11);
+INSERT INTO COMMANDEDETAIL VALUES(10,318,1016,4);
+INSERT INTO COMMANDEDETAIL VALUES(11,311,1028,5);
+INSERT INTO COMMANDEDETAIL VALUES(12,311,1030,23);
+INSERT INTO COMMANDEDETAIL VALUES(13,301,1009,5);
+INSERT INTO COMMANDEDETAIL VALUES(14,301,1028,8);
+INSERT INTO COMMANDEDETAIL VALUES(15,302,1009,5);
+INSERT INTO COMMANDEDETAIL VALUES(16,305,1009,5);
+INSERT INTO COMMANDEDETAIL VALUES(17,307,1025,5);
+INSERT INTO COMMANDEDETAIL VALUES(18,306,1016,3);
+INSERT INTO COMMANDEDETAIL VALUES(19,308,1027,11);
+INSERT INTO COMMANDEDETAIL VALUES(20,309,1031,14);
+INSERT INTO COMMANDEDETAIL VALUES(21,310,1002,49);
+
+--****************************** TABLE LIVRAISON *********************
+
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5000,'13/10/2014',100);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5001,'14/10/2014',101);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5002,'14/10/2014',102);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5003,'14/10/2014',103);
 
 
-
+--******************************* TABLE LIVRAISONDETAIL ******************
+--20
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(1,5000,300,1024,3);
+--20 
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(2,5000,300,1029,5); 
+--30
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(3,5001,307,1025,5); 
+--70
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(3,5002,309,1031,14); 
+--50
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(3,5002,310,1002,49); 
+--20
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(3,5000,304,1001,40); 
 
 
 commit;

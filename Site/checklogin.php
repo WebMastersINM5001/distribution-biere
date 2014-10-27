@@ -35,6 +35,7 @@
 		// Register $myusername, $mypassword and redirect to file "login_success.php"
 		$_SESSION["myusername"] = $myusername;
 		$_SESSION["mypassword"] = $mypassword;
+<<<<<<< HEAD
 		
 		$typeuser = $row['TYPE'][0];
 		
@@ -43,6 +44,14 @@
 		}else if($typeuser == "entreprise" ){
 			header("location:page_entreprise.php");
 		}else if($typeuser == "livreur" ){
+=======
+
+		if($row[4] == "client" && $row[5] == "y"){
+			header("location:page_client.php");
+		}else if($row[4] == "entreprise" && $row[5] == "y"){
+			header("location:page_entreprise.php");
+		}else if($row[4] == "livreur" && $row[5] == "y"){
+>>>>>>> origin/master
 			header("location:page_livreur.php");
 		}else if($typeuser == "administrateur" ){
 			header("location:page_admin.php");

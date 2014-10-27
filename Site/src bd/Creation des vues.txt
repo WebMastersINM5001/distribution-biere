@@ -1,0 +1,7 @@
+CREATE VIEW InfoClient AS
+    SELECT noclient,nomclient,adresse,ville,telephone,courriel
+    FROM CLIENT;
+
+CREATE VIEW InfoProduit AS
+    SELECT noproduit,description,prix,emballage,quantiteenstock,fournisseur
+    from produit;
