@@ -1,49 +1,51 @@
+<?php include("includes/databaseInfo.php"); ?>
+
 <?php
 
 	session_start();
 
-	$host="localhost"; // Host name 
-	$username=""; // Mysql username 
-	$password=""; // Mysql password 
-	$db_name="test"; // Database name 
-	$tbl_name="usager"; // Table name 
-
 	// Connect to server and select databse.
-	mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
-	mysql_select_db("$db_name")or die("cannot select DB");
+	$conn = oci_connect("inm5001", "inm5001", "//UACC-LENOVO/DEV5CA.UACC-LENOVO.COM");
+	if (!$conn) {
+	   $e = oci_error();
+       echo $e['message'], "\n";
+       trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
+       //exit;
+	} else {
+      print "Connected to Oracle!";
+   }
 
 	// Define $myusername and $mypassword 
 	$myusername=$_POST['userName']; 
 	$mypassword=$_POST['password'];
 
-	/*$encrypt_password=md5($mypassword);
-	die($encrypt_password);*/
-
-	// To protect MySQL injection (more detail about MySQL injection)
-	$myusername = stripslashes($myusername);
-	$mypassword = stripslashes($mypassword);
-	$myusername = mysql_real_escape_string($myusername);
-	$mypassword = mysql_real_escape_string($mypassword);
-	$sql="SELECT * FROM $tbl_name WHERE username='$myusername' and password='$mypassword'";
-	$result=mysql_query($sql);
-
-	$row = mysql_fetch_row($result);
-
-	// Mysql_num_row is counting table row
-	$count=mysql_num_rows($result);
-
+    // counting table row
+	// Use bind variable to improve resuability, and to remove SQL Injection attacks.
+	$query = 'select lower(type) type from USAGER where lower(username)= lower(:usr) and lower(password)=lower(:pwd)';
+	$stid = oci_parse($conn, $query);
+	oci_bind_by_name($stid, ":usr", $myusername);
+	oci_bind_by_name($stid, ":pwd", $mypassword);
+	oci_execute($stid);
+	$count = oci_fetch_all($stid, $row);
+    echo  $row['TYPE'][0];
+	//var_dump($res);
+    echo $count;
 	// If result matched $myusername and $mypassword, table row must be 1 row
-	if($count==1){
+	if($count==1) {
 		// Register $myusername, $mypassword and redirect to file "login_success.php"
 		$_SESSION["myusername"] = $myusername;
 		$_SESSION["mypassword"] = $mypassword;
-
-		if($row[3] == "client" && $row[4] == "y"){
+		
+		$typeuser = $row['TYPE'][0];
+		
+		if($typeuser == "client" ){
 			header("location:page_client.php");
-		}else if($row[3] == "entreprise" && $row[4] == "y"){
+		}else if($typeuser == "entreprise" ){
 			header("location:page_entreprise.php");
-		}else if($row[3] == "livreur" && $row[4] == "y"){
+		}else if($typeuser == "livreur" ){
 			header("location:page_livreur.php");
+		}else if($typeuser == "administrateur" ){
+			header("location:page_admin.php");
 		}else{
 			echo "Votre compte n'a pas été encore validé";
 		}		
@@ -51,6 +53,8 @@
 		echo "Wrong Username or Password";
 	}
 	
-
-	//Pour encrypter le password utiliser md5()
+   oci_free_statement($stid);
+  // Close the Oracle connection
+   oci_close($conn);
+	
 ?>
