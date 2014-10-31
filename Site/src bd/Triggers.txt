@@ -1,0 +1,28 @@
+ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY'
+/
+
+
+--La dateLivraison ne peut précéder la dateCommande.
+
+CREATE OR REPLACE TRIGGER dateLiv_dateCom
+BEFORE INSERT OR UPDATE ON LIVRAISONDETAIL
+REFERENCING
+NEW AS ligneApres
+FOR EACH ROW
+DECLARE
+   datecom COMMANDE.datecommande%TYPE;
+   dateliv LIVRAISON.datelivraison%TYPE;
+   BEGIN
+     SELECT datecommande INTO datecom
+     FROM COMMANDE
+     WHERE nocommande = :ligneApres.nocommande;
+
+     SELECT datelivraison INTO dateliv
+     FROM LIVRAISON
+     WHERE nolivraison = :ligneApres.nolivraison;
+
+     IF dateliv < datecom THEN
+        raise_application_error(-20100, 'la date de livraison doit etre supérieur la date de la
+        commande');
+     END IF;
+END;

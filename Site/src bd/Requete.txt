@@ -1,5 +1,9 @@
+
+
+ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY'
+/
 --**************************************************************
--- Voir la liste les produits commandes par la commande 300
+-- Voir la liste des produits commandes par la commande 300
 --**************************************************************
 select cd.nocommande,description, p.emballage, cd.quantite
 from COMMANDEDETAIL cd, PRODUIT p
@@ -31,7 +35,7 @@ WHERE ca.nocamion = li.noCamion AND
 
 
 --**************************************************************
--- Les nocommandes placées a la même date qu'une commande (Ex;:300)
+-- Les nocommandes placees a la meme date qu'une commande (Ex;:300)
 --************************************************************* 
 SELECT Commande.noCommande
 FROM Commande, Commande C2
@@ -55,7 +59,7 @@ WHERE prix =
           FROM PRODUIT);
 
 --****************************************************************
--- Le montant de la  de la commande #300 avant et après 
+-- Le montant de la commande #300 avant et apres 
 -- taxe de 15%
 --************************************************************* 
 

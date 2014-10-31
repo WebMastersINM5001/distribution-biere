@@ -1,7 +1,63 @@
-CREATE VIEW InfoClient AS
-    SELECT noclient,nomclient,adresse,ville,telephone,courriel
-    FROM CLIENT;
+DROP VIEW VUE_CLIENT;
+DROP VIEW VUE_PRODUIT;
+DROP VIEW VUE_COMMANDE;
+DROP VIEW VUE_DETAIL_COMMANDE;
+DROP VIEW VUE_DETAIL_LIVRAISON;
+DROP VIEW VUE_ROUTE;
+DROP VIEW VUE_CAMION_REGION;
 
-CREATE VIEW InfoProduit AS
+CREATE VIEW VUE_CLIENT AS
+    SELECT noclient,nomclient,adresse,ville,telephone,courriel
+    FROM CLIENT
+    ORDER BY noclient;
+
+CREATE VIEW VUE_PRODUIT AS
     SELECT noproduit,description,prix,emballage,quantiteenstock,fournisseur
     from produit;
+
+CREATE VIEW VUE_COMMANDE AS
+    SELECT  CM.nocommande, CL.noclient,CL.nomclient, CM.datecommande
+    FROM    COMMANDE CM, CLIENT CL
+    WHERE   CM.noclient = CL.noclient
+    ORDER BY CL.noclient ASC;
+
+CREATE VIEW VUE_DETAIL_COMMANDE AS
+    SELECT  CM.nocommande,CL.nomclient, P.noproduit, P.description, CD.quantite
+    FROM    COMMANDEDETAIL CD, PRODUIT P, COMMANDE CM, CLIENT CL
+    WHERE   CD.noproduit =  P.noproduit AND
+            CD.nocommande = CM.nocommande AND
+            CM.noclient = CL.noclient
+    ORDER BY CL.nomclient ASC;
+
+CREATE VIEW VUE_DETAIL_LIVRAISON AS
+    SELECT  RG.nomregion, LD.nolivraison, LD.nocommande, CL.nomclient, LD.noproduit, P.description, LD.qtlivree
+    FROM    REGION RG, LIVRAISONDETAIL LD, CLIENT CL, PRODUIT P, COMMANDE CM 
+    WHERE   LD.NOCOMMANDE = CM.nocommande AND
+            CM.noclient = CL.noclient AND
+            CL.noregion = RG.noregion AND
+            LD.noproduit = P.noproduit; 
+
+CREATE VIEW VUE_ROUTE AS
+    SELECT  RG.nomregion, CAM.nocamion, LD.nolivraison, LD.nocommande, 
+            CL.nomclient, CL.adresse, CL.ville,LIV.datelivraison
+    FROM    REGION RG, CAMION CAM, CLIENT CL, LIVRAISONDETAIL LD, 
+            LIVRAISON LIV, COMMANDE CM
+    WHERE   LD.NOCOMMANDE = CM.nocommande AND
+            CM.noclient = CL.noclient AND
+            CL.noregion = RG.noregion AND
+            LD.nolivraison = LIV.nolivraison AND
+            LIV.nocamion = CAM.nocamion
+    ORDER BY CAM.nocamion ASC;
+
+CREATE VIEW VUE_CAMION_REGION AS
+     SELECT  CAM.noCamion, RG.noregion, RG.nomregion, LD.nolivraison
+     FROM    CAMION CAM, REGION RG, LIVRAISONDETAIL LD, LIVRAISON LIV,
+             COMMANDE CM, CLIENT CL
+     WHERE   CAM.nocamion = LIV.nocamion AND
+             LIV.nolivraison = LD.nolivraison AND
+             LD.nocommande = CM.nocommande AND
+             CM.noclient = CL.noclient AND
+             CL.noregion = RG.noregion
+      ORDER BY CAM.nocamion ASC;
+             
+            

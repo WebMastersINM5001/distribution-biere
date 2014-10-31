@@ -313,27 +313,30 @@ INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5000,'13/10/20
 INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5001,'14/10/2014',101);
 INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5002,'14/10/2014',102);
 INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5003,'14/10/2014',103);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5004,'14/10/2014',104);
 
 
 --******************************* TABLE LIVRAISONDETAIL ******************
---20
+
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
 	VALUES(1,5000,300,1024,3);
---20 
+ 
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
 	VALUES(2,5000,300,1029,5); 
---30
+
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
 	VALUES(3,5001,307,1025,5); 
---70
+
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
-	VALUES(3,5002,309,1031,14); 
---50
+	VALUES(4,5004,309,1031,14); 
+
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
-	VALUES(3,5002,310,1002,49); 
---20
+	VALUES(5,5002,310,1002,49); 
+
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
-	VALUES(3,5000,304,1001,40); 
+	VALUES(6,5003,304,1001,40); 
+
+
 
 
 commit;
