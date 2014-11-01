@@ -1,4 +1,4 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/header.php"); //onsubmit="return validateFormLogin()" ?>
 <body>
 	<div id="content">
 		<h1>Web master inc.</h1>
