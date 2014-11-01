@@ -14,7 +14,7 @@ where cd.NOPRODUIT = p.NOPRODUIT and
 -- Le no de région ainsi que la région du noLivraison = 5000
 --*************************************************************
 
-SELECT DISTINCT re.noregion, re.nomregion
+SELECT DISTINCT re.noregion, re.nomregion, ld.nolivraison
 from LIVRAISONDETAIL ld,COMMANDE cm,CLIENT cl, REGION re
 WHERE ld.nocommande = cm.nocommande AND
       cm.noclient = cl.noclient AND
@@ -125,3 +125,5 @@ SELECT	  *
 FROM      LIVRAISONDETAIL
 ORDER BY  nocommande ASC, noproduit ASC
 /
+
+

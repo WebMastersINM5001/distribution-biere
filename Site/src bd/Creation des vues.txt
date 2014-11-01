@@ -30,15 +30,16 @@ CREATE VIEW VUE_DETAIL_COMMANDE AS
     WHERE   CD.noproduit =  P.noproduit AND
             CD.nocommande = CM.nocommande AND
             CM.noclient = CL.noclient
-    ORDER BY CL.nomclient ASC;
+    ORDER BY CL.nomclient ASC, CM.nocommande ASC;
 
 CREATE VIEW VUE_DETAIL_LIVRAISON AS
     SELECT  RG.nomregion, LD.nolivraison, LD.nocommande, CL.nomclient, LD.noproduit, P.description, LD.qtlivree
     FROM    REGION RG, LIVRAISONDETAIL LD, CLIENT CL, PRODUIT P, COMMANDE CM 
-    WHERE   LD.NOCOMMANDE = CM.nocommande AND
+    WHERE   LD.nocommande = CM.nocommande AND
             CM.noclient = CL.noclient AND
             CL.noregion = RG.noregion AND
-            LD.noproduit = P.noproduit; 
+            LD.noproduit = P.noproduit
+    ORDER BY LD.nocommande ASC, P.noproduit ASC; 
 
 CREATE VIEW VUE_ROUTE AS
     SELECT  RG.nomregion, CAM.nocamion, LD.nolivraison, LD.nocommande, 
@@ -53,7 +54,7 @@ CREATE VIEW VUE_ROUTE AS
     ORDER BY CAM.nocamion ASC;
 
 CREATE VIEW VUE_CAMION_REGION AS
-     SELECT  CAM.noCamion, RG.noregion, RG.nomregion, LD.nolivraison
+     SELECT  DISTINCT CAM.noCamion, RG.noregion, RG.nomregion, LD.nolivraison
      FROM    CAMION CAM, REGION RG, LIVRAISONDETAIL LD, LIVRAISON LIV,
              COMMANDE CM, CLIENT CL
      WHERE   CAM.nocamion = LIV.nocamion AND
