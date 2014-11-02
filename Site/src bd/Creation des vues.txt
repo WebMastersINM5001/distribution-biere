@@ -25,7 +25,7 @@ CREATE VIEW VUE_COMMANDE AS
     ORDER BY CL.noclient ASC;
 
 CREATE VIEW VUE_DETAIL_COMMANDE AS
-    SELECT  CM.nocommande,CL.nomclient, P.noproduit, P.description, CD.quantite
+    SELECT  CL.noclient,CM.nocommande,CL.nomclient, P.noproduit, P.description, CD.quantite
     FROM    COMMANDEDETAIL CD, PRODUIT P, COMMANDE CM, CLIENT CL
     WHERE   CD.noproduit =  P.noproduit AND
             CD.nocommande = CM.nocommande AND

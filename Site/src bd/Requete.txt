@@ -71,6 +71,19 @@ WHERE  CD.noproduit = P.noproduit AND
 GROUP BY nocommande;
 
 --****************************************************************
+-- Le montant de chaque commandes du noClient(5)( avant et apres 
+-- taxe de 15%
+--************************************************************* 
+SELECT CM.noclient,CD.nocommande, SUM(quantite*prix)AS Montant,
+       SUM(quantite*prix *1.15)AS AVEC_TAXE
+FROM   COMMANDEDETAIL CD, PRODUIT P, COMMANDE CM
+WHERE  CD.noproduit = P.noproduit AND
+       CD.nocommande = CM.nocommande AND
+       CM.noclient = 5
+GROUP BY CM.noclient,CD.nocommande;
+
+
+--****************************************************************
 -- Le montant de la facture de la Livraison #5000 avant et après 
 -- taxe de 15%
 --************************************************************* 
