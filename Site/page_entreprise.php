@@ -8,7 +8,7 @@ if( !isset($_SESSION["myusername"]) ){
 ?>
 
 <?php include("includes/header.php"); ?>
-</head>
+
 <body>
 Bienvenue cher entreprise
 </body>

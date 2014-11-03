@@ -4,16 +4,7 @@
 
 	session_start();
 
-	// Connect to server and select databse.
-	$conn = oci_connect("inm5001", "inm5001", "//UACC-LENOVO/DEV5CA.UACC-LENOVO.COM");
-	if (!$conn) {
-	   $e = oci_error();
-       echo $e['message'], "\n";
-       trigger_error(htmlentities($e['message'], ENT_QUOTES), E_USER_ERROR);
-       //exit;
-	} else {
-      print "Connected to Oracle!";
-   }
+	include("includes/connect_DB.php");
 
 	// Define $myusername and $mypassword 
 	$myusername=$_POST['userName']; 
