@@ -1,4 +1,5 @@
 <?php include("includes/header.php"); ?>
+</head>
 <body>
 	<div id="content">
 		<h1>Créer un nouveau compte</h1>
