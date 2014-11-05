@@ -1,34 +1,68 @@
 <?php include("includes/databaseInfo.php"); ?>
 
 <?php
-	$con=mysql_connect("$host", "$username", "$password");
-	// Check connection
-	if (mysqli_connect_errno()) {
-	  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-	}
-
+ 
+	include("includes/connect_DB.php");
+	
 	// escape variables for security
-	$nomClient = mysqli_real_escape_string($con, $_POST['nomClient']);
-	$adresse = mysqli_real_escape_string($con, $_POST['adresse']);
-	$ville = mysqli_real_escape_string($con, $_POST['ville']);
+	$nomClient =$_POST['nomClient'];
+	$adresse = $_POST['adresse'];
+	$ville = $_POST['ville'];
 	$noRegion = "0";
-	$telephone = mysqli_real_escape_string($con, $_POST['telephone']);
-	$courriel = mysqli_real_escape_string($con, $_POST['courriel']);
+	$telephone = $_POST['telephone'];
+	$courriel =  $_POST['courriel'];
 	$confirm = "n";
 
-	$userName = mysqli_real_escape_string($con, $_POST['userName']);
-	$password = mysqli_real_escape_string($con, $_POST['password']);
+	$userName = $_POST['userName'];
+	$password = $_POST['password'];
 	$type = "client";
+	$userNo   ='';
+	
+	$sql="select client_no_seq.nextval NO from dual";
+	$stid = oci_parse($conn, $sql);
+	oci_execute($stid);
+	oci_fetch_all($stid, $row);
+	
+	$userNo = $row['NO'][0];
+	$description = $nomClient." ".$userName;
+	
+	$sql="insert into USAGER
+			(NOUSAGER, USERNAME, PASSWORD, TYPE, DESCRIPTION)
+		values
+			(:nousager, :username, :password, :type, :description)";
+	$stid = oci_parse($conn, $sql);
+	oci_bind_by_name($stid, ":nousager", $userName);
+	oci_bind_by_name($stid, ":username", $userNo);
+	oci_bind_by_name($stid, ":password", $password);
+	oci_bind_by_name($stid, ":type", 	 $type);
+	oci_bind_by_name($stid, ":description", $description);
+    // Insert & commits
+    $r = oci_execute($stid);
+
+    echo "Usager ".$userName." was committed\n";
 
 
+	sql="insert into CLIENT
+                (NOCLIENT, NOMCLIENT, ADRESSE, TELEPHONE, COURRIEL, NOREGION, CONFIRM, NOUSAGER, VILLE)
+          values
+		       (client_no_seq.nextval, :nomclient, :adresse, :telephone, :courriel, :noregion, :confirm, :nousager, :ville)";
+	
+	$stid = oci_parse($conn, $sql);
+	oci_bind_by_name($stid, ":nomclient", $nomClient);
+	oci_bind_by_name($stid, ":adresse",   $adresse);
+	oci_bind_by_name($stid, ":telephone", $telephone);
+	oci_bind_by_name($stid, ":courriel",  $courriel);
+	oci_bind_by_name($stid, ":noregion",  $noRegion);
+	oci_bind_by_name($stid, ":confirm",   $confirm);
+	oci_bind_by_name($stid, ":nousager",  $userNo);
+	oci_bind_by_name($stid, ":ville", 	  $ville);
 
-	$sql="INSERT INTO Persons (FirstName, LastName, Age)
-	VALUES ('$firstname', '$lastname', '$age')";
+   // Insert & commits
+    $r = oci_execute($stid);
 
-	if (!mysqli_query($con,$sql)) {
-	  die('Error: ' . mysqli_error($con));
-	}
-	echo "1 record added";
+    echo "Client ".$nomClient." was committed\n";
 
-	mysqli_close($con);
+   oci_free_statement($stid);
+  // Close the Oracle connection
+   oci_close($conn);
 ?>

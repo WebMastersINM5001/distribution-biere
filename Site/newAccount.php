@@ -1,5 +1,4 @@
-<?php include("includes/header.php"); ?>
-</head>
+<?php include("includes/header.php");?>
 <body>
 	<div id="content">
 		<h1>Créer un nouveau compte</h1>
@@ -28,9 +27,9 @@
 		  </div>
 
 		  <div class="form-group">
-		    <label for="telehpone" class="col-sm-2 control-label">Téléphone</label>
+		    <label for="telephone" class="col-sm-2 control-label">Téléphone</label>
 		    <div class="col-sm-10">
-		      <input name="telehpone" type="text" id="telehpone">
+		      <input name="telephone" type="text" id="telephone">
 		    </div>
 		  </div>
 
