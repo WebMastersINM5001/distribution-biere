@@ -2,9 +2,9 @@ ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY'
 /
 drop trigger dateLiv_dateCom;
 
---La dateLivraison ne peut précéder la dateCommande. Doir etre fait sur livraison detail
---car c'est elle qui relie la date commande et la date commande. pour teser on doit 
--- palcer un no livraison d'une date anterieur
+--La dateLivraison ne peut précéder la dateCommande. Doir etre fait sur LIVRAISONDETAIL
+--car c'est elle qui relie la date commande et la date de livraison. pour teser on doit 
+--placer un no livraison a une date anterieur.
 
 CREATE OR REPLACE TRIGGER dateLiv_dateCom
 BEFORE INSERT OR UPDATE ON LIVRAISONDETAIL
