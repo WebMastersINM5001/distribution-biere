@@ -1,0 +1,45 @@
+ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY'
+/
+drop trigger dateLiv_dateCom;
+
+--La dateLivraison ne peut précéder la dateCommande. Doir etre fait sur livraison detail
+--car c'est elle qui relie la date commande et la date commande. pour teser on doit 
+-- palcer un no livraison d'une date anterieur
+
+CREATE OR REPLACE TRIGGER dateLiv_dateCom
+BEFORE INSERT OR UPDATE ON LIVRAISONDETAIL
+REFERENCING
+NEW AS ligneApres
+FOR EACH ROW
+DECLARE
+   datecom COMMANDE.datecommande%TYPE;
+   dateliv LIVRAISON.datelivraison%TYPE;
+   BEGIN
+     SELECT datecommande INTO datecom
+     FROM COMMANDE
+     WHERE nocommande = :ligneApres.nocommande;
+
+     SELECT datelivraison INTO dateliv
+     FROM LIVRAISON
+     WHERE nolivraison = :ligneApres.nolivraison;
+
+     IF dateliv < datecom THEN
+        raise_application_error(-20100, 'la date de livraison doit etre supérieur la date de la
+        commande');
+     END IF;
+END;
+
+-- test: insertion trigger
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5005,'11/03/2014',110);
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(7,5005,300,1005,7);
+DELETE FROM LIVRAISON  WHERE nolivraison = 5005;
+
+-- test update trigger
+UPDATE LIVRAISONDETAIL
+SET    nolivraison = 5005
+WHERE  nocommande = 300 AND
+       noproduit = 1024;
+
+
+
