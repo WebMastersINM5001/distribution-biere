@@ -1,3 +1,43 @@
-/* Login page */
-#content{width:980px;margin:0 auto;}
-span.inputGroup{display: block;}
+
+/**************************** general ****************************/
+/*****************************************************************/
+header{
+	background: #009de4;
+	height: 250px;
+}
+footer{
+	background: #002c40;
+	height:100px;
+}
+footer .container p{
+	color:#fff;
+}
+.container{
+	padding:30px 0px;
+}
+.btn{
+	background:url(../images/btn.jpg) repeat-x;
+	text-transform: uppercase;
+	color:#fff;
+	border:1px solid #06578e;
+	font-weight: bold;
+	margin-bottom:10px;
+	display:block;
+}
+.btn:hover{
+	background:url(../images/btn_hover.jpg) repeat-x;
+	border:1px solid #06578e;
+	color:#fff;
+	font-weight: bold;
+}
+.main.container{
+	min-height: 608px;
+}
+/************************** Login page **************************/
+/****************************************************************/
+span.inputGroup{
+	display: block;
+}
+
+/************************** Client page **************************/
+/****************************************************************/
