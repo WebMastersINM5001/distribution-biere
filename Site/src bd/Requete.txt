@@ -139,4 +139,10 @@ FROM      LIVRAISONDETAIL
 ORDER BY  nocommande ASC, noproduit ASC
 /
 
+--******************************************************************
+-- Table produit; Afficher nomproduit, emballage et qteenstock
+--*****************************************************************
 
+SELECT description, emballage, quantiteenstock
+FROM   VUE_PRODUIT
+ORDER BY description ASC;
