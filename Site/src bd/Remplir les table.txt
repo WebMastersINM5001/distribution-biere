@@ -314,30 +314,52 @@ INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5001,'14/10/20
 INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5002,'14/10/2014',102);
 INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5003,'14/10/2014',103);
 INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5004,'14/10/2014',104);
-
-
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5005,'14/03/2011',105);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5006,'14/03/2011',106);
 --******************************* TABLE LIVRAISONDETAIL ******************
 
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
 	VALUES(1,5000,300,1024,3);
- 
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
 	VALUES(2,5000,300,1029,5); 
-
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
 	VALUES(3,5001,307,1025,5); 
-
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
 	VALUES(4,5004,309,1031,14); 
-
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
 	VALUES(5,5002,310,1002,49); 
-
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
 	VALUES(6,5003,304,1001,40); 
-
-
-
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(7,5001,318,1005,4); 
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(8,5001,318,1016,4);
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(9,5001,318,1022,3);
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(10,5001,318,1031,11);
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(11,5003,308,1027,11);  
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(12,5000,306,1016,3);
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(13,5000,300,1005,7); 
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(14,5000,300,1021,12);  
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(15,5000,300,1006,18); 
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(16,5000,301,1028,8); 
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(17,5000,301,1009,5);
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(18,5001,302,1009,5); 
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(19,5003,305,1009,5);
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(20,5001,311,1028,5);
+INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 
+	VALUES(21,5001,311,1030,23);    
 
 commit;
 /

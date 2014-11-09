@@ -1,0 +1,23 @@
+DROP FUNCTION nbCaisseParLivraison;
+
+
+--=================================================================
+Cette fonction retourne en caisse de 24 le nombre de caisses 
+commandées dans un no de livraison (i.e. le nombre de caisse déja
+inclu dans un camion)
+--=================================================================
+
+create or replace FUNCTION nbCaisseParLivraison(noLiv VUE_DETAIL_LIVRAISON.qtlivree%TYPE)
+    RETURN integer IS
+    nbCaisse  VUE_DETAIL_LIVRAISON.qtlivree%TYPE :=0;
+BEGIN
+    SELECT SUM(nb_unites)
+    INTO   nbCaisse
+    FROM   VUE_DETAIL_LIVRAISON VDL
+    WHERE  VDL.nolivraison = noLiv;
+    
+    RETURN nbCaisse;
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+	DBMS_OUTPUT.PUT_LINE('noLivraison invalide'||noLiv);
+END nbCaisseParLivraison;
