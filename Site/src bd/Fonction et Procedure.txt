@@ -16,7 +16,7 @@ BEGIN
     FROM   VUE_DETAIL_LIVRAISON VDL
     WHERE  VDL.nolivraison = noLiv;
     
-    RETURN nbCaisse;
+    RETURN nbCaisse /24;
 EXCEPTION
     WHEN NO_DATA_FOUND THEN
 	DBMS_OUTPUT.PUT_LINE('noLivraison invalide'||noLiv);
