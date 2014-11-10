@@ -8,8 +8,8 @@ inclu dans un camion)
 --=================================================================
 create or replace FUNCTION nbCaisseDe24parNoLivraison(noLiv VUE_DETAIL_LIVRAISON.qtlivree%TYPE)
     RETURN integer IS
-    nbCaisse  VUE_DETAIL_LIVRAISON.qtlivree%TYPE :=0;
-    nbCommande     	integer:= 0;
+    nbCaisse    VUE_DETAIL_LIVRAISON.qtlivree%TYPE :=0;
+    nbCommande  VUE_DETAIL_LIVRAISON.nocommande%TYPE;
 BEGIN
     SELECT SUM(nb_unites)
     INTO   nbCaisse
@@ -17,13 +17,11 @@ BEGIN
     WHERE  VDL.nolivraison = noLiv;
      -- Verifier si le noLivraison contient au moins une commande
         SELECT COUNT(nocommande) INTO nbCommande 
-        FROM LIVRAISONDETAIL; 
-	IF nbCmmande = 0 THEN 
+        FROM  VUE_DETAIL_LIVRAISON VDL
+        WHERE  VDL.nolivraison = noLiv; 
+	IF nbCommande = 0 THEN 
            nbCaisse := 0;
-	END IF;
-    IF nbCaisse = 0 THEN
-        nbCaisse := 0;
-    ELSIF nbCaisse < 24 THEN
+  ELSIF nbCaisse < 24 THEN
         nbCaisse := 1;
     ELSE 
         nbCaisse := nbCaisse /24;
@@ -39,26 +37,4 @@ END nbCaisseDe24parNoLivraison;
 -- Appel de fonction nbCaisseDe24parNoLivraison
 --===============================================
 SELECT nbCaisseDe24parNoLivraison(5000) FROM DUAL;
-
-create or replace FUNCTION nbCaisseDe24parNoLivraison(noLiv VUE_DETAIL_LIVRAISON.qtlivree%TYPE)
-    RETURN integer IS
-    nbCaisse  VUE_DETAIL_LIVRAISON.qtlivree%TYPE :=0;
-BEGIN
-    SELECT SUM(nb_unites)
-    INTO   nbCaisse
-    FROM   VUE_DETAIL_LIVRAISON VDL
-    WHERE  VDL.nolivraison = noLiv;
-
-    IF nbCaisse = 0 THEN
-        nbCaisse := 0;
-    ELSIF nbCaisse < 24 THEN
-        nbCaisse := 1;
-    ELSE 
-        nbCaisse := nbCaisse /24;
-    END IF;
-    
-    RETURN nbCaisse;
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-	DBMS_OUTPUT.PUT_LINE('noLivraison invalide'||noLiv);
-END nbCaisseDe24parNoLivraison;
+SELECT nbCaisseDe24parNoLivraison(5005) FROM DUAL; --PAS DE COMMANDE
