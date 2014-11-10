@@ -34,9 +34,9 @@ EXCEPTION
 	DBMS_OUTPUT.PUT_LINE('noLivraison invalide'||noLiv);
 END nbCaisseDe24parNoLivraison;
 /
---===============================================
--- Appel de fonction nbCaisseDe24parNoLivraison
---===============================================
+
+--=========Appel de fonction nbCaisseDe24parNoLivraison===========
+
 SELECT nbCaisseDe24parNoLivraison(5000) FROM DUAL;
 SELECT nbCaisseDe24parNoLivraison(5005) FROM DUAL; --PAS DE COMMANDE
 
@@ -70,7 +70,13 @@ EXCEPTION
 	WHEN NO_DATA_FOUND THEN
 	DBMS_OUTPUT.PUT_LINE('noLivraison invalide'||noLiv);
 END trouveNoLivraison;
---===============================================
--- Appel de fonction trouveNoLivraison
---===============================================
+
+--========-- Appel de fonction trouveNoLivraison============
 SELECT trouveNoLivraison(10) FROM DUAL;
+
+--======================================================================
+--
+--=======================================================================
+
+
+
