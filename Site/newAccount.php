@@ -25,6 +25,15 @@
 		      <input name="ville" type="text" id="ville">
 		    </div>
 		  </div>
+		  <div class="form-group">
+		    <label for="Region" class="col-sm-2 control-label">Region</label>
+		    <div class="col-sm-10">
+				<select name="region" size="1" id="region">
+					<option value=""> Choisisez une Region ... </option>
+					<?php include("includes/region_listbox.php"); ?>
+				</select>		      
+		    </div>
+		  </div>
 
 		  <div class="form-group">
 		    <label for="telephone" class="col-sm-2 control-label">Téléphone</label>
