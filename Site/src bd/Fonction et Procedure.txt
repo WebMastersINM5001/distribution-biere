@@ -1,10 +1,12 @@
 
 DROP FUNCTION nbCaisseDe24parNoLivraison;
-
+drop function NOUVNOCOMMANDE;
+drop function trouveNoLivraison;
+drop PROCEDURE INSERT_TABLE_COMMANDE;
 --=================================================================
-Cette fonction retourne en caisse de 24 le nombre de caisses 
-commandées dans un no de livraison (i.e. le nombre de caisse déja
-inclu dans un camion)
+--Cette fonction prend un no de livraison retourne en caisse de 24 
+--le nombre de caisses commandées dans un no de livraison 
+--(i.e. le nombre de caisse déja inclu dans un camion)
 --***Attention le no Livraison doit d'abord etre valider en javaScript
 --=================================================================
 create or replace FUNCTION nbCaisseDe24parNoLivraison(noLiv VUE_DETAIL_LIVRAISON.qtlivree%TYPE)
@@ -72,11 +74,55 @@ EXCEPTION
 END trouveNoLivraison;
 
 --========-- Appel de fonction trouveNoLivraison============
-SELECT trouveNoLivraison(10) FROM DUAL;
+SELECT trouveNoLivraison(10) FROM DUAL;    --(noRegion 10)
 
 --======================================================================
---
+--fONCTION QUI DONNE UN NOUVEAU NO DE COMMANDE
 --=======================================================================
 
+create or replace FUNCTION NOUVNOCOMMANDE
+RETURN integer AS
+noCom    INTEGER:= 0;
+BEGIN 
+        SELECT MAX(noCommande)
+        INTO   noCom
+        FROM   COMMANDE;
+RETURN nocom +1;
+END NOUVNOCOMMANDE;
+--==== Appel de foncion=========================
+SELECT NOUVNOCOMMANDE FROM DUAL;
 
 
+--======================================================================
+--FONCTION QUI DONNE UN NOUVEAU NO DE Client
+--=======================================================================
+
+create or replace FUNCTION NOUVNOCLIENT
+RETURN integer AS
+noclient    INTEGER:= 0;
+BEGIN 
+        SELECT MAX(noClient)
+        INTO   noCom
+        FROM   COMMANDE;
+RETURN noclient +1;
+END NOUVNOCLIENT;
+--==== Appel de foncion=========================
+SELECT NOUVNOCLIENT FROM DUAL;
+
+--======================================================================
+--PROCEDURE QUI VA INSERER UNE NOUVELLE COMMANDE DANS TABLE COMMANDE
+--=======================================================================
+create or replace PROCEDURE INSERT_TABLE_COMMANDE(noClient  COMMANDE.noclient%TYPE) AS
+nocom	    INTEGER:= 0;
+uneDate     DATE;
+confirm     char:= 'N';
+BEGIN 
+      nocom := NOUVNOCOMMANDE; -- Appel de fonction
+      uneDate := CURRENT_DATE;
+      
+       insert into Commande values(nocom,noclient,uneDate,confirm);
+      
+END INSERT_TABLE_COMMANDE;
+
+--======= Appel de procedure ==============
+EXECUTE INSERT_TABLE_COMMANDE(10);  --(Client no 10);
