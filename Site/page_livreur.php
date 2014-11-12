@@ -11,8 +11,8 @@ if( !isset($_SESSION["myusername"]) ){
 
 <body>
 	<script type="text/javascript">
-		function swapClientContent(param){
-			var url = "ajax/phpClientScript.php";
+		function swapLivreurContent(param){
+			var url = "ajax/phpLivreurScript.php";
 			$.post(url, {contentVar: param}, function(data){
 				$("#myDiv").html(data).show();
 			});
@@ -27,7 +27,7 @@ if( !isset($_SESSION["myusername"]) ){
 	<div class="container main">
 		<div class="row">
 			<div class="col-md-3 menu">
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con1')">Afficher livraison</a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapLivreurContent('con1')">Afficher livraison</a>
 			</div>
 			<div id="myDiv" class="col-md-9">
 
