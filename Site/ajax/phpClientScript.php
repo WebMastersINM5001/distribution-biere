@@ -1,6 +1,8 @@
 <?php 
 	session_start();
-	
+
+	include("../includes/connect_DB.php");
+
 	$contentVar = $_POST['contentVar'];
 	if($contentVar == "con1"){
 		echo '
@@ -28,34 +30,45 @@
 			</form>
 		';
 	}else if($contentVar == "con2"){
-		echo "Annuler commande";
+		echo '
+			<form class="form-inline" role="form" method="post" action="supprimerCommande.php">
+			  <div class="form-group">
+			    <label for="noCommandeASupprimer">Numéro de la commande à supprimer</label><br>
+			    <input name="noCommandeASupprimer" type="text" class="form-control" id="noCommandeASupprimer" placeholder="Numéro de la commande">
+			  </div>
+			  <br>
+			  <br>
+			  <button type="submit" class="btn btn-default">Supprimer la commande</button>
+			</form>
+		';
 	}else if($contentVar == "con3"){
-
-		include("../includes/connect_DB.php");
 
 		$noUsager = $_SESSION["NOUSAGER"];
 
 		// php to select dropdown list options from table
-		$stid = oci_parse($conn, "select NOCOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY QUANTITE");
+		$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY DATECOMMANDE");
 		oci_execute($stid);
 		$count = oci_fetch_all($stid, $row);
 
 		if($count > 0){
 		    oci_free_statement($stid);
 
-			$stid = oci_parse($conn, "select NOCOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY QUANTITE");
+			$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY DATECOMMANDE");
 			oci_execute($stid);
 
 			echo 	'<table class="table table-striped table-bordered">
 						<tr>
 							<th>
-								Numéro Commande
+								Numéro de la Commande
 							</th>
 							<th>
-								Numéro produit
+								Date de la commande
 							</th>
 							<th>
-								Nom produit
+								Numéro du produit
+							</th>
+							<th>
+								Nom du produit
 							</th>
 							<th>
 								Quantité
@@ -66,12 +79,12 @@
 			// build the history table
 			while($row = oci_fetch_array($stid)) {
 				$nocommande = $row["NOCOMMANDE"];
+				$date = $row["DATECOMMANDE"];
 				$noproduit = $row["NOPRODUIT"];
 				$description = $row["DESCRIPTION"];
 				$quantite = $row["QUANTITE"];
-				//$date = $row["DATE"];
 				
-				echo '<tr><td>' . $nocommande . '</td><td>' . $noproduit . '</td><td>' . $description .'</td><td>' . $quantite .'</td></tr>';
+				echo '<tr><td>' . $nocommande . '</td><td>' . $date . '</td><td>' . $noproduit . '</td><td>' . $description .'</td><td>' . $quantite .'</td></tr>';
 			}
 		    oci_free_statement($stid);
 		    // Close the Oracle connection

@@ -31,7 +31,7 @@
 		echo '
 			<h1>'. date("Y/m/d") .'</h1>
 			<hr></hr>
-			<form class="form-inline" role="form">
+			<form class="form-inline" role="form" action="supprimerCommande.php">
 			  <div class="form-group">
 			    <label>
 			    	info de la commande ici
