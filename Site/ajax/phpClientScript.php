@@ -27,7 +27,52 @@
 		';
 	}else if($contentVar == "con2"){
 		echo "Annuler commande";
-	}else{
-		echo "Historique";
+	}else if($contentVar == "con3"){
+		include("../includes/connect_DB.php");
+		// php to select dropdown list options from table
+		$stid = oci_parse($conn, "select NOCOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE  ORDER BY QUANTITE");
+		oci_execute($stid);
+		$count = oci_fetch_all($stid, $row);
+
+		if($count > 0){
+		    oci_free_statement($stid);
+
+			$stid = oci_parse($conn, "select NOCOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE  ORDER BY QUANTITE");
+			oci_execute($stid);
+
+			echo 	'<table class="table table-striped table-bordered">
+						<tr>
+							<th>
+								Numéro Commande
+							</th>
+							<th>
+								Numéro produit
+							</th>
+							<th>
+								Nom produit
+							</th>
+							<th>
+								Quantité
+							</th>
+						</tr>
+			';
+
+			// build the history table
+			while($row = oci_fetch_array($stid)) {
+				$nocommande = $row["NOCOMMANDE"];
+				$noproduit = $row["NOPRODUIT"];
+				$description = $row["DESCRIPTION"];
+				$quantite = $row["QUANTITE"];
+				//$date = $row["DATE"];
+				
+				echo '<tr><td>' . $nocommande . '</td><td>' . $noproduit . '</td><td>' . $description .'</td><td>' . $quantite .'</td></tr>';
+			}
+		    oci_free_statement($stid);
+		    // Close the Oracle connection
+		    oci_close($conn);
+
+
+			echo '</table>';
+		}
 	}
 ?>

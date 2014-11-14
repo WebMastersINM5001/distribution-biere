@@ -39,6 +39,10 @@ footer .container p{
 .main.container{
 	min-height: 608px;
 }
+
+@-moz-document url-prefix() {
+  fieldset { display: table-cell; }
+}
 /************************** Login page **************************/
 /****************************************************************/
 span.inputGroup{

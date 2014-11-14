@@ -43,8 +43,8 @@ if( !isset($_SESSION["myusername"]) ){
 				$noclient = $row["NOCLIENT"];
 
 				echo '<p><strong>Nom de compagnie :</strong> ' . $nomclient . '</p>';
-				echo '<p><strong>Adresse :</strong>' . $adresse . '</p>';
-				echo '<p><strong>Ville :</strong>' . $ville . '</p>';
+				echo '<p><strong>Adresse :</strong> ' . $adresse . '</p>';
+				echo '<p><strong>Ville :</strong> ' . $ville . '</p>';
 
 				?>
 
@@ -52,8 +52,8 @@ if( !isset($_SESSION["myusername"]) ){
     			<div class="col-md-6">
 	    			<?php
 						echo '<p><strong>Téléphone :</strong> ' . $telehpone . '</p>';
-						echo '<p><strong>Courriel :</strong>' . $courriel . '</p>';
-						echo '<p><strong>Numéro Client :</strong>' . $noUsager . '</p>';
+						echo '<p><strong>Courriel :</strong> ' . $courriel . '</p>';
+						echo '<p><strong>Numéro Client :</strong> ' . $noUsager . '</p>';
 						oci_free_statement($stid);
 					    // Close the Oracle connection
 					    oci_close($conn);
