@@ -6,7 +6,9 @@ if( !isset($_SESSION["myusername"]) ){
 	exit();
 }
 ?>
-<?php include("includes/header.php"); ?>
+<?php 	include("includes/header.php"); 
+		include("includes/connect_DB.php");
+?>
 
 <body>
 	<script type="text/javascript">
@@ -19,7 +21,35 @@ if( !isset($_SESSION["myusername"]) ){
 	</script>
 	<header>
 		<div class="container">
-			<p>test</p>
+			<?php
+
+				$noUsager = $_SESSION["NOUSAGER"];
+
+				// php to select dropdown list options from table
+				$stid = oci_parse($conn, "select NOMCLIENT, ADRESSE, VILLE, TELEPHONE, COURRIEL, NOCLIENT  from CLIENT  where NOCLIENT=$noUsager");
+				oci_execute($stid);
+				
+				// build the dropdown list
+				$row = oci_fetch_array($stid);
+
+				$nomclient = $row["NOMCLIENT"];
+				$adresse = $row["ADRESSE"];
+				$ville = $row["VILLE"];
+				$telehpone = $row["TELEPHONE"];
+				$courriel = $row["COURRIEL"];
+				$noclient = $row["NOCLIENT"];
+
+				echo '<p>' . $nomclient . '</p>';
+				echo '<p>' . $adresse . '</p>';
+				echo '<p>' . $ville . '</p>';
+				echo '<p>' . $telehpone . '</p>';
+				echo '<p>' . $courriel . '</p>';
+				echo '<p>' . $noUsager . '</p>';
+				
+			    oci_free_statement($stid);
+			    // Close the Oracle connection
+			    oci_close($conn);
+    		?>
 		</div>
 	</header>
 
