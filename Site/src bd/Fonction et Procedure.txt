@@ -1,8 +1,9 @@
 
 DROP FUNCTION nbCaisseDe24parNoLivraison;
-drop function NOUVNOCOMMANDE;
-drop function trouveNoLivraison;
+drop FUNCTION NOUVNOCOMMANDE;
+drop FUNCTION trouveNoLivraison;
 drop PROCEDURE INSERT_TABLE_COMMANDE;
+DROP PROCEDURE AJOUT_QUANTITE;
 --=================================================================
 --Cette fonction prend un no de livraison retourne en caisse de 24 
 --le nombre de caisses commandées dans un no de livraison 
@@ -116,13 +117,62 @@ create or replace PROCEDURE INSERT_TABLE_COMMANDE(noClient  COMMANDE.noclient%TY
 nocom	    INTEGER:= 0;
 uneDate     DATE;
 confirm     char:= 'N';
+verif	    INTEGER:= 0;
+innexistant EXCEPTION;
 BEGIN 
       nocom := NOUVNOCOMMANDE; -- Appel de fonction
       uneDate := CURRENT_DATE;
-      
+      SELECT COUNT(noclient)
+      INTO verif
+      FROM CLIENT
+      WHERE CLIENT.noclient = noClient;
+
+      IF verif = 0 THEN
+           raise innexistant;
+      ELSE
        insert into Commande values(nocom,noclient,uneDate,confirm);
+      END IF;
+EXCEPTION
+      WHEN innexistant THEN
+	          DBMS_OUTPUT.PUT_LINE('no client invalide');
       
 END INSERT_TABLE_COMMANDE;
-
 --======= Appel de procedure ==============
 EXECUTE INSERT_TABLE_COMMANDE(10);  --(Client no 10);
+
+--===================================================================================
+--PROCEDURE QUI PREND UN NOPRODUIT ET UNE QUANTITE ET FAIT AJUSTEMENT QUANTITEENSTOCK
+--=====================================================================================
+
+create or replace PROCEDURE AJOUT_QUANTITE(produit PRODUIT.noPRODUIT%TYPE, 
+                     qte PRODUIT.quantiteenstock%TYPE ) AS
+verifProduit     INTEGER:=0;
+innexistant      EXCEPTION;
+qtePresente      INTEGER:=0;
+BEGIN 
+     SELECT COUNT(noproduit)
+      INTO verifProduit
+      FROM PRODUIT
+      WHERE PRODUIT.noPRODUIT = produit;
+      
+      SELECT quantiteenstock
+      INTO qtePresente
+      FROM PRODUIT
+      WHERE PRODUIT.noPRODUIT = produit;
+      
+      
+       IF verifProduit = 0 THEN
+           raise innexistant;
+      ELSE
+           UPDATE PRODUIT
+           SET    quantiteenstock = qte +  qtePresente
+           WHERE  PRODUIT.noproduit = produit;
+      END IF;
+EXCEPTION
+    WHEN innexistant THEN
+	          DBMS_OUTPUT.PUT_LINE('no produit invalide');
+
+END AJOUT_QUANTITE;
+
+--================ Appel de propcedure =================
+execute AJOUT_QUANTITE(1000,20);
