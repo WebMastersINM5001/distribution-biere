@@ -1,4 +1,6 @@
 <?php 
+	session_start();
+	
 	$contentVar = $_POST['contentVar'];
 	if($contentVar == "con1"){
 		echo '
@@ -28,16 +30,20 @@
 	}else if($contentVar == "con2"){
 		echo "Annuler commande";
 	}else if($contentVar == "con3"){
+
 		include("../includes/connect_DB.php");
+
+		$noUsager = $_SESSION["NOUSAGER"];
+
 		// php to select dropdown list options from table
-		$stid = oci_parse($conn, "select NOCOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE  ORDER BY QUANTITE");
+		$stid = oci_parse($conn, "select NOCOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY QUANTITE");
 		oci_execute($stid);
 		$count = oci_fetch_all($stid, $row);
 
 		if($count > 0){
 		    oci_free_statement($stid);
 
-			$stid = oci_parse($conn, "select NOCOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE  ORDER BY QUANTITE");
+			$stid = oci_parse($conn, "select NOCOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY QUANTITE");
 			oci_execute($stid);
 
 			echo 	'<table class="table table-striped table-bordered">
@@ -73,6 +79,8 @@
 
 
 			echo '</table>';
+		}else{
+			echo '<p>Vous n\'avez aucune commande de passé sur votre compte.</p>';
 		}
 	}
 ?>
