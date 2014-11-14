@@ -19,6 +19,111 @@ INSERT INTO Usager VALUES(300,'KevB5001','05001','Administrateur','Kevin');
 INSERT INTO Usager VALUES(301,'MalG5001','05001','Administrateur','Ghislain');
 INSERT INTO Usager VALUES(302,'AleC5001','05001','Administrateur','Alexandru');
 INSERT INTO Usager VALUES(303,'Bas45001','05001','Administrateur','Basseim');
+-- ===============================  usager client =======================
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1,'client1','1','Client','Hotel Europeene');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(2,'client2','2','Client','Hotel St-Denis');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(3,'client3','3','Client','marriot');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(4,'client4','4','Client','Westin Montreal');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(5,'client5','5','Client','Hotellerie Pierre Calvet');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(6,'client6','6','Client','Bistro on the ave');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(7,'client7','7','Client','Comquieme peche');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(8,'client8','8','Client','Bateau-mouche');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(9,'client9','9','Client','Casino');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(10,'client10','10','Client','Les 2 pierrot');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(11,'client11','11','Client','Hotel Sheraton');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(12,'client12','12','Client','St-Martin');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(13,'client13','13','Client','Confort Inn');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(14,'client14','14','Client','Econo Lodge');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(15,'client15','15','Client','Tire-Bouchon');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(16,'client16','16','Client','Univer resto-bar');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(17,'client17','17','Client','Alessa Bar');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(18,'client18','18','Client','Allumette Pub');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(19,'client19','19','Client','Taverne St-Martin');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(20,'client20','20','Client','Bada Bing');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(21,'client21','21','Client','Brasserie Pudriere');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(22,'client22','22','Client','Bar le Surf');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(23,'client23','23','Client','Bistro Ste-Madeleine');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(24,'client24','24','Client','Bar-terrasse Helene');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(25,'client25','25','Client','Bar St-Joseph');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(26,'client26','26','Client','Monte Cristo');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(27,'client27','27','Client','Chateau Joliette');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(28,'client28','28','Client','Brasserie pudriere');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(29,'client29','29','Client','Auberge 4 Matins');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(30,'client30','30','Client','Days Inn Berthierville');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(31,'client31','31','Client','Bar le Ranch');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(32,'client32','32','Client','Brasserie Albion');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(33,'client33','33','Client','Bar le Paradis');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(34,'client34','34','Client','Brasserie de Mail');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(35,'client35','35','Client','Brasserie Maska');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(36,'client36','36','Client','Bar Salon');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(37,'client37','37','Client','Salon le Sieur');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(38,'client38','38','Client','Jono Bar');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(39,'client39','39','Client','Bar Lanjeu');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(40,'client40','40','Client','Hotel Brossard');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(41,'client41','41','Client','Hotel Plaza');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(42,'client42','42','Client','Traiteur le Fin');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(43,'client43','43','Client','Bar Sportivo');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(44,'client44','44','Client','Le Skratch');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(45,'client45','45','Client','La mainson verte');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(46,'client46','46','Client','Brasserie Cherrier');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(47,'client47','47','Client','Brasserie st-leonard');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(48,'client48','48','Client','S Lounge');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(49,'client49','49','Client','Bar Napoleon');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(50,'client50','50','Client','Marina st-blaise');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(51,'client51','51','Client','Goldies');
+INSERT INTO Usager(nousager,username,password,type,description)
+	VALUES(52,'client52','52','Client','Vivaldi');
 
 --**************  TABLE Region ********************
 
@@ -172,7 +277,7 @@ INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
             VALUES(18,'Allumette Publicitaire','274,rue Elie','Laval',30,'450 625-0645','','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
-	    VALUES(19,'Taverne t-Martin','1725,boul. Des Laurentide','Laval',30,'450 625-0898','','Y',NULL);
+	    VALUES(19,'Taverne St-Martin','1725,boul. Des Laurentide','Laval',30,'450 625-0898','','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
 	    VALUES(20,'Bar Bada Bing','270,boul. De La Concorde','Laval',30,'450 681-2158','','Y',NULL);
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
