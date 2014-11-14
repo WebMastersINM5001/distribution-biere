@@ -21,6 +21,9 @@ if( !isset($_SESSION["myusername"]) ){
 	</script>
 	<header>
 		<div class="container">
+			<h3>Information personnel sur le client</h3>
+			<div class="row">
+				<div class="col-md-6">
 			<?php
 
 				$noUsager = $_SESSION["NOUSAGER"];
@@ -39,17 +42,24 @@ if( !isset($_SESSION["myusername"]) ){
 				$courriel = $row["COURRIEL"];
 				$noclient = $row["NOCLIENT"];
 
-				echo '<p>' . $nomclient . '</p>';
-				echo '<p>' . $adresse . '</p>';
-				echo '<p>' . $ville . '</p>';
-				echo '<p>' . $telehpone . '</p>';
-				echo '<p>' . $courriel . '</p>';
-				echo '<p>' . $noUsager . '</p>';
-				
-			    oci_free_statement($stid);
-			    // Close the Oracle connection
-			    oci_close($conn);
-    		?>
+				echo '<p><strong>Nom de compagnie :</strong> ' . $nomclient . '</p>';
+				echo '<p><strong>Adresse :</strong>' . $adresse . '</p>';
+				echo '<p><strong>Ville :</strong>' . $ville . '</p>';
+
+				?>
+
+    			</div>
+    			<div class="col-md-6">
+	    			<?php
+						echo '<p><strong>Téléphone :</strong> ' . $telehpone . '</p>';
+						echo '<p><strong>Courriel :</strong>' . $courriel . '</p>';
+						echo '<p><strong>Numéro Client :</strong>' . $noUsager . '</p>';
+						oci_free_statement($stid);
+					    // Close the Oracle connection
+					    oci_close($conn);
+	    			?>
+    			</div>
+    		</div>
 		</div>
 	</header>
 

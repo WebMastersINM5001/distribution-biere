@@ -10,6 +10,14 @@
 	$myusername=$_POST['userName']; 
 	$mypassword=$_POST['password'];
 
+	$query = 'select NOUSAGER from USAGER where lower(username)= lower(:usr) and lower(password)=lower(:pwd)';
+	$stid = oci_parse($conn, $query);
+	oci_bind_by_name($stid, ":usr", $myusername);
+	oci_bind_by_name($stid, ":pwd", $mypassword);
+	oci_execute($stid);
+	oci_fetch_all($stid, $row);
+	$nousager = $row["NOUSAGER"][0];
+
     // counting table row
 	// Use bind variable to improve resuability, and to remove SQL Injection attacks.
 	$query = 'select lower(type) type from USAGER where lower(username)= lower(:usr) and lower(password)=lower(:pwd)';
@@ -18,14 +26,14 @@
 	oci_bind_by_name($stid, ":pwd", $mypassword);
 	oci_execute($stid);
 	$count = oci_fetch_all($stid, $row);
-    echo  $row['TYPE'][0];
-	//var_dump($res);
-    echo $count;
+
 	// If result matched $myusername and $mypassword, table row must be 1 row
 	if($count==1) {
+
 		// Register $myusername, $mypassword and redirect to file "login_success.php"
 		$_SESSION["myusername"] = $myusername;
 		$_SESSION["mypassword"] = $mypassword;
+		$_SESSION["NOUSAGER"] = $nousager;
 		
 		$typeuser = $row['TYPE'][0];
 		
