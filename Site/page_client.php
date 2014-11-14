@@ -5,9 +5,9 @@ if( !isset($_SESSION["myusername"]) ){
 	header("location:index.php");
 	exit();
 }
-?>
-<?php 	include("includes/header.php"); 
-		include("includes/connect_DB.php");
+
+ 	include("includes/header.php"); 
+	include("includes/connect_DB.php");
 ?>
 
 <body>

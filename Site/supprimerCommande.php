@@ -46,4 +46,4 @@
 		echo 'Veuillez remplir le champ.<br><a href="javascript:history.back()" class="btn btn-default">Retour</a>';
 	}
 
-	?>
+?>
