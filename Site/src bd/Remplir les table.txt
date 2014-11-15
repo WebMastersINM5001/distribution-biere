@@ -124,6 +124,31 @@ INSERT INTO Usager(nousager,username,password,type,description)
 	VALUES(51,'client51','51','Client','Goldies');
 INSERT INTO Usager(nousager,username,password,type,description)
 	VALUES(52,'client52','52','Client','Vivaldi');
+-- ======================= usager lIVREUR =======================
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1000,'livreur00','livreur00','Livreur','Livreur camion #1000');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1001,'livreur01','livreur01','Livreur','Livreur camion #1001');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1002,'livreur02','livreur02','Livreur','Livreur camion #1002');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1003,'livreur03','livreur03','Livreur','Livreur camion #1003');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1004,'livreur04','livreur04','Livreur','Livreur camion #1004');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1005,'livreur05','livreur05','Livreur','Livreur camion #1005');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1006,'livreur06','livreur06','Livreur','Livreur camion #1006');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1007,'livreur07','livreur07','Livreur','Livreur camion #1007');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1008,'livreur08','livreur08','Livreur','Livreur camion #1008');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1009,'livreur09','livreur09','Livreur','Livreur camion #1009');
+INSERT INTO Usager(nousager,username,password,type,description) 
+	VALUES(1010,'livreur10','livreur10','Livreur','Livreur camion #1010');
+
+
 
 --**************  TABLE Region ********************
 
@@ -217,27 +242,27 @@ INSERT INTO PRODUIT(noproduit,description,prix,emballage,alcool,fournisseur,quan
 --******************* TABLE Camion ******************************
 
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(100,800,'Camion classe 3','y');
+	VALUES(1000,800,'Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(101,'800','Camion classe 3','y');
+	VALUES(1001,'800','Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(103,'800','Camion classe 3','y');
+	VALUES(1003,'800','Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(102,800,'Camion classe 3','y');
+	VALUES(1002,800,'Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(104,'800','Camion classe 3','y');
+	VALUES(1004,'800','Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(105,'800','Camion classe 3','y');
+	VALUES(1005,'800','Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(106,'800','Camion classe 3','y');
+	VALUES(1006,'800','Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(107,'800','Camion classe 3','y');
+	VALUES(1007,'800','Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(108,'800','Camion classe 3','y');
+	VALUES(1008,'800','Camion classe 3','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(109,'2080','Camion classe 1','y');
+	VALUES(1009,'2080','Camion classe 1','y');
 INSERT INTO Camion(noCamion,nbCaisseMax,description,disponible) 
-	VALUES(110,'2080','Camion classe 1','y');
+	VALUES(1010,'2080','Camion classe 1','y');
 
 --************************* TABLE Client *********************************
 INSERT INTO Client(noClient,nomClient,adresse,ville,noRegion,telephone,courriel,confirm,noUsager) 
@@ -414,13 +439,13 @@ INSERT INTO COMMANDEDETAIL VALUES(21,310,1002,49);
 
 --****************************** TABLE LIVRAISON *********************
 
-INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5000,'13/10/2014',100);
-INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5001,'14/10/2014',101);
-INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5002,'14/10/2014',102);
-INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5003,'14/10/2014',103);
-INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5004,'14/10/2014',104);
-INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5005,'14/03/2011',105);
-INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5006,'14/03/2011',106);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5000,'13/10/2014',1000);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5001,'14/10/2014',1001);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5002,'14/10/2014',1002);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5003,'14/10/2014',1003);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5004,'14/10/2014',1004);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5005,'14/03/2011',1005);
+INSERT INTO LIVRAISON (nolivraison,datelivraison,nocamion) VALUES(5006,'14/03/2011',1006);
 --******************************* TABLE LIVRAISONDETAIL ******************
 
 INSERT INTO LIVRAISONDETAIL (noligne,nolivraison,nocommande,noproduit,qtlivree) 

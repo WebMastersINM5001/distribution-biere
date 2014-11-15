@@ -1,15 +1,16 @@
 
 DROP FUNCTION nbCaisseDe24parNoLivraison;
-drop FUNCTION NOUVNOCOMMANDE;
-drop FUNCTION trouveNoLivraison;
-drop PROCEDURE INSERT_TABLE_COMMANDE;
+DROP FUNCTION NOUVNOCOMMANDE;
+DROP FUNCTION trouveNoLivraison;
+DROP PROCEDURE INSERT_TABLE_COMMANDE;
 DROP PROCEDURE AJOUT_QUANTITE;
---=================================================================
+DROP FUNCTION PLACER_DATELIVRAISON;
+--=====================================================================
 --Cette fonction prend un no de livraison retourne en caisse de 24 
 --le nombre de caisses commandées dans un no de livraison 
 --(i.e. le nombre de caisse déja inclu dans un camion)
 --***Attention le no Livraison doit d'abord etre valider en javaScript
---=================================================================
+--=====================================================================
 create or replace FUNCTION nbCaisseDe24parNoLivraison(noLiv VUE_DETAIL_LIVRAISON.qtlivree%TYPE)
     RETURN integer IS
     nbCaisse    VUE_DETAIL_LIVRAISON.qtlivree%TYPE :=0;
@@ -176,3 +177,40 @@ END AJOUT_QUANTITE;
 
 --================ Appel de propcedure =================
 execute AJOUT_QUANTITE(1000,20);
+
+--=================================================================
+--Cette fonction prend en parametre une date et un noLivraison
+--Elle UPDATE la table LIVRAISON à la datelivraison du nolivraison
+--et retoune un message qui confirm la mise-à-jour.
+-- ******PS. Ne pas oublie de faire 
+--ALTER SESSION SET NLS_DATE_FORMAT = 'DD/MM/YYYY';
+--=================================================================
+
+create or replace FUNCTION UPDATE_DATE_LIVRAISON (
+       dateLiv LIVRAISON.datelivraison%TYPE,
+       noLiv   LIVRAISON.nolivraison%TYPE)
+RETURN VARCHAR2 IS
+     PRAGMA AUTONOMOUS_TRANSACTION;
+verifNoLiv integer:=0;
+msg    varchar2(100):= '';
+BEGIN
+  
+       SELECT count(nolivraison)
+       INTO   verifNoLiv
+       FROM   LIVRAISON LV
+       WHERE  LV.nolivraison = noLiv;
+
+       IF verifNoLiv = 0 THEN
+            msg:='noLivraison invalide!';
+       ELSE 
+           UPDATE LIVRAISON
+           SET    livraison.datelivraison = dateLiv
+           WHERE  LIVRAISON.nolivraison = noLiv; 
+           msg:= 'Modification complete';
+           COMMIT;
+       END IF;
+RETURN msg;       
+END UPDATE_DATE_LIVRAISON;
+
+--==============  Appel de function =======================
+select UPDATE_DATE_LIVRAISON('16/11/2014',5005) from dual;

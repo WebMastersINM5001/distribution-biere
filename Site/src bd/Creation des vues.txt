@@ -9,6 +9,7 @@ DROP VIEW VUE_DETAIL_LIVRAISON;
 DROP VIEW VUE_ROUTE;
 DROP VIEW VUE_CAMION_REGION;
 DROP VIEW VUE_FACTURE;
+DROP VIEW VUE_PAGE_LIVREUR;
 --=============================================================================
 CREATE VIEW VUE_CLIENT AS
     SELECT noclient,nomclient,adresse,ville,telephone,courriel
@@ -75,4 +76,18 @@ CREATE VIEW VUE_FACTURE AS
              CM.noclient = CL.noclient 
       GROUP BY CM.noclient,CD.nocommande, CL.nomclient
       ORDER BY noclient ASC;
-/        
+/
+--================================================================================
+CREATE VIEW VUE_PAGE_LIVREUR AS
+    SELECT  CM.nocommande, CL.noclient,CL.nomclient, CM.datecommande,CM.confirm,
+            LV.nocamion, LV.nolivraison
+    FROM    COMMANDE CM, CLIENT CL, LIVRAISONDETAIL LD, LIVRAISON LV
+    WHERE   CM.noclient = CL.noclient AND
+            LD.nocommande = CM.nocommande AND
+            LD.nolivraison = LV.nolivraison
+    ORDER BY CM.datecommande ASC;  
+--================================================================================
+CREATE VIEW VUE_TABLE_USAGER AS 
+	SELECT *
+	FROM   USAGER
+        ORDER BY type;    
