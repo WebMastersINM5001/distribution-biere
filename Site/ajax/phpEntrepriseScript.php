@@ -5,8 +5,6 @@
 
 	$contentVar = $_POST['contentVar'];
 	if($contentVar == "con1"){
-		$noUsager = $_SESSION["NOUSAGER"];
-	   //&pnocommande=&pdtcommnade&pnoproduit
 		echo 	'<table class="table table-striped table-bordered">
 					<tr> <p>FILTRER: </p>
 						<th> par Client
@@ -54,17 +52,14 @@
 		echo ' </div>';
 		
 		
-	}else if($contentVar == "con2"){
-		echo '
-			<form class="form-inline" role="form" method="post" action="supprimerCommande.php">
-			  <div class="form-group">
-			    <label for="noCommandeASupprimer">Numero de la commande a supprimer</label><br>
-			    <input name="noCommandeASupprimer" type="text" class="form-control" id="noCommandeASupprimer" placeholder="Numero de la commande">
-			  </div>
-			  <br>
-			  <button type="submit" class="btn btn-default">Supprimer la commande</button>
-			</form>
-		';
+	}else if($contentVar == "con4"){
+		include("../includes/entrpListeClientQueryScript.php");
+	}else if($contentVar == "con5"){
+		include("../includes/entrpListeProduitQueryScript.php");
+	}else if($contentVar == "con6"){
+		include("../includes/entrpListeCamionQueryScript.php");
+	}else if($contentVar == "con7"){
+		include("../includes/entrpListeRegionQueryScript.php");
 	}else if($contentVar == "con3"){
 
 		$noUsager = $_SESSION["NOUSAGER"];

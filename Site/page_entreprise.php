@@ -50,16 +50,17 @@ if( !isset($_SESSION["myusername"]) ){
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con2')">Confirmation client </a>
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con3')">Ajout quantite produit </a>
 				<br />
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con4')">Liste des clients</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con5')">Liste des produits</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con6')">Liste des camions</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con7')">Liste des region</a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con4')">Liste des clients</a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con5')">Liste des produits</a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con6')">Liste des camions</a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con7')">Liste des region</a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con8')">Liste des usager</a>
 				<br />
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con8')">Ajout produit</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con9')">Ajout client </a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con10')">Ajout camion </a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con11')">Ajout usager </a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con12')">Ajout region </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con9')">Ajout produit</a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con10')">Ajout client </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con11')">Ajout camion </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con12')">Ajout usager </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con13')">Ajout region </a>
 			</div>
 			
 			<div id="myDiv" class="col-md-9">
