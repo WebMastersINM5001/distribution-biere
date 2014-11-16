@@ -5,7 +5,6 @@
 	session_start();
 
 	include("includes/connect_DB.php");
-
 	// Define $myusername and $mypassword 
 	$myusername=$_POST['userName']; 
 	$mypassword=$_POST['password'];

@@ -26,7 +26,7 @@
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="Region" class="col-sm-2 control-label">Region</label>
+		    <label for="region" class="col-sm-2 control-label">Region</label>
 		    <div class="col-sm-10">
 				<select name="region" size="1" id="region">
 					<option value=""> Choisisez une Region ... </option>

@@ -7,7 +7,7 @@
 		exit;
 	}
 	// php to select dropdown list options from table
-	$stid = oci_parse($conn, "select NOMREGION, NOREGION  from REGION  ORDER BY NOREGION");
+	$stid = oci_parse($conn, "select NOMREGION, NOREGION from REGION ORDER BY NOREGION");
 	oci_execute($stid);
 	
 	// build the dropdown list
