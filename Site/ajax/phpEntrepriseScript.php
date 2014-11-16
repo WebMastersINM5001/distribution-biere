@@ -43,15 +43,12 @@
 		echo '</table>';
 		echo '	<br>
 			<div id="txtHint1"><b>Info will be listed here.</b></div>';
-
 		echo '	<div id="txtHint2">';
 			$noclient = 0;
 			$nocommande = 0;
 			$noproduit = 0;
 			include("../includes/commandeQueryScript.php");
 		echo ' </div>';
-		
-		
 	}else if($contentVar == "con4"){
 		include("../includes/entrpListeClientQueryScript.php");
 	}else if($contentVar == "con5"){
@@ -60,59 +57,18 @@
 		include("../includes/entrpListeCamionQueryScript.php");
 	}else if($contentVar == "con7"){
 		include("../includes/entrpListeRegionQueryScript.php");
+	}else if($contentVar == "con8"){
+		include("../includes/entrpListeUserQueryScript.php");
+	}else if($contentVar == "con9"){
+		include("../includes/newClient.php");
+	}else if($contentVar == "con10"){
+		include("../includes/newProduit.php");
+	}else if($contentVar == "con11"){
+		include("../includes/newCamion.php");
+	}else if($contentVar == "con12"){
+		include("../includes/newRegion.php");
 	}else if($contentVar == "con3"){
-
 		$noUsager = $_SESSION["NOUSAGER"];
-
-		// php to select dropdown list options from table
-		$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY DATECOMMANDE");
-		oci_execute($stid);
-		$count = oci_fetch_all($stid, $row);
-
-		if($count > 0){
-		    oci_free_statement($stid);
-
-			$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY DATECOMMANDE");
-			oci_execute($stid);
-
-			echo 	'<table class="table table-striped table-bordered">
-						<tr>
-							<th>
-								Numero de la Commande
-							</th>
-							<th>
-								Date de la commande
-							</th>
-							<th>
-								Numero du produit
-							</th>
-							<th>
-								Nom du produit
-							</th>
-							<th>
-								Quantite
-							</th>
-						</tr>
-			';
-
-			// build the history table
-			while($row = oci_fetch_array($stid)) {
-				$nocommande = $row["NOCOMMANDE"];
-				$date = $row["DATECOMMANDE"];
-				$noproduit = $row["NOPRODUIT"];
-				$description = $row["DESCRIPTION"];
-				$quantite = $row["QUANTITE"];
-				
-				echo '<tr><td>' . $nocommande . '</td><td>' . $date . '</td><td>' . $noproduit . '</td><td>' . $description .'</td><td>' . $quantite .'</td></tr>';
-			}
-		    oci_free_statement($stid);
-		    // Close the Oracle connection
-		    oci_close($conn);
-
-
-			echo '</table>';
-		}else{
-			echo '<p>Vous n\'avez aucune commande de passe sur votre compte.</p>';
-		}
+		
 	}
 ?>

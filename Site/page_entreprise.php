@@ -1,12 +1,11 @@
 <?php
-session_start();
+	session_start();
 
-if( !isset($_SESSION["myusername"]) ){
-	header("location:index.php");
-	exit();
-}
-
- 	include("includes/header.php"); 
+	if( !isset($_SESSION["myusername"]) ){
+		header("location:index.php");
+		exit();
+	}
+	include("includes/header.php"); 
 	include("includes/connect_DB.php");
 ?>
 
@@ -37,7 +36,6 @@ if( !isset($_SESSION["myusername"]) ){
 			    // Close the Oracle connection
 			    oci_close($conn);
 				?>
-
     			</div>
     		</div>
 		</div>
@@ -56,21 +54,20 @@ if( !isset($_SESSION["myusername"]) ){
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con7')">Liste des region</a>
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con8')">Liste des usager</a>
 				<br />
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con9')">Ajout produit</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con10')">Ajout client </a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con11')">Ajout camion </a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con12')">Ajout usager </a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con13')">Ajout region </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con9')">Ajout client </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con10')">Ajout produit</a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con11')">Ajout camion </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con12')">Ajout region </a>
 			</div>
 			
 			<div id="myDiv" class="col-md-9">
-				<form class="form-inline" role="form">
+<!--				<form class="form-inline" role="form">
 					<div class="form-group">
 					    <label class="sr-only" for="exampleInputEmail2">Email address</label>
 					    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
 					</div>
 					<button type="submit" class="btn btn-default">Envoye</button>
-				</form>
+				</form>-->
 			</div>
 		</div>
 	</div>
