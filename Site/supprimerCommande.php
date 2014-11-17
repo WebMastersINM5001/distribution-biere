@@ -57,4 +57,6 @@
 	// Close the Oracle connection
    	oci_close($conn);
 
+   	header("location:page_client.php");
+
 ?>
