@@ -6,27 +6,37 @@
 	$contentVar = $_POST['contentVar'];
 	if($contentVar == "con1"){
 		echo '
-			<form class="form-inline" role="form">
-			  <div class="form-group">
-			    <label class="sr-only" for="exampleInputEmail2">Email address</label>
-			    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
-			  </div>
-			  <div class="form-group">
-			    <div class="input-group">
-			      <div class="input-group-addon">@</div>
-			      <input class="form-control" type="email" placeholder="Enter email">
-			    </div>
-			  </div>
-			  <div class="form-group">
-			    <label class="sr-only" for="exampleInputPassword2">Password</label>
-			    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
-			  </div>
-			  <div class="checkbox">
-			    <label>
-			      <input type="checkbox"> Remember me
-			    </label>
-			  </div>
-			  <button type="submit" class="btn btn-default">Sign in</button>
+			<a class="btn btn-default" onmousedown="javascript:addProductLine()">Ajouter un produit à la commande</a>
+			<form class="form-inline" role="form" method="post" action="passerCommande.php">
+				<div id="tousProduitsCommande">
+				  	<div class="form-group">
+				    	<label class="sr-only" for="produit" class="col-sm-2 control-label">produit</label>
+				    	<div class="col-sm-10">
+							<select class="form-control" name="produit0" size="1" id="produit">
+								<option value=""> Choisisez un produit ... </option>';
+									// php to select dropdown list options from table
+									$stid = oci_parse($conn, "select NOPRODUIT, DESCRIPTION, EMBALLAGE  from PRODUIT  ORDER BY DESCRIPTION");
+									oci_execute($stid);
+									
+									// build the dropdown list
+									while($row = oci_fetch_array($stid)) {
+										$noproduit = $row["NOPRODUIT"];
+										$description = $row["DESCRIPTION"];
+										$emballage = $row["EMBALLAGE"];
+										echo '<option value="' . $noproduit . '">' . $description . ' - ' . $emballage . ' unités' . '</option>';
+									}
+								    oci_free_statement($stid);
+								    // Close the Oracle connection
+								    oci_close($conn);
+				  			echo '</select>		      
+				    	</div>
+					</div>
+					<div class="form-group">
+					    <label class="sr-only" for="quantite">Quantite</label>
+					    <input type="text" name="quantite0" class="form-control" id="quantite" placeholder="Quantité">
+					</div>
+				</div>
+			<button type="submit" class="btn btn-default" style="float:right;">Envoyé</button>
 			</form>
 		';
 	}else if($contentVar == "con2"){
@@ -38,6 +48,7 @@
 			  </div>
 			  <br>
 			  <br>
+			  <p><strong>Note :</strong> Vous ne pouvez que supprimer les commandes qui n\'ont pas été confirmées.</p>
 			  <button type="submit" class="btn btn-default">Supprimer la commande</button>
 			</form>
 		';

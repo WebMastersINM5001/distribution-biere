@@ -4,6 +4,16 @@
 
 	include("includes/connect_DB.php");
 
+	$noCommande = $_POST['noCommandeASupprimer'];
+
+	$stid = oci_parse($conn, "select NOCOMMANDE, CONFIRM  from COMMANDE where NOCOMMANDE=$noCommande");
+	oci_execute($stid);
+	$row = oci_fetch_array($stid);
+
+	$confirm = $row["CONFIRM"];
+
+	oci_free_statement($stid);
+
 	// Define $myusername and $mypassword
 	if($_POST['noCommandeASupprimer'] != ""){
 		$noCommandeASupprimer = $_POST['noCommandeASupprimer'];
@@ -22,7 +32,7 @@
 		$noClient = $row["NOCLIENT"];
 		$noUsager = $_SESSION["NOUSAGER"];
 
-		if($count > 0 && $noClient == $noUsager){
+		if($count > 0 && $noClient == $noUsager && ($confirm == "n" || $confirm == "N")){
 		    oci_free_statement($stid);
 			$stid = oci_parse($conn, "DELETE from LIVRAISONDETAIL where NOCOMMANDE=$noCommandeASupprimer");
 			oci_execute($stid);
@@ -39,11 +49,12 @@
 			echo 'Le numéro de commande entré n\'est pas valide.<br><a href="javascript:history.back()" class="btn btn-default">Retour</a>';
 		}
 
-	  	// Close the Oracle connection
-	   	oci_close($conn);
 
 	}else{
 		echo 'Veuillez remplir le champ.<br><a href="javascript:history.back()" class="btn btn-default">Retour</a>';
 	}
+
+	// Close the Oracle connection
+   	oci_close($conn);
 
 ?>
