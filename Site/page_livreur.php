@@ -25,24 +25,22 @@ if( !isset($_SESSION["myusername"]) ){
 			<div class="row">
 				<div class="col-md-12">
 					<?php
-
 						$noUsager = $_SESSION["NOUSAGER"];
 
-						// php to select dropdown list options from table
-						$stid = oci_parse($conn, "select NOUSAGER, USERNAME  from USAGER  where NOUSAGER=$noUsager");
+						$stid = oci_parse($conn, "select NOUSAGER, USERNAME, DESCRIPTION  from USAGER  where NOUSAGER=$noUsager");
 						oci_execute($stid);
 						
-						// build the dropdown list
 						$row = oci_fetch_array($stid);
 
-						$noclient = $row["NOUSAGER"];
 						$username = $row["USERNAME"];
+						$nolivreur = $row["NOUSAGER"];
+						$description = $row["DESCRIPTION"];
 
 						echo '<p><strong>Identifiant du livreur :</strong> ' . $username . '</p>';
-						echo '<p><strong>Numéro Livreur :</strong> ' . $noUsager . '</p>';
+						echo '<p><strong>Numéro Livreur :</strong> ' . $nolivreur . '</p>';
+						echo '<p><strong>Description :</strong> ' . $description . '</p>';
 
 						oci_free_statement($stid);
-					    // Close the Oracle connection
 					    oci_close($conn);
 					?>
 

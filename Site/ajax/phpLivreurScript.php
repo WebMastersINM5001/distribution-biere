@@ -39,14 +39,12 @@
 
 		$noUsager = $_SESSION["NOUSAGER"];
 
-		// php to select dropdown list options from table
 		$stid = oci_parse($conn, "select NOCAMION, NOLIVRAISON from LIVRAISON where NOCAMION=$noUsager");
 		oci_execute($stid);
 		$row = oci_fetch_array($stid);
 
 		$noLivraison = $row["NOLIVRAISON"];
 
-		// php to select dropdown list options from table
 		$stid = oci_parse($conn, "select NOLIVRAISON from VUE_DETAIL_LIVRAISON where NOLIVRAISON=$noLivraison");
 		oci_execute($stid);
 		$count = oci_fetch_all($stid, $row);
@@ -86,7 +84,6 @@
 						</tr>
 			';
 
-			// build the history table
 			while($row = oci_fetch_array($stid)) {
 
 				$nomregion = $row["NOMREGION"];
@@ -102,9 +99,7 @@
 				echo '<tr><td>' . $nomregion . '</td><td>' . $nocommande . '</td><td>' . $nomclient . '</td><td>' . $nbproduit . '</td><td>' . $description . '</td><td>' . $qtelivrer . '</td><td>' . $emballage .'</td><td>' . $nbunite .'</td></tr>';
 			}
 		    oci_free_statement($stid);
-		    // Close the Oracle connection
 		    oci_close($conn);
-
 
 			echo '</table>';
 		}else{
