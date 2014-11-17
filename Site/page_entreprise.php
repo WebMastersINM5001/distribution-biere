@@ -31,6 +31,8 @@
 			<?php
 
 				$noUsager = $_SESSION["NOUSAGER"];
+				$_SESSION["NoLigneProduitQnt"] = 1;
+				$_SESSION["NoClientConfirm"]  = 1;
 
 				$stid = oci_parse($conn, "select NOUSAGER, USERNAME, PASSWORD, TYPE, DESCRIPTION, to_char(SYSDATE,'DD/MM/YYYY') TODAY from USAGER where NOUSAGER=$noUsager");
 				oci_execute($stid);
@@ -58,8 +60,8 @@
 		<div class="row">
 			<div class="col-md-3 menu">
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con1')">Voir les commandes</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con2')">Confirmation client </a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con3')">Ajout quantite produit </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con2')">Confirmation client </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con3')">Ajout quantite produit </a>
 				<br />
 				<a href="#" id="btnListe" class="btn btn-default" onclick="return false">Menu Liste</a>
 				<div id="liste">

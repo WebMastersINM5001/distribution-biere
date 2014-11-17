@@ -1,5 +1,5 @@
 /**
- * @author  Alexandtu Condorachi
+ * @author  Alexandru Condorachi
  */
 
 	   function swapEntrepriseContent(param){
@@ -35,4 +35,23 @@
 					}
 			xmlhttp.open("GET","ajax/phpEntrpCommandesByFilterScript.php?pnoclient="+prm1+"&pnocommande="+prm2+"&pnoproduit="+prm3,true);
 			xmlhttp.send();
-		}		
+		}	
+
+		function addProductQntLine(){
+			var url = "ajax/phpAddProductQuantite.php";
+			$.post(url, function(data){
+				$("#tousProduitsQuantite").append(data);
+			});
+		}
+
+		function addClientConfirm(cb){
+		if (cb == "N")
+			var url = "ajax/phpMinusClientConfirm.php";
+		 else
+			var url = "ajax/phpAddClientConfirm.php";
+
+			$.post(url, function(data){
+				$("#tousConfirm").append(data);
+			});
+		}
+		

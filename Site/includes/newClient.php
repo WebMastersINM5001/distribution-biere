@@ -63,7 +63,7 @@
 		  <div class="form-group">
 		    <label for="courriel" class="col-sm-2 control-label">Courriel</label>
 		    <div class="col-sm-10">
-		      <input name="courriel" type="text" id="courriel">
+		      <input name="courriel" type="email" id="courriel">
 		    </div>
 		  </div>
 		  

@@ -25,7 +25,15 @@ if( !isset($_SESSION["myusername"]) ){
 				$("#tousProduitsCommande").append(data);
 			});
 		}
-	</script>
+
+		function addProductQntLine(){
+			var url = "ajax/phpAddProductQuantite.php";
+			$.post(url, function(data){
+				$("#tousProduitsCommande").append(data);
+			});
+		}
+
+		</script>
 	<header>
 		<div class="container">
 			<h3>Information personnel sur le client</h3>
