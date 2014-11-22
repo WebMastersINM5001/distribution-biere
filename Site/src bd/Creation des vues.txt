@@ -10,6 +10,10 @@ DROP VIEW VUE_ROUTE;
 DROP VIEW VUE_CAMION_REGION;
 DROP VIEW VUE_FACTURE;
 DROP VIEW VUE_PAGE_LIVREUR;
+DROP VIEW VUE_CLIENT_NON_COMFIRMER;
+DROP VIEW VUE_FACTURE_DETAILLER;
+DROP VIEW VUE_NB_CLIENT_NON_CONFIRMER;
+DROP VIEW VUE_NB_COMMANDE_EN_COURS;
 --=============================================================================
 CREATE VIEW VUE_CLIENT AS
     SELECT noclient,nomclient,adresse,ville,telephone,courriel
@@ -77,7 +81,13 @@ CREATE VIEW VUE_FACTURE AS
       GROUP BY CM.noclient,CD.nocommande, CL.nomclient
       ORDER BY noclient ASC;
 /
---================================================================================
+--===============================================================================
+CREATE OR REPLACE VIEW VUE_FACTURE_DETAILLER AS
+    SELECT   CD.nocommande, CD.noproduit,P.description, 
+             CD.quantite,P.emballage,P.prix AS PRIX_UNITAIRE, (CD.quantite *P.prix) AS montant_$
+    FROM     COMMANDEDETAIL CD, PRODUIT P
+    WHERE    CD.noproduit = P.noproduit
+    ORDER BY CD.nocommande ASC, P.noproduit ASC; 
 CREATE VIEW VUE_PAGE_LIVREUR AS
     SELECT  CM.nocommande, CL.noclient,CL.nomclient, CM.datecommande,CM.confirm,
             LV.nocamion, LV.nolivraison
@@ -90,4 +100,20 @@ CREATE VIEW VUE_PAGE_LIVREUR AS
 CREATE VIEW VUE_TABLE_USAGER AS 
 	SELECT *
 	FROM   USAGER
-        ORDER BY type;    
+        ORDER BY type;  
+--===============================================================================
+
+CREATE VIEW VUE_CLIENT_NON_CONFIRMER AS 
+	SELECT noclient, nomclient,confirm
+	FROM   CLIENT
+  	WHERE  CONFIRM = 'N';
+  	ORDER BY noclient;  
+--=================================================================================
+
+CREATE VIEW VUE_NB_CLIENT_NON_CONFIRMER AS 
+	SELECT COUNT(confirm)AS DEMANDE_CONFIRMATION
+FROM  VUE_CLIENT_NON_CONFIRMER;
+--=================================================================================
+CREATE VIEW VUE_NB_COMMANDE_EN_COURS AS 
+SELECT COUNT(nocommande)AS NB_COMMANDE_EN_COURS
+FROM  VUE_DETAIL_COMMANDE;

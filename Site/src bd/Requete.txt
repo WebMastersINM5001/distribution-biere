@@ -146,3 +146,10 @@ ORDER BY  nocommande ASC, noproduit ASC
 SELECT description, emballage, quantiteenstock
 FROM   VUE_PRODUIT
 ORDER BY description ASC;
+
+--******************************************************************
+--Le nombre de client qui demande une confirmation
+--******************************************************************
+
+SELECT COUNT(confirm)AS DEMANDE_CONFIRMATION
+FROM  VUE_CLIENT_NON_CONFIRMER;
