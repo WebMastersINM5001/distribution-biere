@@ -8,7 +8,20 @@
 	include("includes/header.php"); 
 	include("includes/connect_DB.php");
 ?>
+<script type="text/javascript">
+	$(document).ready(function(){
 
+		$("#liste").hide();
+		$("#ajout").hide();
+
+		$("#btnListe").click(function() {
+		  $("#liste").slideToggle( "slow" );
+		});
+		$("#btnAjout").click(function() {
+		  $("#ajout").slideToggle( "slow" );
+		});
+	});
+</script>
 <body>
 	<header>
 		<div class="container">
@@ -48,16 +61,22 @@
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con2')">Confirmation client </a>
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con3')">Ajout quantite produit </a>
 				<br />
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con4')">Liste des clients</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con5')">Liste des produits</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con6')">Liste des camions</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con7')">Liste des region</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con8')">Liste des usager</a>
+				<a href="#" id="btnListe" class="btn btn-default" onclick="return false">Menu Liste</a>
+				<div id="liste">
+					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con4')">Liste des clients</a>
+					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con5')">Liste des produits</a>
+					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con6')">Liste des camions</a>
+					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con7')">Liste des region</a>
+					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con8')">Liste des usager</a>
+				</div>
 				<br />
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con9')">Ajout client </a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con10')">Ajout produit</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con11')">Ajout camion </a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con12')">Ajout region </a>
+				<a href="#" id="btnAjout" class="btn btn-default" onclick="return false">Menu Ajout</a>
+				<div id="ajout">
+					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con9')">Ajout client </a>
+					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con10')">Ajout produit</a>
+					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con11')">Ajout camion </a>
+					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con12')">Ajout region </a>
+				</div>
 			</div>
 			
 			<div id="myDiv" class="col-md-9">
