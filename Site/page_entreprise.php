@@ -31,6 +31,8 @@
 			<?php
 
 				$noUsager = $_SESSION["NOUSAGER"];
+				$_SESSION["NoLigneProduitQnt"] = 1;
+				$_SESSION["NoClientConfirm"]  = 1;
 
 				$stid = oci_parse($conn, "select NOUSAGER, USERNAME, PASSWORD, TYPE, DESCRIPTION, to_char(SYSDATE,'DD/MM/YYYY') TODAY from USAGER where NOUSAGER=$noUsager");
 				oci_execute($stid);
@@ -91,6 +93,8 @@
 			</div>
 			
 			<div id="myDiv" class="col-md-9">
+				<img src="http://chart.apis.google.com/chart?cht=bvs&chd=t:80,20&chco=009de4,009de4&chs=250x250&chl=Moi|Vous">
+				
 				<?php /*
 					for($i=0;$i<$qteProduit;$i++){
 
