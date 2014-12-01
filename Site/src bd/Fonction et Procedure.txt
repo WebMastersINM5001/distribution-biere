@@ -6,6 +6,7 @@ DROP FUNCTION INSERT_TABLE_COMMANDE;
 DROP PROCEDURE AJOUT_QUANTITE;
 DROP FUNCTION PLACER_DATELIVRAISON;
 DROP FUNCTION INSERT_TABLE_COMMANDEDETAIL;
+drop function NO_PRODUIT_ALEATOIRE;
 --*************************************************************************
 --Cette fonction prend un no de livraison retourne en caisse de 24 
 --le nombre de caisses commandées dans un no de livraison 
@@ -328,3 +329,28 @@ BEGIN
       RETURN  'Insertion complete';
 
 END INSERT_TABLE_LIVRAISONDETAIL;
+--==========================================================================
+-- fonction  qui retourne un noproduit aleatoire entre 1 et 50000
+--==========================================================================
+
+create or replace FUNCTION NO_PRODUIT_ALEATOIRE
+RETURN integer AS
+unProd    INTEGER:= 0;
+compte    INTEGER:=0;
+exist     INTEGER:= 0;
+BEGIN 
+     WHILE(exist = 0)loop
+        SELECT trunc(DBMS_RANDOM.value(1,50000)) into unProd from dual;
+        SELECT count(noproduit)
+        INTO   compte
+        FROM   PRODUIT
+        WHERE  noproduit = unProd;
+        if(compte = 0)then
+            exist := 1;
+        END IF;
+     END LOOP;
+--==============  Appel de fonction ------------
+SELECT NO_PRODUIT_ALEATOIRE FROM DUAL;
+     
+RETURN unProd;
+END NO_PRODUIT_ALEATOIRE;

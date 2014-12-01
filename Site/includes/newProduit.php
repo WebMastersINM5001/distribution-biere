@@ -7,7 +7,7 @@
 		    <div class="col-sm-10">
 			<?php
 				include("connect_DB.php");
-				$stid = oci_parse($conn, "select produit_no_seq.nextval NO from dual");
+				$stid = oci_parse($conn, "select no_produit_aleatoire NO from dual");
 				oci_execute($stid);
 				$row = oci_fetch_array($stid);
 				$no = $row["NO"];
