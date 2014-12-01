@@ -46,8 +46,7 @@
 				echo '<p><strong> Aujourd\'hui :</strong> ' . $date . ' </p>';
 				echo '<p><strong> Usager: '.$nomusager.' ('.$descr.')</p>';
 				oci_free_statement($stid);
-			    // Close the Oracle connection
-			    oci_close($conn);
+
 				?>
     			</div>
     		</div>
@@ -58,7 +57,19 @@
 		<div class="row">
 			<div class="col-md-3 menu">
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con1')">Voir les commandes</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con2')">Confirmation client </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con2')">Confirmation client 
+					<?php 
+							//Trouve le Numero région de l'usager connecté
+							$stid = oci_parse($conn, "SELECT DEMANDE_CONFIRMATION FROM VUE_NB_CLIENT_NON_CONFIRMER");
+							oci_execute($stid);
+							$row = oci_fetch_array($stid);
+
+							$noConfirmationClient = $row["DEMANDE_CONFIRMATION"];
+							echo "(" . $noConfirmationClient . ")";
+							
+							oci_free_statement($stid);
+					?>
+				</a>
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con3')">Ajout quantite produit </a>
 				<br />
 				<a href="#" id="btnListe" class="btn btn-default" onclick="return false">Menu Liste</a>
@@ -80,13 +91,22 @@
 			</div>
 			
 			<div id="myDiv" class="col-md-9">
-<!--				<form class="form-inline" role="form">
-					<div class="form-group">
-					    <label class="sr-only" for="exampleInputEmail2">Email address</label>
-					    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Enter email">
-					</div>
-					<button type="submit" class="btn btn-default">Envoye</button>
-				</form>-->
+				<?php /*
+					for($i=0;$i<$qteProduit;$i++){
+
+						$produit = $_POST['produit'.$i];
+						$quantite = $_POST['quantite'.$i];
+
+						//Insert les produit dans la table LivraisonDetail
+						$stid = oci_parse($conn, "SELECT INSERT_TABLE_LIVRAISONDETAIL($noRegion, $nouveauNoCommande, $produit, $quantite) FROM DUAL");
+						oci_execute($stid);
+
+						$row = oci_fetch_array($stid);
+
+						$message = $row[0];
+					}
+					echo '<img src="http://chart.apis.google.com/chart?cht=bvs&chd=t:' .  . '80,20&chco=009de4,009de4&chs=250x250&chl=' .  . 'Moi|Vous">';*/
+				?>
 			</div>
 		</div>
 	</div>
@@ -98,5 +118,9 @@
 	</footer>
 </body>
 
-<?php include("includes/footer.php"); ?>
+<?php 
+		// Close the Oracle connection
+			oci_close($conn);
+		include("includes/footer.php"); 
+	?>
 
