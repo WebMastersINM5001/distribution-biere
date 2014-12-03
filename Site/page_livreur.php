@@ -41,7 +41,6 @@ if( !isset($_SESSION["myusername"]) ){
 						echo '<p><strong>Description :</strong> ' . $description . '</p>';
 
 						oci_free_statement($stid);
-					    oci_close($conn);
 					?>
 
     			</div>
@@ -52,12 +51,41 @@ if( !isset($_SESSION["myusername"]) ){
 	<div class="container main">
 		<div class="row">
 			<div class="col-md-3 menu">
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapLivreurContent('con2')">Trajet de la journée</a>
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapLivreurContent('con1')">Afficher livraison</a>
 			</div>
 			<div id="myDiv" class="col-md-9">
 				<?php
+
+				    $stid = oci_parse($conn, "select NOCAMION, NOLIVRAISON, ADRESSE, VILLE  from VUE_ROUTE  where NOCAMION=$noUsager");
+					oci_execute($stid);
+
+					$waypoints = "";
+
+					while($row = oci_fetch_array($stid)) {
+
+						$nocamion = $row["NOCAMION"];
+						$nolivraison = $row["NOLIVRAISON"];
+						$adresse = $row["ADRESSE"];
+						$ville = $row["VILLE"];
 						
+						$waypoints .= $adresse . ' ' . $ville . ' | ';
+
+					}
+					$waypoints = substr($waypoints, 0, -3);
+
+					echo '
+						<iframe
+						    width="100%"
+						    height="450"
+						    frameborder="0" style="border:0"
+						    src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCC-s1KFsmrmCVqWlTPaiibLoRDRF2vhMc&origin=1405 Rue Sainte-Catherine Est, Montréal&waypoints=' . $waypoints . '&destination=1405 Rue Sainte-Catherine Est, Montréal&mode=driving">
+						</iframe>
+					';
+
+					oci_close($conn);
 				?>
+
 			</div>
 		</div>
 	</div>

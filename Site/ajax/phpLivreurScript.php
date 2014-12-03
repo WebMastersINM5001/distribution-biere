@@ -8,34 +8,6 @@
 
 	if($contentVar == "con1"){
 
-		/*$query = 'select * from USAGER where lower(username)= lower(:usr) and lower(password)=lower(:pwd)';
-		$stid = oci_parse($conn, $query);
-		oci_bind_by_name($stid, ":usr", $myusername);
-		oci_bind_by_name($stid, ":pwd", $mypassword);		
-		oci_execute($stid);
-		$count = oci_fetch_all($stid, $row);
-
-		if($count==1) {
-			echo 'test';
-		}
-
-		echo '
-			<h1>'. date("Y/m/d") .'</h1>
-			<form class="form-inline" role="form" action="supprimerCommande.php">
-			  <div class="form-group">
-			    <label>
-			    	info de la commande ici
-			    </label>
-			  </div>
-			  <div class="checkbox">
-			    <label>
-			      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="checkbox"> Commande livré
-			    </label>
-			  </div>
-			  <br></br><button type="submit" class="btn btn-default">Soumettre</button>
-			</form>
-		';*/
-
 
 		$noUsager = $_SESSION["NOUSAGER"];
 
@@ -105,5 +77,37 @@
 		}else{
 			echo '<p>Vous n\'avez aucune commande à livrer aujourd\'hui.</p>';
 		}
+	}else if($contentVar == "con2"){
+
+		$noUsager = $_SESSION["NOUSAGER"];
+
+	    $stid = oci_parse($conn, "select NOCAMION, NOLIVRAISON, ADRESSE, VILLE  from VUE_ROUTE  where NOCAMION=$noUsager");
+		oci_execute($stid);
+
+		$waypoints = "";
+
+		while($row = oci_fetch_array($stid)) {
+
+			$nocamion = $row["NOCAMION"];
+			$nolivraison = $row["NOLIVRAISON"];
+			$adresse = $row["ADRESSE"];
+			$ville = $row["VILLE"];
+			
+			$waypoints .= $adresse . ' ' . $ville . ' | ';
+
+		}
+		$waypoints = substr($waypoints, 0, -3);
+
+		echo '
+			<iframe
+			    width="100%"
+			    height="450"
+			    frameborder="0" style="border:0"
+			    src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyCC-s1KFsmrmCVqWlTPaiibLoRDRF2vhMc&origin=1405 Rue Sainte-Catherine Est, Montréal&waypoints=' . $waypoints . '&destination=1405 Rue Sainte-Catherine Est, Montréal&mode=driving">
+			</iframe>
+		';
+
+		oci_close($conn);
+
 	}
 ?>
