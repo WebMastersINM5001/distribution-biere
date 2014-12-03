@@ -20,6 +20,7 @@ footer .container p{
 }
 .container{
 	padding:30px 0px;
+	position:relative;
 }
 .btn{
 	background:url(../images/btn.jpg) repeat-x;
@@ -40,6 +41,18 @@ footer .container p{
 	min-height: 608px;
 }
 
+#deconnexion{
+	position:absolute;
+	top:30px;
+	right:0px;
+	color:#fff;
+}
+
+#deconnexion:hover{
+	color:#fff;
+	text-decoration: none;
+}
+
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
@@ -47,6 +60,29 @@ footer .container p{
 /****************************************************************/
 span.inputGroup{
 	display: block;
+}
+
+#accueil{
+	background:#428bca;
+}
+
+#accueil #content{
+	box-shadow: 3px 3px 20px #000;
+	background: #fff;
+	max-width: 600px;
+	margin: 0 auto;
+	margin-top: 100px;
+	padding:50px;
+	position:relative;
+}
+#accueil #content h1{
+	font-family: "roboto";
+}
+
+#accueil .propulsion{
+	bottom:30px;
+	left:30px;
+	position:absolute;
 }
 
 /************************** Client page **************************/

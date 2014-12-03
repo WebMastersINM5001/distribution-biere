@@ -1,34 +1,35 @@
 <?php include("includes/header.php");?>
-<body>
+<body id="accueil">
 	<div id="content">
 		<h1>Créer un nouveau compte</h1>
-		<p>Veuillez prendre note que votre compte ne sera pas accèssible tant que l'administrateur ne l'aura pas validé.</p>
+		<p><b>Important : </b>Veuillez prendre note que votre compte ne sera pas accèssible tant que l'administrateur ne l'aura pas validé.</p>
+		<br>
 		<form class="form-horizontal" role="form" method="post" action="checkNewAccount.php">
 
 		  <div class="form-group">
-		    <label for="nomClient" class="col-sm-2 control-label">Nom de l'établissement</label>
-		    <div class="col-sm-10">
-		      <input name="nomClient" type="text" id="nomClient">
+		    <label for="nomClient" class="col-sm-5 control-label">Nom de l'établissement</label>
+		    <div class="col-sm-7">
+		      <input name="nomClient" class="form-control" type="text" id="nomClient">
 		    </div>
 		  </div>
 
 		  <div class="form-group">
-		    <label for="adresse" class="col-sm-2 control-label">Adresse</label>
-		    <div class="col-sm-10">
-		      <input name="adresse" type="text" id="adresse">
+		    <label for="adresse" class="col-sm-5 control-label">Adresse</label>
+		    <div class="col-sm-7">
+		      <input name="adresse" class="form-control" type="text" id="adresse">
 		    </div>
 		  </div>
 
 		  <div class="form-group">
-		    <label for="ville" class="col-sm-2 control-label">Ville</label>
-		    <div class="col-sm-10">
-		      <input name="ville" type="text" id="ville">
+		    <label for="ville" class="col-sm-5 control-label">Ville</label>
+		    <div class="col-sm-7">
+		      <input name="ville" class="form-control" type="text" id="ville">
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="region" class="col-sm-2 control-label">Region</label>
-		    <div class="col-sm-10">
-				<select name="region" size="1" id="region">
+		    <label for="region" class="col-sm-5 control-label">Region</label>
+		    <div class="col-sm-7">
+				<select name="region" class="form-control" size="1" id="region">
 					<option value=""> Choisisez une Region ... </option>
 					<?php include("includes/region_listbox.php"); ?>
 				</select>		      
@@ -36,35 +37,35 @@
 		  </div>
 
 		  <div class="form-group">
-		    <label for="telephone" class="col-sm-2 control-label">Téléphone</label>
-		    <div class="col-sm-10">
-		      <input name="telephone" type="text" id="telephone">
+		    <label for="telephone" class="col-sm-5 control-label">Téléphone</label>
+		    <div class="col-sm-7">
+		      <input name="telephone" class="form-control" type="text" id="telephone">
 		    </div>
 		  </div>
 
 		  <div class="form-group">
-		    <label for="courriel" class="col-sm-2 control-label">Courriel</label>
-		    <div class="col-sm-10">
-		      <input name="courriel" type="text" id="courriel">
+		    <label for="courriel" class="col-sm-5 control-label">Courriel</label>
+		    <div class="col-sm-7">
+		      <input name="courriel" class="form-control" type="text" id="courriel">
 		    </div>
 		  </div>
 
 		  <div class="form-group">
-		    <label for="userName" class="col-sm-2 control-label">Nom d'utilisateur</label>
-		    <div class="col-sm-10">
-		      <input name="userName" type="text" id="userName">
+		    <label for="userName" class="col-sm-5 control-label">Nom d'utilisateur</label>
+		    <div class="col-sm-7">
+		      <input name="userName" class="form-control" type="text" id="userName">
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <label for="password" class="col-sm-2 control-label">Password</label>
-		    <div class="col-sm-10">
-		      <input name="password" type="password" id="password">
+		    <label for="password" class="col-sm-5 control-label">Password</label>
+		    <div class="col-sm-7">
+		      <input name="password" class="form-control" type="password" id="password">
 		    </div>
 		  </div>
 		  <div class="form-group">
 
 		  <div class="form-group">
-		    <div class="col-sm-offset-2 col-sm-10">
+		    <div class="col-sm-offset-5 col-sm-7">
 		      <button type="submit" class="btn btn-default">Soumettre</button>
 		    </div>
 		  </div>

@@ -52,6 +52,7 @@
 				?>
     			</div>
     		</div>
+    		<a href="logout.php" class="btn btn-default" id="deconnexion">X</a>
 		</div>
 	</header>
 
@@ -117,7 +118,7 @@
 
 	<footer>
 		<div class="container">
-			<p>Propulse par Web master inc.</p>
+			<p>Propulse par <a href="#">Web master inc.</a></p>
 		</div>
 	</footer>
 </body>
