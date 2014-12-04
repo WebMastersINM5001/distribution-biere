@@ -15,12 +15,17 @@
 		$("#ajout").hide();
 
 		$("#btnListe").click(function() {
+		  $("#menuliste").toggleClass("active");
 		  $("#liste").slideToggle( "slow" );
+
 		});
 		$("#btnAjout").click(function() {
+		  $("#menuajout").toggleClass("active");
 		  $("#ajout").slideToggle( "slow" );
 		});
 	});
+	
+</script>
 </script>
 <body>
 	<header>
@@ -60,7 +65,7 @@
 		<div class="row">
 			<div class="col-md-3 menu">
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con1')">Voir les commandes</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con2')">Confirmation client 
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con2')">Confirmation client 
 					<?php 
 							//Trouve le Numero région de l'usager connecté
 							$stid = oci_parse($conn, "SELECT DEMANDE_CONFIRMATION FROM VUE_NB_CLIENT_NON_CONFIRMER");
@@ -73,9 +78,10 @@
 							oci_free_statement($stid);
 					?>
 				</a>
-				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con3')">Ajout quantite produit </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con3')">Ajout quantite produit </a>
 				<br />
-				<a href="#" id="btnListe" class="btn btn-default" onclick="return false">Menu Liste</a>
+			<div id="menuliste">
+			    <a href="#" id="btnListe" class="btn btn-default" onclick="return false">Menu Liste <span class="arrow"></span></a>
 				<div id="liste">
 					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con4')">Liste des clients</a>
 					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con5')">Liste des produits</a>
@@ -83,14 +89,17 @@
 					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con7')">Liste des region</a>
 					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con8')">Liste des usager</a>
 				</div>
+			</div>
 				<br />
-				<a href="#" id="btnAjout" class="btn btn-default" onclick="return false">Menu Ajout</a>
+			  <div id="menuajout">
+				<a href="#" id="btnAjout" class="btn btn-default" onclick="return false">Menu Ajout<span class="arrow"></span></a>
 				<div id="ajout">
 					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con9')">Ajout client </a>
 					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con10')">Ajout produit</a>
 					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con11')">Ajout camion </a>
 					<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con12')">Ajout region </a>
 				</div>
+			  </div>
 			</div>
 			
 			<div id="myDiv" class="col-md-9">
