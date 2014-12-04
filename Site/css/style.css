@@ -73,28 +73,6 @@ span.inputGroup{
 .active > a > .arrow:before {
     content: "\02C5";
 }
-.nav-second-level li,
-.nav-third-level li {
-    border-bottom: none !important;
-}
-.nav-second-level li a {
-    padding-left: 37px;
-}
-.nav-third-level li a {
-    padding-left: 52px;
-}
-@media(min-width:768px) {
-    .navbar-static-side {
-        z-index: 1;
-        position: absolute;
-        width: 250px;
-    }
-    .navbar-top-links .dropdown-messages,
-    .navbar-top-links .dropdown-tasks,
-    .navbar-top-links .dropdown-alerts {
-        margin-left: auto;
-    }
-}
 
 #accueil{
 	background:#428bca;
