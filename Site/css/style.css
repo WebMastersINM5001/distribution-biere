@@ -56,6 +56,10 @@ footer .container p{
 @-moz-document url-prefix() {
   fieldset { display: table-cell; }
 }
+
+.error{
+	color:red;
+}
 /************************** Login page **************************/
 /****************************************************************/
 span.inputGroup{

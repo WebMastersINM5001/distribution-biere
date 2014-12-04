@@ -45,7 +45,8 @@
 			echo "Votre compte n'a pas été encore validé";
 		}		
 	}else {
-		echo "Wrong Username or Password";
+		$message = "Vos identifiants sont invalides.";
+		header('Location: index.php?errorMessage=' . $message);
 	}
 	
    oci_free_statement($stid);

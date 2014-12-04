@@ -1,4 +1,6 @@
-<?php include("includes/header.php"); ?>
+<?php include("includes/header.php"); 
+
+?>
 <body id="accueil">
 	<div id="content">
 		<h1>Distributeur de bière</h1>
@@ -17,6 +19,11 @@
 		    </div>
 		  </div>
 		  <div class="form-group">
+		  	<?php if(isset($_GET["errorMessage"])) { ?>
+		    <div class="col-sm-offset-5 col-sm-7">
+		    	<p class="error"><?php echo $_GET["errorMessage"] ?></p>
+		    </div>
+		    <?php } ?>
 
 		    <div class="col-sm-offset-5 col-sm-7">
 		    	<a href="newAccount.php">Créer un compte client</a><br><br>
