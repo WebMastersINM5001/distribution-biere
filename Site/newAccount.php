@@ -1,6 +1,8 @@
 <?php include("includes/header.php");?>
 <body id="accueil">
 	<div id="content">
+		<a href="index.php" class="btn btn-default">Retour à l'accueil</a>
+		<br>
 		<h1>Créer un nouveau compte</h1>
 		<p><b>Important : </b>Veuillez prendre note que votre compte ne sera pas accèssible tant que l'administrateur ne l'aura pas validé.</p>
 		<br>
@@ -30,7 +32,7 @@
 		    <label for="region" class="col-sm-5 control-label">Region</label>
 		    <div class="col-sm-7">
 				<select name="region" class="form-control" size="1" id="region">
-					<option value=""> Choisisez une Region ... </option>
+					<option value="0"> Choisisez une Region ... </option>
 					<?php include("includes/region_listbox.php"); ?>
 				</select>		      
 		    </div>
@@ -65,6 +67,11 @@
 		  <div class="form-group">
 
 		  <div class="form-group">
+		  	<?php if(isset($_GET["errorMessage"])) { ?>
+		    <div class="col-sm-offset-5 col-sm-7">
+		    	<p class="error"><?php echo $_GET["errorMessage"] ?></p>
+		    </div>
+		    <?php } ?>
 		    <div class="col-sm-offset-5 col-sm-7">
 		      <button type="submit" class="btn btn-default">Soumettre</button>
 		    </div>

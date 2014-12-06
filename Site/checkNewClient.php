@@ -13,6 +13,7 @@
 	$nousager 		= $_POST['usager'];
 	$ville 			= $_POST['ville'];
 
+
 	$sql =	"begin" .
 			"  :result := ajoutClient" . 
 			"             (" . 
@@ -49,4 +50,5 @@
     oci_free_statement($stid);
     // Close the Oracle connection
     oci_close($conn);
+
 ?>
