@@ -7,6 +7,9 @@ DROP PROCEDURE AJOUT_QUANTITE;
 DROP FUNCTION PLACER_DATELIVRAISON;
 DROP FUNCTION INSERT_TABLE_COMMANDEDETAIL;
 drop function NO_PRODUIT_ALEATOIRE;
+DROP FUNCTION QUANTITE_DISPONIBLE;
+DROP FONCTION FUNCTION REMETTRE_QTE_EN_STOCK;
+DROP FUNCTION REMETTRE_QTE_EN_STOCKS;
 --*************************************************************************
 --Cette fonction prend un no de livraison retourne en caisse de 24 
 --le nombre de caisses commandées dans un no de livraison 
@@ -354,3 +357,117 @@ SELECT NO_PRODUIT_ALEATOIRE FROM DUAL;
      
 RETURN unProd;
 END NO_PRODUIT_ALEATOIRE;
+
+
+--====================================================================
+--Cet fonction est la version 2 de la meme fonction, sauf qu'elle ajuste 
+--la qteenstock
+--======================================================================
+
+DROP FUNCTION INSERT_TABLE_COMMANDEDETAIL;
+create or replace FUNCTION INSERT_TABLE_COMMANDEDETAIL(
+       uneCommande  COMMANDE.nocommande%TYPE,
+       unProduit   PRODUIT.noproduit%TYPE,
+       uneQte      COMMANDEDETAIL.quantite%TYPE) 
+return VARCHAR2 AS
+
+PRAGMA AUTONOMOUS_TRANSACTION;
+uneligne      INTEGER:= 0;
+verif	      INTEGER:= 0;
+innexistant EXCEPTION;
+BEGIN 
+       SELECT MAX(noligne +1)
+       INTO   uneligne
+       FROM   COMMANDEDETAIL;
+       insert into COMMANDEDETAIL values(uneligne,uneCommande,unProduit,uneQte);
+       commit;
+       UPDATE PRODUIT
+       SET    quantiteenstock = (quantiteenstock - uneQte)  
+       WHERE  noproduit = unProduit;
+       commit;
+       RETURN 'Insertion complete';
+EXCEPTION
+      WHEN OTHERS THEN
+	       RETURN 'Erreur!,transaction non complete';
+END INSERT_TABLE_COMMANDEDETAIL;
+
+
+--==========================================================
+--  Fonction que retourne qteenstock de la table produit
+--==========================================================
+
+
+create or replace FUNCTION QUANTITE_DISPONIBLE(
+       unProduit   PRODUIT.noproduit%TYPE) 
+return INTEGER AS
+qteDisponible   integer := 0;
+BEGIN 
+       SELECT quantiteenstock
+       INTO   qteDisponible
+       FROM   PRODUIT  
+       WHERE  noproduit = unProduit;
+       RETURN qteDisponible;
+END QUANTITE_DISPONIBLE;
+
+--========  Appel de fonction ===================
+select QUANTITE_DISPONIBLE(1002) from dual;
+
+--==========================================================
+-- Fonction que remet une qte en stock
+--=======================================================
+create or replace FUNCTION REMETTRE_QTE_EN_STOCK(
+       unProduit   PRODUIT.noproduit%TYPE,
+       uneQte      COMMANDEDETAIL.quantite%TYPE) 
+return VARCHAR2 AS
+PRAGMA AUTONOMOUS_TRANSACTION;
+BEGIN 
+       UPDATE PRODUIT
+       SET    quantiteenstock = (quantiteenstock + uneQte)  
+       WHERE  noproduit = unProduit;
+       commit;
+       RETURN 'Ajout de la qte complete';
+EXCEPTION
+      WHEN OTHERS THEN
+	       RETURN 'Erreur!,transaction non complete';
+END REMETTRE_QTE_EN_STOCK;
+
+
+--==========================================================
+-- Fonction qui remet tous les produit une commande en stock
+--=======================================================
+
+
+
+create or replace FUNCTION REMETTRE_QTE_EN_STOCKS(uneCommande   COMMANDEDETAIL.nocommande%TYPE) 
+return VARCHAR2 AS
+unProduit   PRODUIT.noproduit%TYPE;
+uneQte      COMMANDEDETAIL.quantite%TYPE;
+--Déclaration du curseur
+CURSOR	lireLigne IS
+	SELECT * 
+	FROM   COMMANDEDETAIL CD  
+	WHERE  CD.NOCOMMANDE  = uneCommande;
+-- Variable temp est utilise pour mettre les colonnes du curseur 
+temp    lireLigne%ROWTYPE;
+PRAGMA AUTONOMOUS_TRANSACTION;
+BEGIN
+        OPEN lireLigne;
+        LOOP
+        FETCH lireLigne INTO temp;
+        EXIT WHEN lireLigne%NOTFOUND;
+            uneQte := temp.quantite;
+            unProduit := temp.noproduit;
+            UPDATE PRODUIT
+            SET    quantiteenstock = (quantiteenstock + uneQte)  
+            WHERE  noproduit = unProduit;
+        END LOOP;
+        CLOSE lireLigne;      
+       
+        commit;
+       RETURN 'Ajout de la qte complete';
+EXCEPTION
+      WHEN OTHERS THEN
+	       RETURN 'Erreur!,transaction non complete';
+END REMETTRE_QTE_EN_STOCKS;
+--=================== Appel de fonction ================
+select REMETTRE_QTE_EN_STOCKS(335) from dual;
