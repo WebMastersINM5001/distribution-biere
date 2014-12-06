@@ -88,6 +88,11 @@ if( !isset($_SESSION["myusername"]) ){
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapClientContent('con2')">Annuler commande</a>
 			</div>
 			<div id="myDiv" class="col-md-9">
+
+				<?php if(isset($_GET["errorMessage"])) { ?>
+			    	<p class="error"><?php echo $_GET["errorMessage"] ?></p>
+			    <?php } ?>
+
 				<?php
 					include("includes/connect_DB.php");
 					

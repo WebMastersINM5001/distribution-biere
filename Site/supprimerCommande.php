@@ -4,6 +4,8 @@
 
 	include("includes/connect_DB.php");
 
+	$in = true;
+
 	$noCommande = $_POST['noCommandeASupprimer'];
 
 	$stid = oci_parse($conn, "select NOCOMMANDE, CONFIRM  from COMMANDE where NOCOMMANDE=$noCommande");
@@ -50,17 +52,23 @@
 			oci_execute($stid);
 	   		oci_free_statement($stid);
 		}else{
-			echo 'Le numéro de commande entré n\'est pas valide.<br><a href="javascript:history.back()" class="btn btn-default">Retour</a>';
+			$in = false;
+			$message = "Le numéro de commande entré n'est pas valide.";
+			header('Location: page_client.php?errorMessage=' . $message);
 		}
 
 
 	}else{
-		echo 'Veuillez remplir le champ.<br><a href="javascript:history.back()" class="btn btn-default">Retour</a>';
+		$in = false;
+		$message = "Veuillez indiqué le numéro de commande à supprimer.";
+		header('Location: page_client.php?errorMessage=' . $message);
 	}
 
 	// Close the Oracle connection
    	oci_close($conn);
 
-   	header("location:page_client.php");
+   	if($in){
+   		header("location:page_client.php");
+   	}
 
 ?>
