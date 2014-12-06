@@ -10,6 +10,7 @@ drop function NO_PRODUIT_ALEATOIRE;
 DROP FUNCTION QUANTITE_DISPONIBLE;
 DROP FONCTION FUNCTION REMETTRE_QTE_EN_STOCK;
 DROP FUNCTION REMETTRE_QTE_EN_STOCKS;
+DROP FUNCTION CONFIRM_LIVRAISON;
 --*************************************************************************
 --Cette fonction prend un no de livraison retourne en caisse de 24 
 --le nombre de caisses commandées dans un no de livraison 
@@ -471,3 +472,27 @@ EXCEPTION
 END REMETTRE_QTE_EN_STOCKS;
 --=================== Appel de fonction ================
 select REMETTRE_QTE_EN_STOCKS(335) from dual;
+
+--=========================================================================
+-- Fonction qui confirm un nocommande
+--==========================================================================
+CREATE OR REPLACE FUNCTION CONFIRM_LIVRAISON(uneCommande   COMMANDE.nocommande%TYPE) 
+return VARCHAR2 AS
+verifier    COMMANDE.CONFIRM%TYPE :='n';
+PRAGMA AUTONOMOUS_TRANSACTION;
+BEGIN
+        UPDATE COMMANDE
+        SET  confirm = 'y' 
+        WHERE  nocommande = uneCommande;
+        commit;
+RETURN  'Commande confirmer avec succes';
+EXCEPTION
+  when OTHERS THEN
+     RETURN 'La commande est deja confirme';
+END CONFIRM_LIVRAISON;
+--============  Appel de fonction=====================
+SELECT CONFIRM_LIVRAISON(326) FROM DUAL;
+
+UPDATE COMMANDE
+     SET  confirm   = 'N'  
+     WHERE  COMMANDE.nocommande = 326; 
