@@ -34,6 +34,10 @@
 
 		if($count > 0 && $noClient == $noUsager && ($confirm == "n" || $confirm == "N")){
 		    oci_free_statement($stid);
+		    $stid = oci_parse($conn, "SELECT REMETTRE_QTE_EN_STOCKS($noCommandeASupprimer) FROM DUAL");
+			oci_execute($stid);
+	   		oci_free_statement($stid);
+
 			$stid = oci_parse($conn, "DELETE from LIVRAISONDETAIL where NOCOMMANDE=$noCommandeASupprimer");
 			oci_execute($stid);
 	   		oci_free_statement($stid);

@@ -41,7 +41,7 @@
 		';
 	}else if($contentVar == "con2"){
 		echo '
-			<form class="form-inline" role="form" method="post" action="supprimerCommande.php">
+			<form class="form-inline" role="form" method="post" onsubmit="return confirm("Voulez vous vraiment supprimer votre commande?");" action="supprimerCommande.php">
 			  <div class="form-group">
 			    <label for="noCommandeASupprimer">Numéro de la commande à supprimer</label><br>
 			    <input name="noCommandeASupprimer" type="text" class="form-control" id="noCommandeASupprimer" placeholder="Numéro de la commande">
