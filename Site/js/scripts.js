@@ -2,7 +2,60 @@
  * @author  Alexandru Condorachi
  */
 
-	   function swapEntrepriseContent(param){
+	function drawChart1(json) {
+        var data = new google.visualization.DataTable(json);
+        var table = new google.visualization.Table(document.getElementById('chart1_div'));
+
+        table.draw(data, {showRowNumber: true});
+		
+ /*       var options = {
+          title: 'Les produits le plus commandes',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chart1_div'));
+        chart.draw(data, options);
+  */    }
+	
+	function drawTable1(json) {
+        var data = new google.visualization.DataTable(json);
+        var table = new google.visualization.Table(document.getElementById('table1_div'));
+
+        table.draw(data, {showRowNumber: true});
+		}
+		
+	function drawTable2(json) {
+        var data = new google.visualization.DataTable(json);
+        var table = new google.visualization.Table(document.getElementById('table2_div'));
+
+        table.draw(data, {showRowNumber: true});
+		}
+   
+   $(document).ready(function() {
+ 	 $.ajax({
+        url: 'ajax/phpDataChart1.php',
+        success : function(json1) {
+            drawChart1(json1);
+        }
+     });
+
+	 $.ajax({
+        url: 'ajax/phpDataTable1.php',
+        success : function(json) {
+            drawTable1(json);
+        }
+     });
+
+	 $.ajax({
+        url: 'ajax/phpDataTable2.php',
+        success : function(json2) {
+            drawTable2(json2);
+        }
+     });
+  
+   });
+ 
+	  function swapEntrepriseContent(param){
 			var url = "ajax/phpEntrepriseScript.php";
 			$.post(url, {contentVar: param}, function(data){
 				$("#myDiv").html(data).show();
@@ -55,3 +108,4 @@
 			});
 		}
 		
+ 
