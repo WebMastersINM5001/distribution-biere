@@ -7,6 +7,9 @@ h1,h2,h3,h4,h5{
 	text-transform: uppercase;
 	font-family: "roboto";
 }
+h1{
+	font-size:25px;
+}
 header{
 	background: #009de4;
 	height: 250px;
@@ -102,6 +105,13 @@ footer .container p{
 .error{
 	color:red;
 }
+
+.alert{
+	min-height: 92px;
+}
+.user-info strong{
+	color:#fff;
+}
 /************************** Login page **************************/
 /****************************************************************/
 span.inputGroup{
@@ -121,7 +131,6 @@ span.inputGroup{
 #myDiv {
     padding: 0 15px;
     min-height: 568px;
-    background-color:rgb(209, 212, 216);
 	 
 }
 

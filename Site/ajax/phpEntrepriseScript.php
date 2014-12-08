@@ -6,7 +6,7 @@
 	$contentVar = $_POST['contentVar'];
 	if($contentVar == "con1"){
 		echo 	'<table class="table table-striped table-bordered">
-					<tr> <p>FILTRER: </p>
+					<tr> <h1>Commandes</h1>
 						<th> par Client
 							<form> 
 								<select name="fltclient" id="prm1" onchange="showCommandeByFilter(this.value,0,0)">';
@@ -42,7 +42,7 @@
 		';
 		echo '</table>';
 		echo '	<br>
-			<div id="txtHint1"><b>Info will be listed here.</b></div>';
+			<div id="txtHint1"></div>';
 		echo '	<div id="txtHint2">';
 			$noclient = 0;
 			$nocommande = 0;
