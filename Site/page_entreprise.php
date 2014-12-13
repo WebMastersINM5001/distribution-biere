@@ -71,13 +71,8 @@
                 <!--end user image section-->		
     			</div>
     		</div>
-<<<<<<< HEAD
-
     		<a href="logout.php" class="btn btn-default" id="deconnexion">Déconnexion</a>
 
-=======
-    		<a href="logout.php" class="btn btn-default" id="deconnexion">Déconnexion</a>
->>>>>>> origin/master
 		</div>
 	</header>
 
