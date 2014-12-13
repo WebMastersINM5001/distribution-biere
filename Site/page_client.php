@@ -76,9 +76,13 @@ if( !isset($_SESSION["myusername"]) ){
 	    			?>
     			</div>
     		</div>
+<<<<<<< HEAD
 
     		<a href="logout.php" class="btn btn-default" id="deconnexion">Déconnexion</a>
 
+=======
+    		<a href="logout.php" class="btn btn-default" id="deconnexion">Déconnexion</a>
+>>>>>>> origin/master
 		</div>
 	</header>
 
