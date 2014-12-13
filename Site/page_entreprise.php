@@ -71,7 +71,9 @@
                 <!--end user image section-->		
     			</div>
     		</div>
-    		<a href="logout.php" class="btn btn-default" id="deconnexion">X</a>
+
+    		<a href="logout.php" class="btn btn-default" id="deconnexion">Déconnexion</a>
+
 		</div>
 	</header>
 
@@ -124,7 +126,7 @@
 	            <div class="row">
 	                <!-- Page Header -->
 	                <div class="col-lg-12">
-	                    <h3 class="page-header">Tableau du bord</h3>
+	                    <h3 class="page-header">Tableau de bord</h3>
 	                </div>
 	                <!--End Page Header -->
 	            </div>

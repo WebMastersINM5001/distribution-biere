@@ -9,23 +9,23 @@
 
 	$noUsager = $_SESSION["NOUSAGER"];
 
-	//Trouve le Numero région de l'usager connecté
+	
 	$stid = oci_parse($conn, "SELECT NOUSAGER, NOREGION FROM CLIENT WHERE NOUSAGER=$noUsager");
-	oci_execute($stid);
-	$row = oci_fetch_array($stid);
+	oci_execute($stid);  
+	$row = oci_fetch_array($stid);   
 
 	$noRegion = $row["NOREGION"];
 
 	oci_free_statement($stid);
 
-	//Trouve et sauvegarde le nouveau numero de commande
+	
 	$stid = oci_parse($conn, "SELECT INSERT_TABLE_COMMANDE($noCommande) FROM DUAL");
 	oci_execute($stid);
 	$row = oci_fetch_array($stid);
 
 	$nouveauNoCommande = $row[0];
 
-	oci_free_statement($stid);
+	oci_free_statement($stid); 
 
 	for($i=0;$i<$qteProduit;$i++){
 
