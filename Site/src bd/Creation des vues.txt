@@ -18,6 +18,7 @@ DROP VIEW VUE_NB_COMMANDE_NON_LIVRER;
 DROP VIEW VUE_CLIENT_NON_LIVRER;
 DROP VIEW VUE_STOCK_BAS;
 DROP VIEW VUE_CAMION_PAR_LIVRAISON;
+drop view DIVISER_ROUTE;
 --=============================================================================
 CREATE VIEW VUE_CLIENT AS
     SELECT noclient,nomclient,adresse,ville,telephone,courriel
@@ -147,3 +148,12 @@ CREATE OR REPLACE VIEW VUE_CAMION_PAR_LIVRAISON AS
   from CAMION CM, LIVRAISON LV
   where LV.NOCAMION = CM.NOCAMION;
   order by noLivraison;
+-=================================================================================
+-- Cette vue affiche les no commme modulo 2 = 1 et les quantite supérieur a 100
+--===============================================================================
+CREATE OR REPLACE FORCE VIEW DIVISER_ROUTE AS 
+  SELECT nocommande,NOLIVRAISON,NOMCLIENT,NOMREGION,
+          ROUND(NB_UNITES / 24) as TOTAL_CAISSE
+  FROM vue_detail_livraison
+  WHERE  (MOD(NOCOMMANDE,2) = 1) or (NB_UNITES / 24) > 100 
+  ORDER BY NOLIVRAISON;
