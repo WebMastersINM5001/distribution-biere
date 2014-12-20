@@ -17,6 +17,7 @@ DROP VIEW VUE_NB_COMMANDE_EN_COURS;
 DROP VIEW VUE_NB_COMMANDE_NON_LIVRER;
 DROP VIEW VUE_CLIENT_NON_LIVRER;
 DROP VIEW VUE_STOCK_BAS;
+DROP VIEW VUE_CAMION_PAR_LIVRAISON;
 --=============================================================================
 CREATE VIEW VUE_CLIENT AS
     SELECT noclient,nomclient,adresse,ville,telephone,courriel
@@ -52,7 +53,7 @@ CREATE VIEW VUE_DETAIL_COMMANDE AS
     ORDER BY LD.nocommande ASC, P.noproduit ASC; 
 --=============================================================================
 CREATE VIEW VUE_ROUTE AS
-    SELECT  RG.nomregion, CAM.nocamion, LD.nolivraison, LD.nocommande, 
+    SELECT  RG.nomregion, CAM.nocamion,CAM.nbcaissemax, LD.nolivraison, LD.nocommande, 
             CL.nomclient, CL.adresse, CL.ville,LIV.datelivraison
     FROM    REGION RG, CAMION CAM, CLIENT CL, LIVRAISONDETAIL LD, 
             LIVRAISON LIV, COMMANDE CM
@@ -139,3 +140,10 @@ SELECT NOPRODUIT,DESCRIPTION,EMBALLAGE,QUANTITEENSTOCK
 FROM  PRODUIT
 WHERE QUANTITEENSTOCK < 50
 ORDER BY NOPRODUIT;
+--===================================================================================
+CREATE OR REPLACE VIEW VUE_CAMION_PAR_LIVRAISON AS
+
+  SELECT CM.nocamion, LV.nolivraison, CM.disponible
+  from CAMION CM, LIVRAISON LV
+  where LV.NOCAMION = CM.NOCAMION;
+  order by noLivraison;

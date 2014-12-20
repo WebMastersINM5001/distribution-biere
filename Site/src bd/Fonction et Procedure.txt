@@ -11,6 +11,10 @@ DROP FUNCTION QUANTITE_DISPONIBLE;
 DROP FONCTION FUNCTION REMETTRE_QTE_EN_STOCK;
 DROP FUNCTION REMETTRE_QTE_EN_STOCKS;
 DROP FUNCTION CONFIRM_LIVRAISON;
+DROP FUNCTION TABLE_DATE_LIVRAISON;
+DROP FUNCTION VERIFIER_CAMION_PLEIN ;
+drop function TROUV_CAMION_DISP;
+DROP FUNCTION INITIALISE_TABLE_CAMION;
 --*************************************************************************
 --Cette fonction prend un no de livraison retourne en caisse de 24 
 --le nombre de caisses commandées dans un no de livraison 
@@ -496,3 +500,135 @@ SELECT CONFIRM_LIVRAISON(326) FROM DUAL;
 UPDATE COMMANDE
      SET  confirm   = 'N'  
      WHERE  COMMANDE.nocommande = 326; 
+
+
+--================================================================
+-- fONCTION MET A JOURS LA DATE DE LIVRAISON DE TOUS LS NO LIVRAISON
+--==================================================================
+
+CREATE OR REPLACE FUNCTION TABLE_DATE_LIVRAISON
+RETURN VARCHAR2 IS
+
+noLiv   LIVRAISON.nolivraison%TYPE;
+--Déclaration du curseur
+CURSOR	lireLigne IS
+	SELECT * 
+	FROM   LIVRAISON;
+-- Variable temp est utilise pour mettre les colonnes du curseur 
+temp    lireLigne%ROWTYPE;
+msg     varchar2(100) :='';
+
+BEGIN
+
+   OPEN lireLigne;
+        LOOP
+        FETCH lireLigne INTO temp;
+        EXIT WHEN lireLigne%NOTFOUND;
+            noLiv := temp.nolivraison;
+            msg := update_date_livraison(current_date,noLiv);
+        END LOOP;
+        CLOSE lireLigne;      
+RETURN 'Mise a jours complete';
+
+END TABLE_DATE_LIVRAISON;
+--=================  aPPEL DE FUNCTION ====================    
+select TABLE_DATE_LIVRAISON FROM DUAL;
+
+
+
+
+--===================================================================================
+-- FONCTION QUI VERIFIE SI UN CAMION EST PLEIN, SI LE CAMION EST PLAIN IL RETOURNE LE
+-- NOMBRE DE CAISSE QU'IL Y A EN TROP, SINON IL RETOURNE -1 SÉ,IL RESTE DE LA PLACE
+--====================================================================================
+CREATE OR REPLACE FUNCTION VERIFIER_CAMION_PLEIN (noLiv  LIVRAISON.nolivraison%type)
+RETURN INTEGER IS
+
+nbCaisse    INTEGER := 0;
+capacite    INTEGER := 0;
+
+BEGIN
+  nbCaisse := nbCaisseDe24parNoLivraison(noLiv);
+  SELECT DISTINCT nbcaissemax into capacite from VUE_ROUTE VR WHERE noLivraison = VR.nolivraison;
+  IF nbCaisse > capacite THEN
+      return nbCaisse - capacite; 
+  END IF;
+  
+  return -1;
+
+END VERIFIER_CAMION_PLEIN;
+--================ aPPEL DE FONCTION ========================
+select VERIFIER_CAMION_PLEIN(5000) from dual;
+
+
+--==============================================================================
+==Fonction qui trouve le premier camion disponible et le rend non disponible
+--==============================================================================
+
+CREATE OR REPLACE FUNCTION TROUV_CAMION_DISP (noLiv  LIVRAISON.nolivraison%type)
+RETURN INTEGER IS
+PRAGMA AUTONOMOUS_TRANSACTION;
+nbCaisse    INTEGER := 0;
+dispo       CHAR    :='N';
+camion      integer :=0;
+nbCommande  INTEGER := 0;
+--Déclaration du curseur
+CURSOR	lireLigne IS
+	SELECT * 
+	FROM   CAMION CM;
+-- Variable temp est utilise pour mettre les colonnes du curseur 
+temp    lireLigne%ROWTYPE;
+
+BEGIN
+  nbCaisse := nbCaisseDe24parNoLivraison(noLiv);
+  
+  --Verifier le premier camion qui est diponible 
+  OPEN lireLigne;
+    LOOP
+      FETCH lireLigne INTO temp;
+      EXIT WHEN dispo = 'y';
+          
+          dispo := temp.disponible;
+          camion := temp.nocamion;
+        END LOOP;
+        CLOSE lireLigne;
+    IF dispo = 'N' THEN
+        return -1;
+    END IF;
+   --Rendre le camion non disponible
+    UPDATE CAMION
+    SET    DISPONIBLE = 'N'  
+    WHERE  nocamion = camion;
+    commit;
+  return camion;
+
+END TROUV_CAMION_DISP;
+--================ Appel de fonction ------------------
+select TROUV_CAMION_DISP(5000) from dual;
+--======================================================================
+--Fonction qui reme tla tacle camion en verwsion innitiale
+--======================================================================
+
+CREATE OR REPLACE FUNCTION INITIALISE_TABLE_CAMION 
+RETURN varchar2 IS
+PRAGMA AUTONOMOUS_TRANSACTION;
+noCam     INTEGER := 1007;
+noCamMax  INTEGER := 0;
+
+BEGIN
+   
+   SELECT MAX(nocamion) into noCamMax from CAMION;
+   --Rendre le camion non disponible
+    WHILE (noCam <= noCamMax) loop 
+      UPDATE CAMION
+      SET    DISPONIBLE = 'y'  
+      WHERE  nocamion = noCam;
+      noCam := noCam + 1;
+    end loop;
+    commit;
+  return 'Initialisation de la table camion complete';
+
+END INITIALISE_TABLE_CAMION;
+-- =========Appel de fonction================
+select INITIALISE_TABLE_CAMION from dual;
+
