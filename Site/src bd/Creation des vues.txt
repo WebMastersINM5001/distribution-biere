@@ -45,13 +45,13 @@ CREATE VIEW VUE_DETAIL_COMMANDE AS
 --=============================================================================
  CREATE OR REPLACE VIEW VUE_DETAIL_LIVRAISON AS
     SELECT  RG.nomregion, LD.nolivraison, LD.nocommande, CL.nomclient,CL.adresse, LD.noproduit, 
-             P.description,LD.qtlivree,P.emballage, (P.emballage *LD.qtlivree) AS nb_unites
+             P.description,LD.qtlivree,P.emballage, (P.emballage *LD.qtlivree) AS nb_unites, CM.confirm
     FROM    REGION RG, LIVRAISONDETAIL LD, CLIENT CL, PRODUIT P, COMMANDE CM 
     WHERE   LD.nocommande = CM.nocommande AND
             CM.noclient = CL.noclient AND
             CL.noregion = RG.noregion AND
             LD.noproduit = P.noproduit
-    ORDER BY LD.nocommande ASC, P.noproduit ASC; 
+    ORDER BY LD.nocommande ASC, P.noproduit ASC;
 --=============================================================================
 CREATE VIEW VUE_ROUTE AS
     SELECT  RG.nomregion, CAM.nocamion,CAM.nbcaissemax, LD.nolivraison, LD.nocommande, 
