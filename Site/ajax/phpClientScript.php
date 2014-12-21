@@ -7,7 +7,7 @@
 	if($contentVar == "con1"){
 		echo '
 			<a class="btn btn-default" onmousedown="javascript:addProductLine()">Ajouter un produit à la commande</a>
-			<form class="form-inline" role="form" method="post" action="passerCommande.php">
+			<form class="form-inline" role="form" method="post" action="http://www.labunix.uqam.ca/~ec591549/localhost/www/distribution-biere/Site/passercommande.php">
 				<div id="tousProduitsCommande">
 				  	<div class="form-group">
 				    	<label class="sr-only" for="produit" class="col-sm-2 control-label">produit</label>
