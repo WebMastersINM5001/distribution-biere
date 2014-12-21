@@ -156,10 +156,19 @@
 							<div id="table2_div"></div>
                         </div>
                     </div>
+                    <!-- Table 3-->
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <i class="fa-bar-chart-o"></i> Produits à réaprovisionner
+                        </div>
+                        <div class="panel-body">
+							<div id="table3_div"></div>
+                        </div>
+                    </div>
                     <!--pie chart  -->
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <i class="fa-bar-chart-o"></i>Produit Chart
+                            <i class="fa-bar-chart-o"></i>Produits le plus demandés
                         </div>
 
                         <div class="panel-body">
@@ -169,8 +178,6 @@
                     </div>
   
                 </div>			
-			
-
 			</div>
 		</div>
 	</div>

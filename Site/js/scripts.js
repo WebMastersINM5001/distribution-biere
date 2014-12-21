@@ -30,6 +30,13 @@
 
         table.draw(data, {showRowNumber: true});
 		}
+
+	function drawTable3(json) {
+        var data = new google.visualization.DataTable(json);
+        var table = new google.visualization.Table(document.getElementById('table3_div'));
+
+        table.draw(data, {showRowNumber: true});
+		}
    
    $(document).ready(function() {
  	 $.ajax({
@@ -53,6 +60,12 @@
         }
      });
   
+	 $.ajax({
+        url: 'ajax/phpDataTable3.php',
+        success : function(json3) {
+            drawTable3(json3);
+        }
+     });
    });
  
 	  function swapEntrepriseContent(param){
