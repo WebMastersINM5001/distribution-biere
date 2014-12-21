@@ -24,7 +24,7 @@
 		if($count > 0){
 		    oci_free_statement($stid);
 
-			$stid = oci_parse($conn, "select NOMREGION, NOCOMMANDE, NOMCLIENT, NOPRODUIT, DESCRIPTION, QTLIVREE, EMBALLAGE, NB_UNITES from VUE_DETAIL_LIVRAISON where NOLIVRAISON=$noLivraison");
+			$stid = oci_parse($conn, "select NOMREGION, NOCOMMANDE, NOMCLIENT, ADRESSE, NOPRODUIT, DESCRIPTION, QTLIVREE, EMBALLAGE, NB_UNITES from VUE_DETAIL_LIVRAISON where NOLIVRAISON=$noLivraison");
 			oci_execute($stid);
 
 			echo 	'<table class="table table-striped table-bordered">
@@ -37,6 +37,9 @@
 							</th>
 							<th>
 								Nom client
+							</th>
+							<th>
+								Adresse du client
 							</th>
 							<th>
 								Numéro de produit
@@ -65,6 +68,7 @@
 				$nomregion = $row["NOMREGION"];
 				$nocommande = $row["NOCOMMANDE"];
 				$nomclient = $row["NOMCLIENT"];
+				$adresseClient = $row["ADRESSE"];
 				$nbproduit = $row["NOPRODUIT"];
 
 				$description = $row["DESCRIPTION"];
@@ -76,7 +80,7 @@
 				//javascript:confirmerLivraison(this)
 				$checkBox = "<input type=\"checkbox\" id=\"checkBox" . $i . "\" onclick=\"javascript:confirmerLivraison(this);\" value=\"\">";
 				
-				echo '<tr><td>' . $nomregion . '</td><td>' . $nocommande . '</td><td>' . $nomclient . '</td><td>' . $nbproduit . '</td><td>' . $description . '</td><td>' . $qtelivrer . '</td><td>' . $emballage .'</td><td>' . $nbunite .'</td><td>' . $checkBox .'</td></tr>';
+				echo '<tr><td>' . $nomregion . '</td><td>' . $nocommande . '</td><td>' . $nomclient . '</td><td>' . $adresseClient . '</td><td>' . $nbproduit . '</td><td>' . $description . '</td><td>' . $qtelivrer . '</td><td>' . $emballage .'</td><td>' . $nbunite .'</td><td>' . $checkBox .'</td></tr>';
 			}
 		    oci_free_statement($stid);
 		    oci_close($conn);
