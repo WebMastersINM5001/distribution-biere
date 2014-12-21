@@ -56,7 +56,14 @@ if( !isset($_SESSION["myusername"]) ){
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapLivreurContent('con1')">Afficher livraison</a>
 			</div>
 			<div id="myDiv" class="col-md-9">
-				<?php
+
+				<?php 
+					if(isset($_GET["confirmMessage"])) { 
+				?>
+			    		<p class="confirm"><?php echo $_GET["confirmMessage"] ?></p>
+			    <?php 
+
+					} 
 
 				    $stid = oci_parse($conn, "select NOCAMION, NOLIVRAISON, ADRESSE, VILLE  from VUE_ROUTE  where NOCAMION=$noUsager");
 					oci_execute($stid);

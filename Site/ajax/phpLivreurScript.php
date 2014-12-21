@@ -24,8 +24,10 @@
 		if($count > 0){
 		    oci_free_statement($stid);
 
-			$stid = oci_parse($conn, "select NOMREGION, NOCOMMANDE, NOMCLIENT, ADRESSE, NOPRODUIT, DESCRIPTION, QTLIVREE, EMBALLAGE, NB_UNITES from VUE_DETAIL_LIVRAISON where NOLIVRAISON=$noLivraison");
+			$stid = oci_parse($conn, "select NOMREGION, NOCOMMANDE, NOMCLIENT, ADRESSE, NOPRODUIT, DESCRIPTION, QTLIVREE, EMBALLAGE, NB_UNITES, CONFIRM from VUE_DETAIL_LIVRAISON where NOLIVRAISON=$noLivraison AND CONFIRM='N'");
 			oci_execute($stid);
+
+			echo '<form class="form-inline" role="form" method="post" action="confirmCommandes.php">';
 
 			echo 	'<table class="table table-striped table-bordered">
 						<tr>
@@ -63,6 +65,7 @@
 			';
 
 			$i = 0;
+
 			while($row = oci_fetch_array($stid)) {
 				++$i;
 				$nomregion = $row["NOMREGION"];
@@ -75,17 +78,20 @@
 				$qtelivrer = $row["QTLIVREE"];
 				$emballage = $row["EMBALLAGE"];
 				$nbunite = $row["NB_UNITES"];
-				//$estLivre = $row[""];
-				//les id des checkbox vont etre incrementer en commencant par 1
-				//javascript:confirmerLivraison(this)
-				$checkBox = "<input type=\"checkbox\" id=\"checkBox" . $i . "\" onclick=\"javascript:confirmerLivraison(this);\" value=\"\">";
+
+				$checkBox = '<input type="checkbox" name="commande' . $i . '" value="' . $nocommande . '">';
 				
 				echo '<tr><td>' . $nomregion . '</td><td>' . $nocommande . '</td><td>' . $nomclient . '</td><td>' . $adresseClient . '</td><td>' . $nbproduit . '</td><td>' . $description . '</td><td>' . $qtelivrer . '</td><td>' . $emballage .'</td><td>' . $nbunite .'</td><td>' . $checkBox .'</td></tr>';
 			}
+
 		    oci_free_statement($stid);
 		    oci_close($conn);
 
 			echo '</table>';
+
+			echo '
+					<button type="submit" class="btn btn-default">Confirmer les commandes</button> 
+				</form>';
 		}else{
 			echo '<p>Vous n\'avez aucune commande à livrer aujourd\'hui.</p>';
 		}
@@ -123,15 +129,4 @@
 
 	}
 
-	function allo(){
-		echo "<script>alert(\"allo\")</script>";
-	}
-
 ?>
-
-<script type="text/javascript">
-	function confirmerLivraison(cb) {
-  		alert("allo");
-  		//todo
-	}
-</script>
