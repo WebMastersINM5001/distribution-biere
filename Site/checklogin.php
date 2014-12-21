@@ -42,7 +42,8 @@
 		}else if($typeuser == "administrateur" ){
 			header("location:page_admin.php");
 		}else{
-			echo "Votre compte n'a pas été encore validé";
+			$message = "Votre compte n'a pas été encore validé";
+			header('Location: index.php?errorMessage=' . $message);
 		}		
 	}else {
 		$message = "Vos identifiants sont invalides.";
