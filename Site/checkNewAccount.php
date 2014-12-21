@@ -51,7 +51,8 @@
 		if ($result != 'TRUE') {
 	      trigger_error(htmlentities($result), E_USER_ERROR);
 		}else {
-	      echo "Client et Usager ".$nomclient." was committed\n";
+			$message = "Votre compte a bien été créer.";
+			header('Location: index.php?confirmMessage=' . $message);
 		}
 	    oci_free_statement($stid);
 	    // Close the Oracle connection

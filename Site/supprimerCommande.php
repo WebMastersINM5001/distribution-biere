@@ -68,7 +68,8 @@
    	oci_close($conn);
 
    	if($in){
-   		header("location:page_client.php");
+		$message = "Votre commande a bien été supprimée.";
+		header('Location: page_client.php?confirmMessage=' . $message);
    	}
 
 ?>

@@ -25,6 +25,12 @@
 		    </div>
 		    <?php } ?>
 
+		  	<?php if(isset($_GET["confirmMessage"])) { ?>
+		    <div class="col-sm-offset-5 col-sm-7">
+		    	<p class="confirm"><?php echo $_GET["confirmMessage"] ?></p>
+		    </div>
+		    <?php } ?>
+
 		    <div class="col-sm-offset-5 col-sm-7">
 		    	<a href="newAccount.php">Créer un compte client</a><br><br>
 		      <button type="submit" class="btn btn-default">Soumettre</button>

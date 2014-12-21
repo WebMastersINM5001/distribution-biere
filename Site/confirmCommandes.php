@@ -37,7 +37,7 @@
 		}
 
 		$message = "La/les commandes sélectionnés ont bien été confirmées.";
-		header('Location: page_client.php?confirmMessage=' . $message);
+		header('Location: page_livreur.php?confirmMessage=' . $message);
 	
     //header("location:page_entreprise.php");
 	

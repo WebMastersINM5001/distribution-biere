@@ -32,19 +32,31 @@
 		$_SESSION["NOUSAGER"] = $nousager;
 		
 		$typeuser = $row['TYPE'][0];
-		
-		if($typeuser == "client" ){
-			header("location:page_client.php");
-		}else if($typeuser == "entreprise" ){
-			header("location:page_entreprise.php");
-		}else if($typeuser == "livreur" ){
-			header("location:page_livreur.php");
-		}else if($typeuser == "administrateur" ){
-			header("location:page_admin.php");
-		}else{
-			$message = "Votre compte n'a pas été encore validé";
+
+		oci_free_statement($stid);
+		$stid = oci_parse($conn, "SELECT NOUSAGER, CONFIRM FROM CLIENT WHERE NOUSAGER=$nousager");
+		oci_execute($stid);  
+		$row = oci_fetch_array($stid);
+
+		$confirm = $row["CONFIRM"];
+
+		//die($confirm);
+
+		if($confirm == "N"){
+			$message = "Votre compte n'a pas encore été confirmé.";
 			header('Location: index.php?errorMessage=' . $message);
-		}		
+		}else{
+			if($typeuser == "client" || $typeuser == "Client" ){
+				header("location:page_client.php");
+			}else if($typeuser == "entreprise" || $typeuser == "Entreprise"){
+				header("location:page_entreprise.php");
+			}else if($typeuser == "livreur" || $typeuser == "Livreur" ){
+				header("location:page_livreur.php");
+			}else{
+				$message = "Votre compte n'a pas été encore validé";
+				header('Location: index.php?errorMessage=' . $message);
+			}	
+		}	
 	}else {
 		$message = "Vos identifiants sont invalides.";
 		header('Location: index.php?errorMessage=' . $message);

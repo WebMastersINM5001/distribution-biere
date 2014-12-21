@@ -94,6 +94,10 @@ if( !isset($_SESSION["myusername"]) ){
 			    	<p class="error"><?php echo $_GET["errorMessage"] ?></p>
 			    <?php } ?>
 
+			    <?php if(isset($_GET["confirmMessage"])) { ?>
+			    	<p class="confirm"><?php echo $_GET["confirmMessage"] ?></p>
+			    <?php } ?>
+
 				<?php
 					include("includes/connect_DB.php");
 					

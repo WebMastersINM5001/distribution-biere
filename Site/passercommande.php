@@ -48,7 +48,9 @@
 	}
 	oci_free_statement($stid);
 
-	header("location:page_client.php");
+
+	$message = "Votre commande a bien été passé.";
+	header('Location: page_client.php?confirmMessage=' . $message);
 
 	// Close the Oracle connection
    	oci_close($conn);
