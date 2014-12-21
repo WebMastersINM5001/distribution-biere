@@ -33,14 +33,29 @@
 		
 		$typeuser = $row['TYPE'][0];
 		
+		
+
 		if($typeuser == "client" ){
+
+			oci_free_statement($stid);
+			$stid = oci_parse($conn, "SELECT TABLE_DATE_LIVRAISON() FROM DUAL");
+			oci_execute($stid);
+
 			header("location:page_client.php");
 		}else if($typeuser == "entreprise" ){
+
+			oci_free_statement($stid);
+			$stid = oci_parse($conn, "SELECT TABLE_DATE_LIVRAISON() FROM DUAL");
+			oci_execute($stid);
+
 			header("location:page_entreprise.php");
 		}else if($typeuser == "livreur" ){
+
+			oci_free_statement($stid);
+			$stid = oci_parse($conn, "SELECT TABLE_DATE_LIVRAISON() FROM DUAL");
+			oci_execute($stid);
+
 			header("location:page_livreur.php");
-		}else if($typeuser == "administrateur" ){
-			header("location:page_admin.php");
 		}else{
 			$message = "Votre compte n'a pas été encore validé";
 			header('Location: index.php?errorMessage=' . $message);
