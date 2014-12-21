@@ -53,11 +53,15 @@
 							<th>
 								Nombre d\'unité
 							</th>
+							<th>
+								Livré
+							</th>
 						</tr>
 			';
 
+			$i = 0;
 			while($row = oci_fetch_array($stid)) {
-
+				++$i;
 				$nomregion = $row["NOMREGION"];
 				$nocommande = $row["NOCOMMANDE"];
 				$nomclient = $row["NOMCLIENT"];
@@ -67,8 +71,12 @@
 				$qtelivrer = $row["QTLIVREE"];
 				$emballage = $row["EMBALLAGE"];
 				$nbunite = $row["NB_UNITES"];
+				//$estLivre = $row[""];
+				//les id des checkbox vont etre incrementer en commencant par 1
+				//javascript:confirmerLivraison(this)
+				$checkBox = "<input type=\"checkbox\" id=\"checkBox" . $i . "\" onclick=\"javascript:confirmerLivraison(this);\" value=\"\">";
 				
-				echo '<tr><td>' . $nomregion . '</td><td>' . $nocommande . '</td><td>' . $nomclient . '</td><td>' . $nbproduit . '</td><td>' . $description . '</td><td>' . $qtelivrer . '</td><td>' . $emballage .'</td><td>' . $nbunite .'</td></tr>';
+				echo '<tr><td>' . $nomregion . '</td><td>' . $nocommande . '</td><td>' . $nomclient . '</td><td>' . $nbproduit . '</td><td>' . $description . '</td><td>' . $qtelivrer . '</td><td>' . $emballage .'</td><td>' . $nbunite .'</td><td>' . $checkBox .'</td></tr>';
 			}
 		    oci_free_statement($stid);
 		    oci_close($conn);
@@ -110,4 +118,16 @@
 		oci_close($conn);
 
 	}
+
+	function allo(){
+		echo "<script>alert(\"allo\")</script>";
+	}
+
 ?>
+
+<script type="text/javascript">
+	function confirmerLivraison(cb) {
+  		alert("allo");
+  		//todo
+	}
+</script>
