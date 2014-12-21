@@ -26,14 +26,17 @@ create or replace FUNCTION nbCaisseDe24parNoLivraison(noLiv VUE_DETAIL_LIVRAISON
     nbCaisse    VUE_DETAIL_LIVRAISON.qtlivree%TYPE :=0;
     nbCommande  VUE_DETAIL_LIVRAISON.nocommande%TYPE;
 BEGIN
+    
     SELECT SUM(nb_unites)
     INTO   nbCaisse
     FROM   VUE_DETAIL_LIVRAISON VDL
     WHERE  VDL.nolivraison = noLiv;
+     
      -- Verifier si le noLivraison contient au moins une commande
         SELECT COUNT(nocommande) INTO nbCommande 
         FROM  VUE_DETAIL_LIVRAISON VDL
         WHERE  VDL.nolivraison = noLiv; 
+ 
 	IF nbCommande = 0 THEN 
            nbCaisse := 0;
   ELSIF nbCaisse < 24 THEN
@@ -541,17 +544,20 @@ select TABLE_DATE_LIVRAISON FROM DUAL;
 -- FONCTION QUI VERIFIE SI UN CAMION EST PLEIN, SI LE CAMION EST PLAIN IL RETOURNE LE
 -- NOMBRE DE CAISSE QU'IL Y A EN TROP, SINON IL RETOURNE -1 SÉ,IL RESTE DE LA PLACE
 --====================================================================================
-CREATE OR REPLACE FUNCTION VERIFIER_CAMION_PLEIN (noLiv  LIVRAISON.nolivraison%type)
+create or replace FUNCTION VERIFIER_CAMION_PLEIN (noLiv  LIVRAISON.nolivraison%type)
 RETURN INTEGER IS
 
 nbCaisse    INTEGER := 0;
 capacite    INTEGER := 0;
 
 BEGIN
+
   nbCaisse := nbCaisseDe24parNoLivraison(noLiv);
   SELECT DISTINCT nbcaissemax into capacite from VUE_ROUTE VR WHERE noLivraison = VR.nolivraison;
+ 
   IF nbCaisse > capacite THEN
       return nbCaisse - capacite; 
+       RETURN nbCaisse;
   END IF;
   
   return -1;
