@@ -97,12 +97,7 @@
 			});
 		}
 
-		function addClientConfirm(cb){
-		if (cb == "N")
-			var url = "ajax/phpMinusClientConfirm.php";
-		 else
-			var url = "ajax/phpAddClientConfirm.php";
-
+		function checkedClient(val){
 			$.post(url, function(data){
 				$("#tousConfirm").append(data);
 			});

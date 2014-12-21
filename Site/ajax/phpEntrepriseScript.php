@@ -50,7 +50,7 @@
 			include("../includes/commandeQueryScript.php");
 		echo ' </div>';
 	}else if($contentVar == "con2"){
-		include("../includes/entrpConfirmClientActionScript.php");
+		include("../includes/entrpConfirmClient.php");
 	}else if($contentVar == "con3"){
 		echo '
 			<a class="btn btn-default" onmousedown="javascript:addProductQntLine()">Ajouter la quantite pour un produit</a>

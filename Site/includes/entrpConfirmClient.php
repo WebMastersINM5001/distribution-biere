@@ -3,6 +3,7 @@
 		<h1>Liste des clients à confirmer</h1>
 		<form class="form-horizontal" role="form" method="post" action="confirmClients.php">
 	<?php
+	include("connect_DB.php");
  	$stid = oci_parse($conn, "  select NOCLIENT
 									,  NOMCLIENT
 									,  ADRESSE
@@ -11,10 +12,8 @@
 								from CLIENT
 							   where CONFIRM = 'N'
 								order by NOCLIENT");
-	
 	oci_execute($stid);
 	$count = oci_fetch_all($stid, $res, null, null, OCI_FETCHSTATEMENT_BY_ROW);
-
 	if($count > 0) {
 		echo 	'<table id="tabconfirm" class="table table-striped table-bordered">
 					<tr>
@@ -33,7 +32,7 @@
 				 '</td><td>' . $row["ADRESSE"] . 
 				 '</td><td>' . $row["VILLE"] .
 				 '</td><td>' . $row["TELEPHONE"] . 
-				 '</td><td style="text-align: center; vertical-align: middle;"> <input type="checkbox" name="confirm" unchecked="N" onchange="addClientConfirm(this.value)" > '. 
+				 '</td><td style="text-align: center; vertical-align: middle;"> <input type="checkbox" name="confirm[]" value="'.$row["NOCLIENT"].'"> '. 
 				 '</td></tr>';
 		}
 	    oci_free_statement($stid);
@@ -47,7 +46,6 @@
 		      <button type="submit" class="btn btn-default">Soumettre</button>
 		    </div>
 		  </div>
-
 		</form>
 	</div>
 </body>
