@@ -120,7 +120,6 @@
 			
  		
 			<div id="myDiv" class="col-md-9">
-<<<<<<< HEAD
 			<!--  page-wrapper -->
 			<div id="demo" ></div>
             <div class="row">
@@ -171,59 +170,7 @@
   
                 </div>			
 			
-=======
-				<!--  page-wrapper -->
-				<div id="demo" ></div>
-	            <div class="row">
-	                <!-- Page Header -->
-	                <div class="col-lg-12">
-	                    <h3 class="page-header">Tableau de bord</h3>
-	                </div>
-	                <!--End Page Header -->
-	            </div>
 
-	            <div class="row">
-				<?php
-					include("includes/dashbordAlerts.php");
-				?>
-	            </div>	
-
-				<div class="row">
-	                <div class="col-lg-8">
-	                    <!-- Table 1-->
-	                    <div class="panel panel-primary">
-	                        <div class="panel-heading">
-	                            <i class="fa-bar-chart-o"></i> Commandes livrées
-	                        </div>
-	                        <div class="panel-body">
-								<div id="table1_div"></div>
-	                        </div>
-	                    </div>
-	                    <!-- Table 2-->
-	                    <div class="panel panel-primary">
-	                        <div class="panel-heading">
-	                            <i class="fa-bar-chart-o"></i> Usagers non confirmés
-	                        </div>
-	                        <div class="panel-body">
-								<div id="table2_div"></div>
-	                        </div>
-	                    </div>
-	                    <!--pie chart  -->
-	                    <div class="panel panel-primary">
-	                        <div class="panel-heading">
-	                            <i class="fa-bar-chart-o"></i>Produit Chart
-	                        </div>
-
-	                        <div class="panel-body">
-								<div id="chart1_div" ></div>
-	                        </div>
-
-	                    </div>
-	  
-	                </div>			
-				
-				</div>
->>>>>>> origin/master
 			</div>
 		</div>
 	</div>
