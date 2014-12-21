@@ -42,10 +42,19 @@ if( !isset($_SESSION["myusername"]) ){
 			<?php
 
 				$noUsager = $_SESSION["NOUSAGER"];
+
+				$stid = oci_parse($conn, "SELECT NOCLIENT, NOUSAGER FROM CLIENT WHERE NOUSAGER=$noUsager");
+				oci_execute($stid);
+				$row = oci_fetch_array($stid);
+
+				$_SESSION["NOCLIENT"] = $row["NOCLIENT"];
+
+				$noCLient = $_SESSION["NOCLIENT"];
+
 				$_SESSION["NoLigneProduit"] = 1;
 
 				// php to select dropdown list options from table
-				$stid = oci_parse($conn, "select NOMCLIENT, ADRESSE, VILLE, TELEPHONE, COURRIEL, NOCLIENT  from CLIENT  where NOCLIENT=$noUsager");
+				$stid = oci_parse($conn, "select NOMCLIENT, ADRESSE, VILLE, TELEPHONE, COURRIEL, NOCLIENT  from CLIENT  where NOCLIENT=$noCLient");
 				oci_execute($stid);
 				
 				// build the dropdown list
@@ -69,7 +78,7 @@ if( !isset($_SESSION["myusername"]) ){
 	    			<?php
 						echo '<p><strong>Téléphone :</strong> ' . $telehpone . '</p>';
 						echo '<p><strong>Courriel :</strong> ' . $courriel . '</p>';
-						echo '<p><strong>Numéro Client :</strong> ' . $noUsager . '</p>';
+						echo '<p><strong>Numéro Client :</strong> ' . $noCLient . '</p>';
 						oci_free_statement($stid);
 					    // Close the Oracle connection
 					    oci_close($conn);
@@ -104,14 +113,14 @@ if( !isset($_SESSION["myusername"]) ){
 					$noUsager = $_SESSION["NOUSAGER"];
 
 					// php to select dropdown list options from table
-					$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY DATECOMMANDE");
+					$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noCLient ORDER BY DATECOMMANDE");
 					oci_execute($stid);
 					$count = oci_fetch_all($stid, $row);
 
 					if($count > 0){
 					    oci_free_statement($stid);
 
-						$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY DATECOMMANDE");
+						$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noCLient ORDER BY DATECOMMANDE");
 						oci_execute($stid);
 
 						echo 	'<table class="table table-striped table-bordered">

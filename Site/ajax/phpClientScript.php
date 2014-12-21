@@ -54,17 +54,17 @@
 		';
 	}else if($contentVar == "con3"){
 
-		$noUsager = $_SESSION["NOUSAGER"];
+		$noCLient = $_SESSION["NOCLIENT"];
 
 		// php to select dropdown list options from table
-		$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY DATECOMMANDE");
+		$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noCLient ORDER BY DATECOMMANDE");
 		oci_execute($stid);
 		$count = oci_fetch_all($stid, $row);
 
 		if($count > 0){
 		    oci_free_statement($stid);
 
-			$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noUsager ORDER BY DATECOMMANDE");
+			$stid = oci_parse($conn, "select NOCOMMANDE, DATECOMMANDE, NOPRODUIT, DESCRIPTION, QUANTITE  from VUE_DETAIL_COMMANDE where NOCLIENT=$noCLient ORDER BY DATECOMMANDE");
 			oci_execute($stid);
 
 			echo 	'<table class="table table-striped table-bordered">

@@ -4,13 +4,13 @@
 
 	include("includes/connect_DB.php");
 
-	$noCommande = $_SESSION["NOUSAGER"];
+	$noCommande = $_SESSION["NOCLIENT"];
 	$qteProduit = $_SESSION["NoLigneProduit"];
 
-	$noUsager = $_SESSION["NOUSAGER"];
+	$noCLient = $_SESSION["NOCLIENT"];
 
 	
-	$stid = oci_parse($conn, "SELECT NOUSAGER, NOREGION FROM CLIENT WHERE NOUSAGER=$noUsager");
+	$stid = oci_parse($conn, "SELECT NOCLIENT, NOREGION FROM CLIENT WHERE NOCLIENT=$noCLient");
 	oci_execute($stid);  
 	$row = oci_fetch_array($stid);   
 
