@@ -1,5 +1,5 @@
 <?php 
-	session_start();
+	//session_start();
 	$amount = 1;
 	$_SESSION["NoClientConfirm"] -= $amount;
 ?>

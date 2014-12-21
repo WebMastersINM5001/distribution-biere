@@ -6,16 +6,16 @@
         var data = new google.visualization.DataTable(json);
         var table = new google.visualization.Table(document.getElementById('chart1_div'));
 
-        table.draw(data, {showRowNumber: true});
+       // table.draw(data, {showRowNumber: true});
 		
- /*       var options = {
+        var options = {
           title: 'Les produits le plus commandes',
           is3D: true,
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('chart1_div'));
         chart.draw(data, options);
-  */    }
+      }
 	
 	function drawTable1(json) {
         var data = new google.visualization.DataTable(json);

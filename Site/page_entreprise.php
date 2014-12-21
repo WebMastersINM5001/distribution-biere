@@ -123,7 +123,7 @@
             <div class="row">
                 <!-- Page Header -->
                 <div class="col-lg-12">
-                    <h3 class="page-header">Tableau du bord</h3>
+                    <h3 class="page-header">Tableau de bord</h3>
                 </div>
                 <!--End Page Header -->
             </div>
