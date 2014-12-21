@@ -43,8 +43,8 @@ CREATE VIEW VUE_DETAIL_COMMANDE AS
             CM.noclient = CL.noclient
     ORDER BY CL.nomclient ASC, CM.nocommande ASC;
 --=============================================================================
- CREATE VIEW VUE_DETAIL_LIVRAISON AS
-    SELECT  RG.nomregion, LD.nolivraison, LD.nocommande, CL.nomclient, LD.noproduit, 
+ CREATE OR REPLACE VIEW VUE_DETAIL_LIVRAISON AS
+    SELECT  RG.nomregion, LD.nolivraison, LD.nocommande, CL.nomclient,CL.adresse, LD.noproduit, 
              P.description,LD.qtlivree,P.emballage, (P.emballage *LD.qtlivree) AS nb_unites
     FROM    REGION RG, LIVRAISONDETAIL LD, CLIENT CL, PRODUIT P, COMMANDE CM 
     WHERE   LD.nocommande = CM.nocommande AND
