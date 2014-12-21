@@ -1,6 +1,6 @@
 <body>
 	<div id="content">
-		<h1>Liste des clientes a confirme</h1>
+		<h1>Liste des clients à confirmer</h1>
 		<form class="form-horizontal" role="form" method="post" action="confirmClients.php">
 	<?php
  	$stid = oci_parse($conn, "  select NOCLIENT
