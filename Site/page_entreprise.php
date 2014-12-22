@@ -95,6 +95,7 @@
 					?>
 				</a>
 				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con3')">Ajout quantite produit </a>
+				<a href="#" class="btn btn-default" onclick="return false" onmousedown="javascript:swapEntrepriseContent('con13')">Rendre le camion non disp. </a>
 				<br />
 			<div id="menuliste">
 			    <a href="#" id="btnListe" class="btn btn-default" onclick="return false">Menu Liste <span class="arrow"></span></a>
@@ -121,7 +122,8 @@
  		
 			<div id="myDiv" class="col-md-9">
 			<!--  page-wrapper -->
-			<div id="demo" ></div>
+			<div id="demo1" ></div>
+			<div id="demo2" ></div>
             <div class="row">
                 <!-- Page Header -->
                 <div class="col-lg-12">

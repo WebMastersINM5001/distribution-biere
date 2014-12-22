@@ -95,8 +95,8 @@
 			}
 			xmlhttp.onreadystatechange=function() {
 						if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-							document.getElementById("txtHint1").innerHTML=xmlhttp.responseText;
-							document.getElementById("txtHint2").innerHTML="";
+							document.getElementById("demo1").innerHTML=xmlhttp.responseText;
+							document.getElementById("demo2").innerHTML="";
 						}
 					}
 			xmlhttp.open("GET","ajax/phpEntrpCommandesByFilterScript.php?pnoclient="+prm1+"&pnocommande="+prm2+"&pnoproduit="+prm3,true);

@@ -109,5 +109,7 @@
 		include("../includes/newCamion.php");
 	}else if($contentVar == "con12"){
 		include("../includes/newRegion.php");
+	}else if($contentVar == "con13"){
+		include("../includes/entrpSetCamionNonDisp.php");
 	}
 ?>
