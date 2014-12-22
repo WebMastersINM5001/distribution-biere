@@ -1,6 +1,6 @@
 <?php include("includes/header.php");?>
 <body id="accueil">
-	<div id="content">
+	<div id="content" style="margin-bottom: 100px;">
 		<a href="index.php" class="btn btn-default">Retour à l'accueil</a>
 		<br>
 		<h1>Créer un nouveau compte</h1>

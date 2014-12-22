@@ -1,7 +1,7 @@
 <?php
-    echo  $noclient.' ';
+   /* echo  $noclient.' ';
 	echo  $nocommande.' ';
-    echo  $noproduit.' ';
+    echo  $noproduit.' ';*/
 
 	$stid = oci_parse($conn, "select NOCOMMANDE
 									  ,  DATECOMMANDE
@@ -26,13 +26,13 @@
 	if($count > 0) {
 		echo 	'<table class="table table-striped table-bordered">
 					<tr>
-						<th> Numero de la Commande</th>
+						<th> Numéro de la Commande</th>
 						<th> Date de la commande </th>
-						<th> Numero du client</th>
+						<th> Numéro du client</th>
 						<th> Nom du client </th>
-						<th> Numero du produit</th>
+						<th> Numéro du produit</th>
 						<th> Nom du produit </th>
-						<th> Quantite</th>
+						<th> Quantité</th>
 					</tr>
 		';
 		// build the history table
@@ -49,6 +49,6 @@
 	    oci_free_statement($stid);
 		echo '</table>';
 	}else{
-		echo '<p> Aucune commande a afficher.</p>';
+		echo '<p> Aucune commande à afficher.</p>';
 	}
 ?>
